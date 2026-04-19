@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>עצה תומכת – ייעוץ הוליסטי לנשים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --brown-dark:   #3b2210;
+      --brown-mid:    #6b4423;
+      --brown-light:  #9a7252;
+      --olive-dark:   #586b28;
+      --olive-mid:    #7a8c42;
+      --olive-light:  #aab870;
+      --gold:         #c8a55a;
+      --gold-light:   #dfc07e;
+      --cream:        #faf4ec;
+      --cream-mid:    #f2e8d8;
+      --cream-dark:   #e8d5bc;
+      --text:         #2d1e0e;
+      --text-mid:     #6b5040;
+      --text-light:   #9a8070;
+    }
+
+    body {
+      font-family: 'Assistant', Arial, sans-serif;
+      direction: rtl;
+      color: var(--text);
+      background-color: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* ── NAV ── */
+    @keyframes logo-float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-3px); }
+    }
+    .nav-logo-img {
+      transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+      animation: logo-float 3.2s ease-in-out infinite;
+    }
+    .nav-logo-img:hover  { transform: translateY(-4px) scale(1.06); animation: none; opacity: 0.92; }
+    .nav-logo-img:active { transform: scale(0.96); }
+
+    .nav-link {
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-family: 'Assistant', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 6px 14px;
+      letter-spacing: 0.04em;
+      position: relative;
+      transition: color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 50%;
+      width: 0; height: 2px;
+      background: var(--gold-light);
+      border-radius: 2px;
+      transition: width 0.22s cubic-bezier(0.34,1.56,0.64,1), right 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-link:hover { color: var(--gold-light); transform: translateY(-1px); }
+    .nav-link:hover::after { width: 100%; right: 0; }
+    .nav-link:active { color: var(--gold); transform: translateY(0); }
+    .nav-link:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero-bg {
+      background:
+        linear-gradient(to bottom, rgba(10,8,4,0.62) 0%, rgba(15,12,6,0.50) 50%, rgba(10,8,4,0.68) 100%),
+        url('photos/SHOSHI1.JPG') center 30% / cover no-repeat;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 110px 24px 70px;
+      position: relative;
+    }
+
+    /* grain texture on hero */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 128px 128px;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+      opacity: 0.5;
+    }
+
+    /* ── BUTTON ANIMATIONS ── */
+    @keyframes btn-breathe {
+      0%, 100% { box-shadow: 0 2px 8px rgba(90,107,40,0.35), 0 8px 24px rgba(90,107,40,0.18), 0 0 0 0 rgba(90,107,40,0.0); }
+      50%       { box-shadow: 0 2px 8px rgba(90,107,40,0.35), 0 8px 24px rgba(90,107,40,0.18), 0 0 0 6px rgba(90,107,40,0.12); }
+    }
+    @keyframes btn-breathe-gold {
+      0%, 100% { box-shadow: 0 2px 8px rgba(200,165,90,0.4), 0 8px 24px rgba(200,165,90,0.2), 0 0 0 0 rgba(200,165,90,0.0); }
+      50%       { box-shadow: 0 2px 8px rgba(200,165,90,0.4), 0 8px 24px rgba(200,165,90,0.2), 0 0 0 6px rgba(200,165,90,0.14); }
+    }
+    @keyframes btn-breathe-outline {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.0); }
+      50%       { box-shadow: 0 0 0 5px rgba(255,255,255,0.08); }
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--olive-mid);
+      color: #ffffff;
+      font-family: 'Assistant', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 38px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      box-shadow: 0 2px 8px rgba(90,107,40,0.35), 0 8px 24px rgba(90,107,40,0.18);
+      transition: background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s, opacity 0.2s;
+      animation: btn-breathe 2.8s ease-in-out infinite;
+    }
+    .btn-primary:hover {
+      background-color: var(--olive-dark);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(90,107,40,0.45), 0 16px 36px rgba(90,107,40,0.25);
+      animation: none;
+    }
+    .btn-primary:active  { transform: translateY(0) scale(0.97); }
+    .btn-primary:focus-visible { outline: 3px solid var(--olive-light); outline-offset: 3px; }
+
+    .btn-outline {
+      display: inline-block;
+      background-color: transparent;
+      color: #ffffff;
+      font-family: 'Assistant', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 12px 36px;
+      border-radius: 3px;
+      border: 2px solid rgba(255,255,255,0.65);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: border-color 0.2s, background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+      animation: btn-breathe-outline 2.8s ease-in-out infinite;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold-light);
+      background-color: rgba(255,255,255,0.08);
+      transform: translateY(-3px) scale(1.03);
+      animation: none;
+    }
+    .btn-outline:active  { transform: translateY(0) scale(0.97); }
+    .btn-outline:focus-visible { outline: 3px solid var(--gold-light); outline-offset: 3px; }
+
+    .btn-gold {
+      display: inline-block;
+      background-color: var(--gold);
+      color: var(--brown-dark);
+      font-family: 'Assistant', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 38px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      box-shadow: 0 2px 8px rgba(200,165,90,0.4), 0 8px 24px rgba(200,165,90,0.2);
+      transition: background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s, opacity 0.2s;
+      animation: btn-breathe-gold 2.8s ease-in-out infinite;
+    }
+    .btn-gold:hover {
+      background-color: var(--gold-light);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(200,165,90,0.5), 0 16px 36px rgba(200,165,90,0.28);
+      animation: none;
+    }
+    .btn-gold:active  { transform: translateY(0) scale(0.97); }
+    .btn-gold:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: inline-block;
+      font-family: 'Assistant', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      border-bottom: 1.5px solid var(--olive-light);
+      padding-bottom: 4px;
+      margin-bottom: 18px;
+    }
+
+    /* ── CIRCLE IMAGES ── */
+    .circle-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--olive-mid);
+      display: block;
+      margin: 0 auto 16px;
+      box-shadow:
+        0 4px 16px rgba(90, 107, 40, 0.2),
+        0 1px 4px rgba(0,0,0,0.12);
+    }
+    .circle-img-lg-wrap {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: block;
+      margin: 0 auto 24px;
+    }
+    .circle-img-lg-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.65);
+    }
+
+    /* ── GOLD DIVIDER ── */
+    .gold-divider {
+      width: 52px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      margin: 0 auto 28px;
+      border-radius: 2px;
+    }
+
+    /* ── SERVICE CARDS ── */
+    .service-card {
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow:
+        0 1px 4px rgba(59, 34, 16, 0.06),
+        0 6px 24px rgba(59, 34, 16, 0.09),
+        0 24px 48px rgba(59, 34, 16, 0.06);
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 2px 8px rgba(59, 34, 16, 0.08),
+        0 12px 36px rgba(59, 34, 16, 0.13),
+        0 32px 64px rgba(59, 34, 16, 0.08);
+    }
+    .service-card-img {
+      flex: 0 0 190px;
+      min-height: 175px;
+      overflow: hidden;
+      position: relative;
+    }
+    .service-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .service-card-body {
+      flex: 1;
+      padding: 26px 30px;
+      min-width: 220px;
+    }
+
+    /* ── FORM ── */
+    .form-field {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #d8cfc4;
+      border-radius: 4px;
+      font-family: 'Assistant', Arial, sans-serif;
+      font-size: 15px;
+      direction: rtl;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #ffffff;
+      color: var(--text);
+    }
+    .form-field::placeholder { color: #b0a090; }
+    .form-field:focus {
+      border-color: var(--olive-mid);
+      box-shadow: 0 0 0 3px rgba(122, 140, 66, 0.12);
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(200, 165, 90, 0.2);
+      border-radius: 8px;
+      padding: 30px 28px;
+      flex: 1 1 260px;
+      max-width: 360px;
+      text-align: right;
+      transition: border-color 0.2s;
+    }
+    .testimonial-card:hover { border-color: rgba(200, 165, 90, 0.45); }
+
+    /* ── MOBILE NAV ── */
+    #mobile-menu { display: none; }
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav { display: none !important; }
+      .hamburger   { display: flex; }
+      #mobile-menu { display: none; flex-direction: column; }
+      #mobile-menu.open { display: flex; }
+      .hero-title  { font-size: 2.6rem !important; }
+      .hero-sub    { font-size: 1rem !important; }
+      .service-card-img { flex: 0 0 100%; min-height: 210px; }
+      .two-col { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<header style="background-color:var(--brown-dark); position:sticky; top:0; z-index:1000; box-shadow:0 2px 16px rgba(0,0,0,0.32);">
+  <div style="max-width:1170px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:80px;">
+
+    <a href="#home" style="display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0;">
+      <img src="brand_assets/WiseTree_logo.png" alt="עצה תומכת" class="nav-logo-img" style="height:56px; width:auto;" />
+    </a>
+
+    <!-- Company name centered -->
+    <a href="#home" style="position:absolute; left:50%; transform:translateX(-50%); text-decoration:none; text-align:center; line-height:1.15;">
+      <span style="display:block; font-family:'Cormorant Garamond', Georgia, serif; font-size:1.55rem; font-weight:600; color:#ffffff; letter-spacing:0.04em; text-shadow:0 1px 8px rgba(0,0,0,0.3);">עצה תומכת</span>
+      <span style="display:block; font-family:'Assistant', sans-serif; font-size:10px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-light); opacity:0.85; margin-top:2px;">ליווי הוליסטי לנשים</span>
+    </a>
+
+    <nav class="desktop-nav" style="display:flex; align-items:center; gap:0;">
+      <a href="#home"         class="nav-link">בית</a>
+      <a href="about.html"    class="nav-link">אודות</a>
+      <a href="service.html"  class="nav-link">שירותים</a>
+      <a href="#testimonials" class="nav-link">המלצות</a>
+      <a href="#contact"      class="nav-link">צרי קשר</a>
+      <a href="blog.html"     class="nav-link" style="color:var(--gold-light);">בלוג</a>
+      <a href="friends.html"  class="nav-link" style="color:var(--gold-light);">חברות והמלצות</a>
+    </nav>
+
+    <button class="hamburger" id="hamburger-btn" aria-label="תפריט">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" style="background-color:#2d1a0a; padding:6px 0; border-top:1px solid rgba(255,255,255,0.08);">
+    <a href="#home"         class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">בית</a>
+    <a href="about.html"    class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">אודות</a>
+    <a href="service.html"  class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">שירותים</a>
+    <a href="#testimonials" class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">המלצות</a>
+    <a href="#contact"      class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">צרי קשר</a>
+    <a href="blog.html"     class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); color:var(--gold-light);">בלוג</a>
+    <a href="friends.html"  class="nav-link" style="display:block; padding:13px 28px; color:var(--gold-light);">חברות והמלצות</a>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="home" class="hero-bg">
+  <div style="max-width:720px; position:relative; z-index:1;">
+
+    <p class="section-label" style="color:var(--gold-light); border-bottom-color:rgba(223,192,126,0.45); margin-bottom:24px;">
+      ליווי הוליסטי • תמיכה לנשים
+    </p>
+
+    <h1 class="hero-title" style="color:#ffffff; font-size:4rem; font-weight:600; line-height:1.12; margin-bottom:24px; letter-spacing:-0.02em; text-shadow:0 2px 24px rgba(0,0,0,0.5);">
+      את מופלאה<br>
+      <em style="font-style:italic; color:var(--gold-light);">בדיוק כמו שאת</em>
+    </h1>
+
+    <div style="width:48px; height:1px; background:linear-gradient(90deg, transparent, var(--gold-light), transparent); margin:0 auto 24px;"></div>
+
+    <p class="hero-sub" style="color:rgba(255,255,255,0.82); font-size:1.15rem; line-height:1.78; max-width:560px; margin:0 auto 40px; font-weight:400; font-family:'Assistant', sans-serif;">
+      מרחב בטוח לנשים המחפשות שינוי, צמיחה ותמיכה<br>בדרכן לחיים מלאים ושלווים
+    </p>
+
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a href="#contact" class="btn-primary">קבעי פגישת היכרות</a>
+      <a href="#about"   class="btn-outline">הכירי אותי</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     ABOUT / THERAPIST INTRO
+════════════════════════════════════════ -->
+<section id="about" style="background-color:var(--cream); padding:100px 24px;">
+  <div style="max-width:760px; margin:0 auto; text-align:center;">
+
+    <p class="section-label">אודות</p>
+    <div class="gold-divider"></div>
+
+    <div class="circle-img-lg-wrap">
+      <img src="photos/circle_logo_shoshi.png" alt="שושי מיראז" />
+    </div>
+
+    <h2 style="font-size:2.4rem; font-weight:600; color:var(--brown-dark); margin:0 0 6px; letter-spacing:-0.01em; line-height:1.15; font-family:Arial, sans-serif;">
+      היי, שמי שושי מיראז
+    </h2>
+    <p style="color:var(--olive-mid); font-size:1rem; font-weight:700; margin:0 0 32px; letter-spacing:0.08em; text-transform:uppercase; font-family:'Assistant', sans-serif; font-size:13px;">
+      עובדת סוציאלית • גינקוסופית
+    </p>
+
+    <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); margin-bottom:18px; font-family:'Assistant', sans-serif; font-weight:700;">
+      ברוכה הבאה למרחב של "עצה 🌳 תומכת"
+    </p>
+    <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); margin-bottom:18px; font-family:'Assistant', sans-serif;">
+      ליווי רגשי הוליסטי, הנועד להעצמה אישית וחומלת מתוך מודעות למחזוריות גוף-נפש האישה.
+    </p>
+    <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); font-family:'Assistant', sans-serif; margin-bottom:10px;">
+      במרחב הטיפולי אני משלבת <strong>כלים מודרניים</strong> מעולמות העבודה הסוציאלית, מיינדפולנס, התמקדות, קונסטלציה, קלפים טיפוליים ויצירה תרפויטית; לצד, <strong>כלים וידע מסורתי עתיק</strong> כמו סאונת אדים לאגן, טקס סגירת אגן, רפואת העשן וצמחי מרפא.
+    </p>
+
+    <a href="about.html" style="display:block; margin-bottom:20px; font-family:'Assistant', sans-serif; font-size:1rem; font-weight:700; color:var(--olive-mid); text-decoration:underline; text-underline-offset:4px; transition:color 0.2s;" onmouseover="this.style.color='var(--brown-dark)'" onmouseout="this.style.color='var(--olive-mid)'">קראי עוד ›</a>
+    <a href="#contact" class="btn-primary">בואי נדבר</a>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SERVICES – CIRCLES
+════════════════════════════════════════ -->
+<section id="services" style="background-color:var(--cream-mid); padding:90px 24px;">
+  <div style="max-width:980px; margin:0 auto; text-align:center;">
+
+    <p class="section-label">שירותים</p>
+    <div class="gold-divider"></div>
+
+    <h2 style="font-size:2.4rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; letter-spacing:-0.01em; line-height:1.2;">
+      במה אני מתמחה
+    </h2>
+    <p style="color:var(--text-light); font-size:1rem; margin:0 0 56px; font-family:'Assistant', sans-serif; line-height:1.65; max-width:480px; margin-left:auto; margin-right:auto; margin-bottom:56px;">
+      שירותים מקצועיים המותאמים אישית לכל מטופלת
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
+
+      <a href="service.html#livy-holisti" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/livui_rigshi_main_page_service.jpg" alt="ליווי הוליסטי רגשי" class="circle-img" />
+        <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">ליווי רגשי הוליסטי</h3>
+        <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">מפגשים אישיים מותאמים לצרכייך בקליניקה ובזום</p>
+      </a>
+
+      <a href="service.html#kvutza" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/service_group.jpeg" alt="קבוצה תהליכית" class="circle-img" />
+        <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">קבוצה תהליכית</h3>
+        <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">מודעות למחזוריות- מעגל לימוד במרחב מכיל ומאפשר</p>
+      </a>
+
+      <a href="service.html#sauna" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/steam_sauna_service.png" alt="סאונת אדים לאגן" class="circle-img" />
+        <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">סאונת אדים לאגן</h3>
+        <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">פרקטיקה עתיקה לאיזון רגשי וגופני באמצעות צמחי מרפא (בלבוש מלא)</p>
+      </a>
+
+      <a href="service.html#takas" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/sgirat_agan_service_main_page.png" alt="טקס סגירת אגן" class="circle-img" />
+        <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">טקס סגירת אגן ("איסוף עצמות")</h3>
+        <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">טכניקה מסורתית המומלצת לאחר לידה, הפלה או חוויה רגשית אחרת המבקשת מקום</p>
+      </a>
+
+      <a href="service.html#halitot" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/healing_plants_service.png" alt="חליטות" class="circle-img" />
+        <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;"><em>*בקרוב*</em><br>חליטות למגוון שימושים</h3>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ═══════════════════════════════════════
+     BOOKING CTA BAND
+════════════════════════════════════════ -->
+<section style="background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 100%); padding:72px 24px; text-align:center; position:relative; overflow:hidden;">
+  <!-- decorative olive accent line -->
+  <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent, var(--gold), var(--olive-mid), var(--gold), transparent);"></div>
+
+  <p class="section-label" style="color:var(--gold-light); border-bottom-color:rgba(223,192,126,0.4);">קביעת פגישה</p>
+  <h2 style="color:#ffffff; font-size:2.2rem; font-weight:600; margin:0 0 14px; letter-spacing:-0.01em; line-height:1.2;">
+    קבעי פגישה בקלות, <em style="font-style:italic; color:var(--gold-light);">בכמה קליקים</em>
+  </h2>
+  <p style="color:rgba(255,255,255,0.72); font-size:1rem; line-height:1.7; margin:0 auto 34px; max-width:440px; font-family:'Assistant', sans-serif;">
+    הצעד הראשון לשינוי מתחיל כאן. אני כאן בשבילך.
+  </p>
+  <a href="#contact" class="btn-gold">לפגישת היכרות</a>
+
+  <!-- decorative bottom line -->
+  <div style="position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent, var(--olive-mid), var(--gold), var(--olive-mid), transparent);"></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════ -->
+<section id="testimonials" style="background-color:var(--brown-dark); padding:100px 24px; text-align:center;">
+  <div style="max-width:1080px; margin:0 auto;">
+
+    <p class="section-label" style="color:var(--gold-light); border-bottom-color:rgba(223,192,126,0.35);">המלצות</p>
+    <div style="width:48px; height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent); margin:0 auto 28px;"></div>
+
+    <h2 style="color:#ffffff; font-size:2.4rem; font-weight:600; margin:0 0 56px; letter-spacing:-0.01em; line-height:1.2;">
+      מה אומרות <em style="font-style:italic; color:var(--gold-light);">מטופלותיי</em>
+    </h2>
+
+    <!-- Slider wrapper -->
+    <div style="position:relative; max-width:720px; margin:0 auto; padding:0 56px;">
+
+      <div id="testimonial-track" style="overflow:hidden;">
+        <div id="testimonial-slides" style="display:flex; transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);">
+
+          <!-- Slide 1 -->
+          <div class="testimonial-card" style="min-width:100%; flex-shrink:0;">
+            <div style="color:var(--gold); font-size:17px; letter-spacing:3px; margin-bottom:16px;">★★★★★</div>
+            <p style="color:rgba(255,255,255,0.84); font-size:0.96rem; line-height:1.86; margin:0 0 20px; font-family:'Assistant', sans-serif; font-style:italic;">
+              "טקס סגירת האגן עם שושי היה חוויה עמוקה ומרגיעה.
+              שושי יוצרת מרחב בטוח, נעים ומכיל, שמאפשר להרפות ולהתחבר לגוף ולנשיות בטבעיות.
+              הרגשתי מוחזקת ומלווה ברגישות ובנוכחות שקטה.
+              ממליצה בחום לכל אישה שמבקשת רגע לעצמה וחיבור אמיתי פנימה 🤍"
+            </p>
+            <div style="display:flex; align-items:center; gap:10px; justify-content:flex-end;">
+              <div>
+                <p style="color:var(--gold-light); font-weight:700; font-size:0.88rem; margin:0; font-family:'Assistant', sans-serif;">מוניקה</p>
+                <p style="color:rgba(255,255,255,0.4); font-size:0.78rem; margin:0; font-family:'Assistant', sans-serif;">מעסה רפואית</p>
+              </div>
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--olive-mid); opacity:0.6;"></div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="testimonial-card" style="min-width:100%; flex-shrink:0;">
+            <div style="color:var(--gold); font-size:17px; letter-spacing:3px; margin-bottom:16px;">★★★★★</div>
+            <p style="color:rgba(255,255,255,0.84); font-size:0.96rem; line-height:1.86; margin:0 0 20px; font-family:'Assistant', sans-serif; font-style:italic;">
+              "טקס סגירת אגן עם שושי הייתה חוויה מיוחדת ומרפאה. המרחב שהיא יוצרת עוטף ברכות, ברגישות רבה ובאהבה. בעזרתה יכלתי להרפות ולהעמיק את החיבור לעצמי.
+              ממליצה מאוד ❤️"
+            </p>
+            <div style="display:flex; align-items:center; gap:10px; justify-content:flex-end;">
+              <div>
+                <p style="color:var(--gold-light); font-weight:700; font-size:0.88rem; margin:0; font-family:'Assistant', sans-serif;">שי</p>
+                <p style="color:rgba(255,255,255,0.4); font-size:0.78rem; margin:0; font-family:'Assistant', sans-serif;">אם ל-2 קטנים</p>
+              </div>
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--gold); opacity:0.5;"></div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="testimonial-card" style="min-width:100%; flex-shrink:0;">
+            <div style="color:var(--gold); font-size:17px; letter-spacing:3px; margin-bottom:16px;">★★★★★</div>
+            <p style="color:rgba(255,255,255,0.84); font-size:0.96rem; line-height:1.86; margin:0 0 20px; font-family:'Assistant', sans-serif; font-style:italic;">
+              "שושי מביאה לב פתוח, ידע עמוק והחזקה אימהית שמאפשרת להרפות באמת.
+              דרכה למדתי להקשיב לנשיות שלי, למחזוריות, לתנועות הרחם ולרגש. דרכה למדתי על טקסיות עם האשה השלמה, טקסיות מלווה בידע עשיר בעולם הצמחים דרך תפילה אל הירח.
+              ממליצה מכל הלב לכל אישה שמרגישה קריאה לחזור הביתה לעצמה להגיע אליה ❤️"
+            </p>
+            <div style="display:flex; align-items:center; gap:10px; justify-content:flex-end;">
+              <div>
+                <p style="color:var(--gold-light); font-weight:700; font-size:0.88rem; margin:0; font-family:'Assistant', sans-serif;">מירית</p>
+                <p style="color:rgba(255,255,255,0.4); font-size:0.78rem; margin:0; font-family:'Assistant', sans-serif;">רפלקסולוגית</p>
+              </div>
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--brown-light); opacity:0.5;"></div>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="testimonial-card" style="min-width:100%; flex-shrink:0;">
+            <div style="color:var(--gold); font-size:17px; letter-spacing:3px; margin-bottom:16px;">★★★★★</div>
+            <p style="color:rgba(255,255,255,0.84); font-size:0.96rem; line-height:1.86; margin:0 0 20px; font-family:'Assistant', sans-serif; font-style:italic;">
+              "ממליצה על שושי באהבה גדולה!!
+              מעבר לזה שהיא מיוחדת מאוד וזו זכות להיתרם ממנה ולהכיר- זו הזדמנות לכל אחת להתחבר לעצמה ולהנות מחכמתן של נשים רבות לפנינו ומידע שקצת הלך לאיבוד בדרך.
+              אני מרגישה שהתחלתי איזשהו מסע איתה אותו עוד אמשיך.. היא ליוותה אותי בתהליך בו התחברתי לעצמי, לגוף שלי, קיבלתי על דברים מסוימים פרספקטיבה חדשה ומרעננת והחוויה הייתה מעצימה ממש.
+              תודה רבה על הרכות, הליווי המותאם לי אישית, וההכלה הרבה ❤️
+              ממליצה באהבה"
+            </p>
+            <div style="display:flex; align-items:center; gap:10px; justify-content:flex-end;">
+              <div>
+                <p style="color:var(--gold-light); font-weight:700; font-size:0.88rem; margin:0; font-family:'Assistant', sans-serif;">ירדן</p>
+              </div>
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--olive-dark); opacity:0.5;"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Prev/Next arrows -->
+      <button onclick="goToSlide(current-1)" style="position:absolute; top:50%; right:0; transform:translateY(-50%); background:rgba(200,165,90,0.12); border:1px solid rgba(200,165,90,0.5); color:var(--gold-light); font-size:1.4rem; line-height:1; width:40px; height:40px; border-radius:50%; cursor:pointer; transition:background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1); z-index:2;" onmouseover="this.style.backgroundColor='rgba(200,165,90,0.28)';this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.backgroundColor='rgba(200,165,90,0.12)';this.style.transform='translateY(-50%) scale(1)'">›</button>
+      <button onclick="goToSlide(current+1)" style="position:absolute; top:50%; left:0; transform:translateY(-50%); background:rgba(200,165,90,0.12); border:1px solid rgba(200,165,90,0.5); color:var(--gold-light); font-size:1.4rem; line-height:1; width:40px; height:40px; border-radius:50%; cursor:pointer; transition:background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1); z-index:2;" onmouseover="this.style.backgroundColor='rgba(200,165,90,0.28)';this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.backgroundColor='rgba(200,165,90,0.12)';this.style.transform='translateY(-50%) scale(1)'">‹</button>
+
+      <!-- Dot indicators -->
+      <div id="testimonial-dots" style="display:flex; justify-content:center; gap:8px; margin-top:28px;">
+        <button onclick="goToSlide(0)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:1; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
+        <button onclick="goToSlide(1)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
+        <button onclick="goToSlide(2)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
+        <button onclick="goToSlide(3)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
+      </div>
+
+    </div>
+
+    <script>
+      (function() {
+        var current = 0;
+        var total = 4;
+        var slides = document.getElementById('testimonial-slides');
+        var dots = document.getElementById('testimonial-dots').querySelectorAll('button');
+        var timer;
+
+        function goToSlide(n) {
+          current = (n + total) % total;
+          window.current = current;
+          slides.style.transform = 'translateX(' + (current * 100) + '%)';
+          dots.forEach(function(d, i) { d.style.opacity = i === current ? '1' : '0.3'; });
+        }
+
+        window.goToSlide = goToSlide;
+        window.current = current;
+
+        function autoPlay() {
+          timer = setInterval(function() { goToSlide(current + 1); }, 5000);
+        }
+
+        // Pause on hover
+        document.getElementById('testimonial-track').addEventListener('mouseenter', function() { clearInterval(timer); });
+        document.getElementById('testimonial-track').addEventListener('mouseleave', autoPlay);
+
+        autoPlay();
+      })();
+    </script>
+
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     CONTACT + MAP
+════════════════════════════════════════ -->
+<section id="contact" style="background-color:var(--cream); padding:100px 24px;">
+  <div style="max-width:1040px; margin:0 auto;">
+
+    <div style="text-align:center; margin-bottom:56px;">
+      <p class="section-label">צרי קשר</p>
+      <div class="gold-divider"></div>
+      <h2 style="font-size:2.4rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; letter-spacing:-0.01em;">
+        נדבר?
+      </h2>
+      <p style="color:var(--text-light); font-size:1rem; font-family:'Assistant', sans-serif; line-height:1.65; margin:0;">
+        השאירי פרטים ואחזור אלייך בהקדם
+      </p>
+    </div>
+
+    <div class="two-col" style="display:flex; gap:48px; align-items:flex-start;">
+
+      <!-- Form -->
+      <div style="flex:1; min-width:280px;">
+        <form id="contact-form" onsubmit="sendToGmail(event);">
+          <input  type="text"  id="f-name"    placeholder="שם מלא *"  class="form-field" />
+          <input  type="tel"   id="f-phone"   placeholder="טלפון *"    class="form-field" />
+          <input  type="email" id="f-email"   placeholder='דוא"ל'      class="form-field" />
+          <textarea            id="f-message" placeholder="הודעה"      class="form-field" rows="4" style="resize:vertical;"></textarea>
+          <button type="submit" class="btn-primary" style="width:100%; font-size:1rem; padding:15px; font-family:'Assistant', sans-serif;">שלחי הודעה</button>
+        </form>
+        <script>
+        function sendToGmail(e) {
+          e.preventDefault();
+          var name    = document.getElementById('f-name').value;
+          var phone   = document.getElementById('f-phone').value;
+          var email   = document.getElementById('f-email').value;
+          var message = document.getElementById('f-message').value;
+          var subject = encodeURIComponent('פנייה חדשה מהאתר – ' + name);
+          var body    = encodeURIComponent('שם: ' + name + '\nטלפון: ' + phone + '\nאימייל: ' + email + '\n\nהודעה:\n' + message);
+          window.open('https://mail.google.com/mail/?view=cm&to=Shoshimiraz%40gmail.com&su=' + subject + '&body=' + body, '_blank');
+        }
+        </script>
+
+        <div style="margin-top:30px; padding-top:28px; border-top:1px solid var(--cream-dark);">
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; align-items:center; gap:12px; justify-content:flex-end;">
+              <div style="display:flex; align-items:center; gap:8px; direction:ltr;">
+                <a href="tel:+972528753214" style="color:var(--text-mid); font-size:0.95rem; font-family:'Assistant', sans-serif; text-decoration:none;">(+972) 052-8753214</a>
+                <a href="https://wa.me/972528753214" target="_blank" rel="noopener" title="WhatsApp" style="width:28px; height:28px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; text-decoration:none;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+              </div>
+              <span style="width:32px; height:32px; background:var(--cream-mid); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">📞</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; justify-content:flex-end;">
+              <a href="mailto:Shoshimiraz@gmail.com" style="color:var(--text-mid); font-size:0.95rem; font-family:'Assistant', sans-serif; text-decoration:none;">Shoshimiraz@gmail.com</a>
+              <span style="width:32px; height:32px; background:var(--cream-mid); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">✉️</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; justify-content:flex-end;">
+              <span style="color:var(--text-mid); font-size:0.95rem; font-family:'Assistant', sans-serif;">קריית טבעון</span>
+              <span style="width:32px; height:32px; background:var(--cream-mid); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">📍</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; justify-content:flex-end;">
+              <a href="https://www.facebook.com/shoshi.miraz/about" target="_blank" style="color:var(--text-mid); font-size:0.95rem; font-family:'Assistant', sans-serif; text-decoration:none;">Facebook</a>
+              <span style="width:32px; height:32px; background:var(--cream-mid); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#6b7280"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; justify-content:flex-end;">
+              <a href="https://www.instagram.com/sh0shi.m/" target="_blank" style="color:var(--text-mid); font-size:0.95rem; font-family:'Assistant', sans-serif; text-decoration:none;">Instagram</a>
+              <span style="width:32px; height:32px; background:var(--cream-mid); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer style="background-color:var(--brown-dark); padding:56px 24px 32px; text-align:center; position:relative; overflow:hidden;">
+  <!-- top accent line -->
+  <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), var(--olive-mid), var(--gold), transparent);"></div>
+
+  <div style="max-width:900px; margin:0 auto;">
+
+    <img src="brand_assets/WiseTree_logo.png" alt="עצה תומכת"
+      style="height:68px; width:auto; margin-bottom:8px; filter:brightness(1.15) saturate(0.85);" />
+
+    <p style="color:var(--gold-light); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-family:'Assistant', sans-serif; margin:0 0 28px; opacity:0.8;">
+      ייעוץ הוליסטי · תמיכה לנשים
+    </p>
+
+    <div style="margin-bottom:24px; display:flex; justify-content:center; flex-wrap:wrap; gap:2px;">
+      <a href="#home"         style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">בית</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="#about"        style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">אודות</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="#services"     style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">שירותים</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="#testimonials" style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">המלצות</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="#contact"      style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">צרי קשר</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="blog.html"     style="color:var(--gold-light); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='var(--gold-light)'">בלוג</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="friends.html"  style="color:var(--gold-light); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='var(--gold-light)'">חברות והמלצות</a>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <a href="https://www.facebook.com/shoshi.miraz/about" target="_blank" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Facebook</a>
+      <a href="https://www.instagram.com/sh0shi.m/" target="_blank" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Instagram</a>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:24px;">
+      <p style="color:rgba(255,255,255,0.25); font-size:12px; margin:0; font-family:'Assistant', sans-serif; letter-spacing:0.04em;">
+        © 2024 עצה תומכת. כל הזכויות שמורות.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<script>
+  const btn  = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>

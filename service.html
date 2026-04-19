@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>שירותים – עצה תומכת</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --brown-dark:   #3b2210;
+      --brown-mid:    #6b4423;
+      --brown-light:  #9a7252;
+      --olive-dark:   #586b28;
+      --olive-mid:    #7a8c42;
+      --olive-light:  #aab870;
+      --gold:         #c8a55a;
+      --gold-light:   #dfc07e;
+      --cream:        #faf4ec;
+      --cream-mid:    #f2e8d8;
+      --cream-dark:   #e8d5bc;
+      --text:         #2d1e0e;
+      --text-mid:     #6b5040;
+      --text-light:   #9a8070;
+    }
+
+    body {
+      font-family: 'Assistant', Arial, sans-serif;
+      direction: rtl;
+      color: var(--text);
+      background-color: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* ── NAV ── */
+    @keyframes logo-float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-3px); }
+    }
+    .nav-logo-img {
+      transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+      animation: logo-float 3.2s ease-in-out infinite;
+    }
+    .nav-logo-img:hover  { transform: translateY(-4px) scale(1.06); animation: none; opacity: 0.92; }
+    .nav-logo-img:active { transform: scale(0.96); }
+
+    .nav-link {
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-family: 'Assistant', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 6px 14px;
+      letter-spacing: 0.04em;
+      position: relative;
+      transition: color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 50%;
+      width: 0; height: 2px;
+      background: var(--gold-light);
+      border-radius: 2px;
+      transition: width 0.22s cubic-bezier(0.34,1.56,0.64,1), right 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-link:hover { color: var(--gold-light); transform: translateY(-1px); }
+    .nav-link:hover::after { width: 100%; right: 0; }
+    .nav-link:active { color: var(--gold); transform: translateY(0); }
+    .nav-link:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; border-radius: 2px; }
+
+    /* ── MOBILE NAV ── */
+    #mobile-menu { display: none; }
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      .desktop-nav { display: none !important; }
+      .hamburger   { display: flex; }
+      #mobile-menu { display: none; flex-direction: column; }
+      #mobile-menu.open { display: flex; }
+    }
+
+    /* ── BUTTONS ── */
+    @keyframes btn-breathe {
+      0%, 100% { box-shadow: 0 2px 8px rgba(90,107,40,0.35), 0 8px 24px rgba(90,107,40,0.18), 0 0 0 0 rgba(90,107,40,0.0); }
+      50%       { box-shadow: 0 2px 8px rgba(90,107,40,0.35), 0 8px 24px rgba(90,107,40,0.18), 0 0 0 6px rgba(90,107,40,0.12); }
+    }
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--olive-mid);
+      color: #ffffff;
+      font-family: 'Assistant', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 38px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      box-shadow: 0 2px 8px rgba(90,107,40,0.35), 0 8px 24px rgba(90,107,40,0.18);
+      transition: background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s, opacity 0.2s;
+      animation: btn-breathe 2.8s ease-in-out infinite;
+    }
+    .btn-primary:hover {
+      background-color: var(--olive-dark);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(90,107,40,0.45), 0 16px 36px rgba(90,107,40,0.25);
+      animation: none;
+    }
+    .btn-primary:active  { transform: translateY(0) scale(0.97); }
+    .btn-primary:focus-visible { outline: 3px solid var(--olive-light); outline-offset: 3px; }
+
+    /* ── SECTION LABEL ── */
+    .gold-divider {
+      width: 52px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      margin: 0 auto 28px;
+      border-radius: 2px;
+    }
+    .section-label {
+      display: inline-block;
+      font-family: 'Assistant', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      border-bottom: 1.5px solid var(--olive-light);
+      padding-bottom: 4px;
+      margin-bottom: 18px;
+    }
+
+    /* ── CIRCLE IMAGES ── */
+    .circle-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--olive-mid);
+      display: block;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 16px rgba(90,107,40,0.2), 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    /* ── SERVICE CARDS ── */
+    .service-card {
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow:
+        0 1px 4px rgba(59,34,16,0.06),
+        0 6px 24px rgba(59,34,16,0.09),
+        0 24px 48px rgba(59,34,16,0.06);
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 2px 8px rgba(59,34,16,0.08),
+        0 12px 36px rgba(59,34,16,0.13),
+        0 32px 64px rgba(59,34,16,0.08);
+    }
+    .service-card-img {
+      flex: 0 0 190px;
+      min-height: 175px;
+      overflow: hidden;
+      position: relative;
+    }
+    .service-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .service-card-body {
+      flex: 1;
+      padding: 26px 30px;
+      min-width: 220px;
+    }
+
+    @media (max-width: 640px) {
+      .service-card-img { flex: 0 0 100%; min-height: 210px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header style="background-color:var(--brown-dark); position:sticky; top:0; z-index:1000; box-shadow:0 2px 16px rgba(0,0,0,0.32);">
+  <div style="max-width:1170px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:80px;">
+
+    <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0;">
+      <img src="brand_assets/WiseTree_logo.png" alt="עצה תומכת" class="nav-logo-img" style="height:56px; width:auto;" />
+    </a>
+
+    <a href="index.html" style="position:absolute; left:50%; transform:translateX(-50%); text-decoration:none; text-align:center; line-height:1.15;">
+      <span style="display:block; font-family:'Cormorant Garamond', Georgia, serif; font-size:1.55rem; font-weight:600; color:#ffffff; letter-spacing:0.04em; text-shadow:0 1px 8px rgba(0,0,0,0.3);">עצה תומכת</span>
+      <span style="display:block; font-family:'Assistant', sans-serif; font-size:10px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-light); opacity:0.85; margin-top:2px;">ליווי הוליסטי לנשים</span>
+    </a>
+
+    <nav class="desktop-nav" style="display:flex; align-items:center; gap:0;">
+      <a href="index.html"              class="nav-link">בית</a>
+      <a href="about.html"             class="nav-link">אודות</a>
+      <a href="service.html"           class="nav-link">שירותים</a>
+      <a href="index.html#testimonials" class="nav-link">המלצות</a>
+      <a href="index.html#contact"      class="nav-link">צרי קשר</a>
+      <a href="blog.html"               class="nav-link" style="color:var(--gold-light);">בלוג</a>
+      <a href="friends.html"            class="nav-link" style="color:var(--gold-light);">חברות והמלצות</a>
+    </nav>
+
+    <button class="hamburger" id="hamburger-btn" aria-label="תפריט">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" style="background-color:#2d1a0a; padding:6px 0; border-top:1px solid rgba(255,255,255,0.08);">
+    <a href="index.html"              class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">בית</a>
+    <a href="about.html"             class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">אודות</a>
+    <a href="service.html"           class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">שירותים</a>
+    <a href="index.html#testimonials" class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">המלצות</a>
+    <a href="index.html#contact"      class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">צרי קשר</a>
+    <a href="blog.html"               class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); color:var(--gold-light);">בלוג</a>
+    <a href="friends.html"            class="nav-link" style="display:block; padding:13px 28px; color:var(--gold-light);">חברות והמלצות</a>
+  </div>
+</header>
+
+
+<!-- SERVICE DETAIL CARDS -->
+<section style="background-color:var(--cream); padding:90px 24px;">
+  <div style="max-width:840px; margin:0 auto;">
+
+    <div style="text-align:center; margin-bottom:56px;">
+      <p class="section-label">שירותים</p>
+      <div class="gold-divider"></div>
+      <h1 style="font-size:2.4rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; letter-spacing:-0.01em; line-height:1.2;">במה אני מתמחה</h1>
+      <p style="color:var(--text-light); font-size:1rem; font-family:'Assistant', sans-serif; line-height:1.65;">שירותים מקצועיים המותאמים אישית לכל מטופלת</p>
+    </div>
+
+    <!-- Card 1 -->
+    <div id="livy-holisti" class="service-card" style="scroll-margin-top:90px; flex-wrap:wrap;">
+      <div class="service-card-body">
+        <p style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--olive-mid); margin-bottom:10px; font-family:'Assistant', sans-serif;">טיפול אישי</p>
+        <h3 style="font-size:1.45rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; line-height:1.25;">ליווי רגשי הוליסטי</h3>
+        <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.82; margin:0 0 18px; font-family:'Assistant', sans-serif;">
+          מפגשים אישיים מותאמים לצרכייך — בקליניקה ובזום.
+        </p>
+        <button onclick="toggleExpand('livy-expand', this)" style="background:none; border:none; cursor:pointer; color:var(--olive-dark); font-weight:700; font-size:0.9rem; font-family:'Assistant', sans-serif; letter-spacing:0.02em; display:inline-flex; align-items:center; gap:6px; padding:0; transition:gap 0.2s;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+          ← קראי עוד
+        </button>
+      </div>
+      <div class="service-card-img">
+        <img src="photos/livui_rigshi_main_page_service.jpg" alt="ליווי רגשי הוליסטי" />
+      </div>
+
+      <!-- Expandable content -->
+      <div id="livy-expand" style="max-height:0; overflow:hidden; transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1); width:100%;">
+        <div style="padding:32px 30px 36px; border-top:1px solid var(--cream-dark); direction:rtl; text-align:right;">
+
+          <p style="font-size:1rem; font-weight:700; color:var(--brown-dark); line-height:1.8; font-family:'Assistant', sans-serif; margin-bottom:16px;">
+            אני מציעה ליווי רגשי הוליסטי עבור נשים,<br>
+            ליווי הנועד להעצמה אישית וחומלת מתוך מודעות למחזוריות גוף-נפש האישה.
+          </p>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:20px;">
+            במרחב הטיפולי אני משלבת <strong>כלים מודרניים</strong> מעולמות העבודה הסוציאלית, מיינדפולנס, התמקדות, קונסטלציה, קלפים טיפוליים ויצירה תרפויטית; לצד, <strong>כלים וידע מסורתי עתיק</strong> כמו סאונת אדים לאגן, טקס סגירת אגן, רפואת העשן וצמחי מרפא.
+          </p>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:24px;">
+            בתור אישה רגישה מאוד, חשוב לי להביא לקדמת הבמה מודעות למשאבים והכוחות הקיימים בתוכנו וסביבנו — אנחנו חכמות יותר ממה שאנחנו חושבות. יתרה מכך, הרחם יודעת להיות לצידנו, ובהקשבה אליה נוכל לשפר את איכות חיינו.
+          </p>
+
+          <div style="background:var(--cream-mid); border-radius:12px; padding:22px 24px; margin-bottom:24px; border-right:4px solid var(--gold);">
+            <h4 style="font-size:1rem; font-weight:700; color:var(--brown-dark); margin:0 0 14px; font-family:'Assistant', sans-serif;">מה היה קורה לו ידעת להבין את המסרים שהרחם שולחת לך לאורך החודש?</h4>
+            <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif; margin:0 0 10px;">לא רק בנושא פוריות, אלא גם מסרים הטמונים רק בך —</p>
+            <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+              <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+                <span style="color:var(--gold); flex-shrink:0;">◆</span><span>איך לתקשר טוב יותר עם העולם?</span>
+              </li>
+              <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+                <span style="color:var(--gold); flex-shrink:0;">◆</span><span>איך לשמור על הגבולות שלי?</span>
+              </li>
+              <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+                <span style="color:var(--gold); flex-shrink:0;">◆</span><span>איך להבין את הצרכים שלי יותר טוב — ואף לדעת למלא אותם?</span>
+              </li>
+              <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+                <span style="color:var(--gold); flex-shrink:0;">◆</span><span>איך להרגיש אהובה ושלמה יותר עם עצמי?</span>
+              </li>
+              <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+                <span style="color:var(--gold); flex-shrink:0;">◆</span><span>איך להתחבר לנשיות שלי במידה הנכונה לי?</span>
+              </li>
+            </ul>
+          </div>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:20px;">
+            <strong>בקליניקה נלמד לזהות את המסרים</strong> שהרחם והגוף שולחים לך לאורך החודש, נוכל לעבוד על הפחתת תסכולים וכאבים, פיזיים או רגשיים, ולרתום את התהליכים הטבעיים שאת עוברת לידי חיים יותר מאושרים, בריאים ושלמים.
+          </p>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:8px;">
+            אני עובדת סוציאלית בהכשרתי ובתחום משנת 2019. לאורך השנים התרחבו אופקיי בתחומים הוליסטיים שונים, וביניהם לימודי <strong>גינקוסופיה - "חכמת האישה השלמה"</strong>, התמחות העוסקת בתמיכה הוליסטית עבור כל אישה באשר היא, ומתמודדת עם צמתים שונים של מעגלי החיים כגון מחזוריות, מיניות, לידה/הפלה, ועוד.
+          </p>
+
+          <p style="margin-bottom:28px;">
+            <a href="about.html" style="color:var(--olive-dark); font-weight:700; text-decoration:none; font-size:0.9rem; font-family:'Assistant', sans-serif; display:inline-flex; align-items:center; gap:6px; transition:gap 0.2s;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">לקריאה עוד עליי ←</a>
+          </p>
+
+          <div style="text-align:center;">
+            <a href="index.html#contact" style="display:inline-block; background:var(--brown-dark); color:#fff; padding:13px 28px; border-radius:30px; font-weight:700; text-decoration:none; font-size:0.95rem; font-family:'Assistant', sans-serif; letter-spacing:0.03em; transition:background 0.2s, transform 0.2s;" onmouseover="this.style.background='var(--olive-dark)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--brown-dark)';this.style.transform='translateY(0)'">
+              קבעי פגישת היכרות ←
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div id="takas" class="service-card" style="scroll-margin-top:90px; flex-wrap:wrap;">
+      <div class="service-card-body">
+        <p style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--olive-mid); margin-bottom:10px; font-family:'Assistant', sans-serif;">מעגל נשים</p>
+        <h3 style="font-size:1.45rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; line-height:1.25;">מעגל נשים - מודעות למחזוריות 🌙🌿</h3>
+        <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.82; margin:0 0 18px; font-family:'Assistant', sans-serif;">
+          5 מפגשים בלב קרית טבעון — מעגל נשים לימודי על מחזוריות האישה בגישה הוליסטית.
+        </p>
+        <button onclick="toggleExpand('takas-expand', this)" style="background:none; border:none; cursor:pointer; color:var(--olive-dark); font-weight:700; text-decoration:none; font-size:0.9rem; font-family:'Assistant', sans-serif; letter-spacing:0.02em; display:inline-flex; align-items:center; gap:6px; padding:0; transition:gap 0.2s;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+          ← קראי עוד
+        </button>
+      </div>
+      <div class="service-card-img">
+        <img src="photos/service_group.jpeg" alt="מעגל נשים" />
+      </div>
+
+      <!-- Expandable content -->
+      <div id="takas-expand" style="max-height:0; overflow:hidden; transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1); width:100%;">
+        <div style="padding:32px 30px 36px; border-top:1px solid var(--cream-dark); direction:rtl; text-align:right;">
+
+          <p style="font-size:1rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:20px;">
+            אני מזמינה אותך למעגל נשים לימודי על מחזוריות האישה בגישה הוליסטית.<br>
+            בעיניים טובות וסקרניות, נלמד יחד כיצד להעמיק את החכמה הקיימת בתוכנו.
+          </p>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:0 0 10px; font-family:'Assistant', sans-serif;">הידע קיים בתוכך</h4>
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:16px;">
+            קודם נדע לזהות את המסרים שהרחם מאותת לנו לאורך כל החודש כל פעם מחדש.
+          </p>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:0 0 10px; font-family:'Assistant', sans-serif;">למה זה חשוב?</h4>
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:16px;">
+            הזיהוי של השינויים הפיזיים והרגשיים שחוזרים על עצמם מידי חודש, עוזר לנו לחיות את חיינו באופן מלא יותר, בריא יותר, מאושר יותר, מחובר ושלם יותר עם החיים שלנו.<br><br>
+            <em>זה ממש כלי להתפתחות אישית.</em><br><br>
+            הזיהוי מלמד אותנו להעמיק את ההיכרות שלנו עם עצמנו, מפתח לימוד אישי על גבולות, צרכים, תקשורת פנימית וחיצונית, ונוגע בהרבה נושאים המשפיעים על חיינו גם באופן לא מודע.<br><br>
+            כל אחת בקבוצה תכיר משאבים התומכים במסעה האישי. בנוסף, אחד המפגשים יעסוק עם החוויה הראשונית שלנו בחיינו עם דם הווסת (מניסיוני האישי, נרטיב זה מביא להרבה ריפוי לנרטיב האישי עמו אנו מסתובבות בעולם).
+          </p>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:0 0 14px; font-family:'Assistant', sans-serif;">סילבוס</h4>
+          <ul style="list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:10px;">
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+              <span style="color:var(--olive-mid); flex-shrink:0; margin-top:2px;">🍁</span>
+              <span><strong>האקו סייקל</strong> — למידה על השלבים במחזור החודשי בהשוואה לעונות הטבע</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+              <span style="color:var(--olive-mid); flex-shrink:0; margin-top:2px;">🍁</span>
+              <span>גוף האישה, הורמונים וזיהוי הפרשות צוואר הרחם</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+              <span style="color:var(--olive-mid); flex-shrink:0; margin-top:2px;">🍁</span>
+              <span>זיהוי ארכיטיפיות מעצימות — בשילוב יצירה תרפויטית</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+              <span style="color:var(--olive-mid); flex-shrink:0; margin-top:2px;">🍁</span>
+              <span>"מה עובד לך?" — חקירה משותפת בנושא שנבחר: משאבים, טיפים, צמחי מרפא</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif;">
+              <span style="color:var(--olive-mid); flex-shrink:0; margin-top:2px;">🍁</span>
+              <span><strong>מפגש סיום ארוך:</strong> טקס וסת — מרחב שיתופי על הנערה בתוכי והאישה שאני היום — טקס חניכה</span>
+            </li>
+          </ul>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif; margin-bottom:24px; text-align:center;">
+            🍁 בלב קריית טבעון עם נוף ליער 🍁<br>5 מפגשים קבוצתיים
+          </p>
+
+          <div style="background:var(--cream-mid); border-radius:12px; padding:22px 24px; margin-bottom:28px; border-right:4px solid var(--gold);">
+            <h4 style="font-size:1rem; font-weight:700; color:var(--brown-dark); margin:0 0 10px; font-family:'Assistant', sans-serif;">מועדים ומחירים</h4>
+            <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.8; font-family:'Assistant', sans-serif; margin:0 0 8px;">
+              <strong>מעגל לימוד ינואר–פברואר</strong> מתחילות ב: 22.1, 29.1, 5.2, 12.2, 19.2<br>
+              ימי חמישי בין 20:00–22:00
+            </p>
+            <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.8; font-family:'Assistant', sans-serif; margin:0;">
+              <strong>מחיר השקה קהילתי לכבוד השנה החדשה —</strong> 450 ש"ח לכל המפגשים יחד | תשלום מראש
+            </p>
+          </div>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.8; font-family:'Assistant', sans-serif; margin-bottom:24px;">
+            מוזמנת לפנות אליי להתייעץ ולשאול כל דבר. אשמח מאוד לראות אותך איתנו.<br>
+            <strong>מוזמנת באהבה 🌺 שושי מיראז</strong>
+          </p>
+
+          <div style="text-align:right;">
+            <a href="index.html#contact" style="display:inline-block; background:var(--brown-dark); color:#fff; padding:13px 28px; border-radius:30px; font-weight:700; text-decoration:none; font-size:0.95rem; font-family:'Assistant', sans-serif; letter-spacing:0.03em; transition:background 0.2s, transform 0.2s;" onmouseover="this.style.background='var(--olive-dark)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--brown-dark)';this.style.transform='translateY(0)'">
+              להתייעצות והרשמה ←
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div id="kvutza" class="service-card" style="scroll-margin-top:90px; flex-wrap:wrap;">
+      <div class="service-card-body">
+        <p style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--olive-mid); margin-bottom:10px; font-family:'Assistant', sans-serif;">טקס מסורתי</p>
+        <h3 style="font-size:1.45rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; line-height:1.25;">טקס סגירת אגן ("איסוף עצמות")</h3>
+        <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.82; margin:0 0 18px; font-family:'Assistant', sans-serif;">
+          טכניקה מסורתית לתמיכה לאחר לידה, אובדן הריון/הפלה או חוויה רגשית אחרת.
+        </p>
+        <button onclick="toggleExpand('kvutza-expand', this)" style="background:none; border:none; cursor:pointer; color:var(--olive-dark); font-weight:700; font-size:0.9rem; font-family:'Assistant', sans-serif; letter-spacing:0.02em; display:inline-flex; align-items:center; gap:6px; padding:0; transition:gap 0.2s;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+          ← קראי עוד
+        </button>
+      </div>
+      <div class="service-card-img">
+        <img src="photos/sgirat_agan_service_main_page.png" alt="טקס סגירת אגן" />
+      </div>
+
+      <!-- Expandable content -->
+      <div id="kvutza-expand" style="max-height:0; overflow:hidden; transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1); width:100%;">
+        <div style="padding:32px 30px 36px; border-top:1px solid var(--cream-dark); direction:rtl; text-align:right;">
+
+          <p style="font-size:1rem; font-weight:700; color:var(--brown-dark); line-height:1.8; font-family:'Assistant', sans-serif; margin-bottom:16px;">
+            *טקס סגירת אגן – מסע של ריפוי וחזרה למרכז שלך
+          </p>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:16px;">
+            עבורי, טקס סגירת אגן הוא לא רק תמיכה פיזית, רגשית ורוחנית, אלא גם משמש כ<strong>רפואה מונעת</strong> בכל הרבדים הללו.
+          </p>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:16px;">
+            חוויות משמעותיות בחיים, וביניהם הלידה, מהוות שער של התרחבות עצומה – פיזית, רגשית ורוחנית. לאחר תקופות של "פתיחה" כה גדולה, נשים רבות מתארות תחושה של ריחוף, פיזור או קושי לנחות חזרה אל הגוף והמציאות שלאחר מכן.
+          </p>
+
+          <p style="font-size:1rem; font-weight:700; color:var(--brown-dark); text-align:center; line-height:1.7; font-family:'Assistant', sans-serif; margin-bottom:24px; padding:16px; background:var(--cream-mid); border-radius:10px;">
+            טקס 'סגירת אגן' הוא מקום עוטף שבו תוכלי לנוח, להיאסף בחזרה לתוך עצמך ולשוב למרכז שלך
+          </p>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:20px;">
+            טקס סגירת אגן, המגיע ממסורת מקסיקנית ומוכר בעולם באופנים שונים, טומן בליבו השפעות משמעותיות ורבות על גוף היולדת ונפשה. השפעות אלו רלוונטיות גם לנשים אחרות העוברות את הטקס, מכיוון והרחם היא שער לריפוי עבור כל אחת מאיתנו.
+          </p>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:0 0 14px; font-family:'Assistant', sans-serif;">במה הטקס תומך?</h4>
+          <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:24px;">
+            <div style="background:var(--cream-mid); border-radius:10px; padding:16px 18px;">
+              <p style="font-size:0.93rem; font-weight:700; color:var(--brown-dark); margin:0 0 6px; font-family:'Assistant', sans-serif;">1. תמיכה גופנית פיזית</p>
+              <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.8; margin:0; font-family:'Assistant', sans-serif;">במהלך ההיריון והלידה, האגן מתרחב משמעותית. הטקס, המשתמש בטכניקות עטיפה והדקה עם צעיפי ריבוזו בנקודות אסטרטגיות, תומך בעדינות את העצמות והמפרקים בחזרה למקומם הטבעי.</p>
+            </div>
+            <div style="background:var(--cream-mid); border-radius:10px; padding:16px 18px;">
+              <p style="font-size:0.93rem; font-weight:700; color:var(--brown-dark); margin:0 0 6px; font-family:'Assistant', sans-serif;">2. תמיכה ברחם</p>
+              <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.8; margin:0; font-family:'Assistant', sans-serif;">טיפול המשלב חימום אינטנסיבי (באמצעות צמחי מרפא, אמבטיות אדים ועטיפה בשמיכות), תומך בשיקום הרחם: הזרמת דם לאזור האגן, עידוד התכווצות הרחם לגודלה המקורי, סיוע בריפוי רקמות, ורפואה מונעת מסורתית.</p>
+            </div>
+            <div style="background:var(--cream-mid); border-radius:10px; padding:16px 18px;">
+              <p style="font-size:0.93rem; font-weight:700; color:var(--brown-dark); margin:0 0 6px; font-family:'Assistant', sans-serif;">3. איסוף ומרכוז הגוף</p>
+              <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.8; margin:0; font-family:'Assistant', sans-serif;">העטיפה ההדוקה בשבע נקודות בגוף (מהראש ועד הרגליים) עוזרת לאישה "להרגיש" שוב את גבולות הגוף שלה. העטיפה מעניקה למערכת העצבים תחושת ביטחון ומרכוז וסגירה רכה של השערים שנפתחו.</p>
+            </div>
+            <div style="background:var(--cream-mid); border-radius:10px; padding:16px 18px;">
+              <p style="font-size:0.93rem; font-weight:700; color:var(--brown-dark); margin:0 0 6px; font-family:'Assistant', sans-serif;">4. ניקוז וטיהור</p>
+              <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.8; margin:0; font-family:'Assistant', sans-serif;">השילוב של החום והעטיפה מעודד הזעה עדינה, שעוזרת לגוף להפריש נוזלים עודפים שנאגרו במהלך ההיריון והלידה ולנקות את המערכת. ברמה הרוחנית, ניתן לחוש ניקוי ושחרור.</p>
+            </div>
+          </div>
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:24px;">
+            כל הטקס בנוי בצורה התומכת בנפש האישה לקבל מרחב עיבוד חם ועוטף המאפשר לך לתמוך במעבר שלך משער ההריון והלידה אל שער האמהות, ולהתחדש באנרגיה, מנוחה ותמיכה עבור עצמך לקראת תקופה חדשה.
+          </p>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:0 0 14px; font-family:'Assistant', sans-serif;">למי ומתי הטקס מתאים?</h4>
+          <ul style="list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:10px;">
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.93rem; color:var(--text-mid); line-height:1.75; font-family:'Assistant', sans-serif;">
+              <span style="color:var(--gold); flex-shrink:0; margin-top:3px;">◆</span>
+              <span><strong>לאחר לידה:</strong> בסיום הדימום הווסתי (לרוב כ-3 עד 4 שבועות לאחר לידה וגינלית, ולפחות חודש וחצי לאחר ניתוח קיסרי). ניתן להתייעץ טלפונית.</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.93rem; color:var(--text-mid); line-height:1.75; font-family:'Assistant', sans-serif;">
+              <span style="color:var(--gold); flex-shrink:0; margin-top:3px;">◆</span>
+              <span><strong>לאחר אובדן הריון או הפלה:</strong> מרחב בטוח ומוחזק להרפות, לתת מקום לרגש, לעבד את הפרידה ולחמם את חלל הרחם. ניתן באהבה להתייעץ טלפונית.</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.93rem; color:var(--text-mid); line-height:1.75; font-family:'Assistant', sans-serif;">
+              <span style="color:var(--gold); flex-shrink:0; margin-top:3px;">◆</span>
+              <span><strong>בצמתים ושערים שונים בחיים:</strong> כיום הטקס משמש גם כטקס מעבר עוצמתי לנשים בכל גיל — פרידה מאדם קרוב, שינוי מקום מגורים/עבודה, מנופאוזה, ניתוח להוצאת רחם, ועוד.</span>
+            </li>
+          </ul>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:0 0 14px; font-family:'Assistant', sans-serif;">איך נראה המסע שלנו יחד?</h4>
+          <p style="font-size:0.93rem; color:var(--text-mid); line-height:1.8; font-family:'Assistant', sans-serif; margin-bottom:14px;">הטקס מותאם אלייך באופן אישי, ומועבר בגישה "מיודעת טראומה" תוך הקשבה מלאה לקצב שלך ולגבולותייך. המפגש מחולק ל-4 חלקים:</p>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:24px;">
+            <div style="display:flex; align-items:flex-start; gap:12px; font-size:0.93rem; color:var(--text-mid); line-height:1.75; font-family:'Assistant', sans-serif;">
+              <span style="background:var(--brown-dark); color:#fff; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:2px;">1</span>
+              <span><strong>שיח והדהוד כוונות:</strong> נתחיל בנחיתה רכה למרחב באמצעות מיינדפולנס, נאזין לסיפורך ולכוונות איתן הגעת לטקס.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:12px; font-size:0.93rem; color:var(--text-mid); line-height:1.75; font-family:'Assistant', sans-serif;">
+              <span style="background:var(--brown-dark); color:#fff; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:2px;">2</span>
+              <span><strong>חימום האגן (סאונת אדים / אמבט ישיבה):</strong> נשיב את החום לגוף בעזרת ישיבה מעל סיר אדים המכיל חליטת צמחי מרפא ארומטיים ומחממים. החום מרכך את הרקמות, מזרים דם עשיר לאגן ותומך בשחרור רגשי ופיזי.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:12px; font-size:0.93rem; color:var(--text-mid); line-height:1.75; font-family:'Assistant', sans-serif;">
+              <span style="background:var(--brown-dark); color:#fff; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:2px;">3</span>
+              <span><strong>עיסוי גוף ורחם:</strong> תשכבי על מזרן נוח לעיסוי עוטף בשמנים חמים. מגע אדמתי ומקרקע בכל הגוף. חלק משמעותי הוא עיסוי רחם אנרגטי עדין שמטרתו לאסוף את חלקיקי הנשמה ולהזמינם לשוב הביתה.</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:12px; font-size:0.93rem; color:var(--text-mid); line-height:1.75; font-family:'Assistant', sans-serif;">
+              <span style="background:var(--brown-dark); color:#fff; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:2px;">4</span>
+              <span><strong>הסגירה בצעיפים:</strong> זהו שיאו של הטקס. נעטוף את גופך בערסול באמצעות שבעה צעיפי ריבוזו מסורתיים בשבע נקודות מפתח לאורך הגוף. העטיפה ההדוקה-רכה מעבירה לגוף מסר עמוק של ביטחון והחזקה: "השער נסגר, אפשר לנוח".</span>
+            </div>
+          </div>
+
+          <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif; margin-bottom:8px;">
+            *יש אפשרות לעבור את הטקס עם הוולד ובן/בת הזוג (או דמות משמעותית אחרת).
+          </p>
+
+          <div style="background:var(--cream-mid); border-radius:12px; padding:18px 22px; margin-bottom:28px; border-right:4px solid var(--gold); display:flex; gap:32px; flex-wrap:wrap;">
+            <div>
+              <p style="font-size:0.85rem; color:var(--text-mid); font-family:'Assistant', sans-serif; margin:0 0 4px;">משך הטקס</p>
+              <p style="font-size:1rem; font-weight:700; color:var(--brown-dark); font-family:'Assistant', sans-serif; margin:0;">שעתיים וחצי*</p>
+            </div>
+            <div>
+              <p style="font-size:0.85rem; color:var(--text-mid); font-family:'Assistant', sans-serif; margin:0 0 4px;">מחיר</p>
+              <p style="font-size:1rem; font-weight:700; color:var(--brown-dark); font-family:'Assistant', sans-serif; margin:0;">450 ש"ח בלבד</p>
+              <p style="font-size:0.8rem; color:var(--text-mid); font-family:'Assistant', sans-serif; margin:4px 0 0;">(ניתן גם לרכוש כמתנה לאישה)</p>
+            </div>
+          </div>
+
+          <p style="font-size:1rem; font-weight:700; color:var(--brown-dark); line-height:1.7; font-family:'Assistant', sans-serif; margin-bottom:8px; text-align:center;">
+            כל אישה זכותה לקבל מקום משלה, לנוח ולהקשיב לכל חלקיה.
+          </p>
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.7; font-family:'Assistant', sans-serif; margin-bottom:24px; text-align:center;">
+            מוזמנת באהבה ליצור קשר ולתאם.
+          </p>
+
+          <div style="text-align:center;">
+            <a href="index.html#contact" style="display:inline-block; background:var(--brown-dark); color:#fff; padding:13px 28px; border-radius:30px; font-weight:700; text-decoration:none; font-size:0.95rem; font-family:'Assistant', sans-serif; letter-spacing:0.03em; transition:background 0.2s, transform 0.2s;" onmouseover="this.style.background='var(--olive-dark)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--brown-dark)';this.style.transform='translateY(0)'">
+              בואי נדבר ←
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div id="sauna" style="scroll-margin-top:90px; background:#ffffff; border-radius:6px; overflow:hidden; box-shadow:0 1px 4px rgba(59,34,16,0.06), 0 6px 24px rgba(59,34,16,0.09), 0 24px 48px rgba(59,34,16,0.06); margin-bottom:22px;">
+      <div style="display:flex; flex-wrap:wrap;">
+        <div class="service-card-body">
+          <p style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--olive-mid); margin-bottom:10px; font-family:'Assistant', sans-serif;">פרקטיקה מסורתית</p>
+          <h3 style="font-size:1.45rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; line-height:1.25;">סאונת אדים לאגן</h3>
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.82; margin:0 0 18px; font-family:'Assistant', sans-serif;">
+            פרקטיקה עתיקה לאיזון רגשי וגופני באמצעות צמחי מרפא (בלבוש מלא).
+          </p>
+          <button onclick="toggleExpand('sauna-expand', this)" style="background:none; border:none; cursor:pointer; color:var(--olive-dark); font-weight:700; text-decoration:none; font-size:0.9rem; font-family:'Assistant', sans-serif; letter-spacing:0.02em; display:inline-flex; align-items:center; gap:6px; padding:0; transition:gap 0.2s;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+            ← קראי עוד
+          </button>
+        </div>
+        <div class="service-card-img">
+          <img src="photos/steam_sauna_service.png" alt="סאונת אדים לאגן" />
+        </div>
+      </div>
+
+      <!-- Expandable content -->
+      <div id="sauna-expand" style="max-height:0; overflow:hidden; transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1);">
+        <div style="padding:32px 30px 36px; border-top:1px solid var(--cream-dark); direction:rtl; text-align:right;">
+
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:20px;">
+            סאונת אדים לאגן, המוכרת גם בשמות "אמבט אדים וגינלי", "Yoni Steam" או "סווט פות" — היא שיטת ריפוי עתיקה המגיעה מתרבויות ילידיות ומסורתיות ברחבי העולם, כגון מקסיקו וגואטמלה.
+          </p>
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:20px;">
+            הפרקטיקה כוללת בחירה וחליטה של צמחי מרפא ארומטיים בתוך סיר מים חמים, וישיבה של האישה מעל האדים העולים מהסיר (באמצעות כסא מיוחד). יש לציין כי הישיבה היא <strong>בלבוש מלא</strong>, שכן המטרה היא לשמור על חום הגוף והאגן, ולכן גם אכסה אותך בשמיכה נעימה. <em>*לצורך נוחיותך, כדאי לבוא עם שמלה או חצאית ארוכה.</em>
+          </p>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:24px 0 10px; font-family:'Assistant', sans-serif;">איך זה עובד?</h4>
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:20px;">
+            האדים החמים פועלים לחמם, לרכך ולהרפות את רקמות האגן. החום גורם להתרחבות של כלי הדם, מה שמשפר את זרימת הדם והלימפה לאזור ומזין את איברי האגן. במקביל, החומרים הפעילים הנדיפים שבצמחי המרפא נישאים באדים, נפגשים עם הרקמות העדינות של הפות, הנרתיק ואף של צוואר הרחם, ומעניקים רפואה מקומית ומערכתית.
+          </p>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:24px 0 10px; font-family:'Assistant', sans-serif;">למה זה טוב?</h4>
+          <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:8px;">הסאונה קודם כל משמשת כרפואה מונעת וכהקדשת זמן של "תשומת לב אוהבת" לגוף. היא פועלת במספר רבדים:</p>
+          <ul style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin:0 24px 16px 0; padding:0; list-style:disc;">
+            <li style="margin-bottom:8px;"><strong>בריאות פיזית ואיזון הורמונלי:</strong> הסאונה מניעה את זרימת הדם לכיוון הרחם, מה שמחזק את שרירי הרחם ומסייע לפנות את הרירית ביעילות. היא מקלה על כאבי מחזור (דיסמנוריאה) ועל תסמונת קדם-וסתית (PMS), מעודדת הופעת וסת שמתעכבת, ומסייעת במצבים של אנדומטריוזיס, שחלות פוליציסטיות, שרירנים וציסטות. בנוסף, היא תורמת לטיפוח ורענון הפות בכך שמסייעת לאיזון ה-PH, תומכת את הניקוי הטבעי של הפות, מקלה על יובש בנרתיק, מרככת ומעודדת חשק מיני.</li>
+            <li style="margin-bottom:8px;"><strong>תמיכה במעגלי החיים:</strong> הפרקטיקה מצוינת לטיפול משקם לאחר לידה או אובדן הריון/הפלה, לאחר שהדימום הכבד מסתיים. כמו כן, היא תומכת בנשים בגיל המעבר ומהווה הכנה טובה לפני בדיקות גינקולוגיות. סאונת אגן נפוצה גם כתמיכה לאחר יחסי מין לא מדויקים, ותומכת בתהליך השחרור של פרידות.</li>
+            <li><strong>ריפוי רגשי ואנרגטי:</strong> אזור האגן נוטה לאגור תקיעויות, בין אם בשל ישיבה ממושכת ובין אם בשל רגשות מודחקים. הסאונה מטהרת אנרגטית תחושות ורגשות שהושקעו באגן, ומאפשרת שחרור וחיבור מחודש לנשיות שלך.</li>
+          </ul>
+
+          <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:24px 0 10px; font-family:'Assistant', sans-serif;">מתי אסור לעשות סאונת אדים?</h4>
+          <ul style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin:0 24px 16px 0; padding:0; list-style:disc;">
+            <li style="margin-bottom:8px;">בזמן וסת פעילה או כל דימום טרי מהנרתיק (כולל דימום לאחר לידה או הפלה פעילה).</li>
+            <li style="margin-bottom:8px;">בזמן הריון — ניתן לערוך רק החל משבוע 38 בהנחיה מקצועית כדי לעודד לידה.</li>
+            <li style="margin-bottom:8px;">בחלון הפוריות (לאחר הביוץ) עבור אישה המנסה להיקלט להריון. מתי כן — לאחר הוסת עד לביוץ.</li>
+            <li style="margin-bottom:8px;">כשיש התקן תוך רחמי או נובה רינג — קיימות הסתייגויות, נוכל לעשות סאונה עדינה.</li>
+            <li>במצבים של דלקת אקוטית, פטרייה (כמו קנדידה) פעילה, גרד קיצוני, תחושת צריבה או טחורים.</li>
+          </ul>
+
+          <div style="background:var(--cream-mid); border-radius:6px; padding:20px 24px; margin-top:24px;">
+            <h4 style="font-size:1.05rem; font-weight:700; color:var(--brown-dark); margin:0 0 10px; font-family:'Assistant', sans-serif;">מחירים</h4>
+            <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:6px;">מפגש סאונת אדים לאגן — <strong>350 ש"ח</strong></p>
+            <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif; margin-bottom:6px;">מחיר מיוחד לזוג נשים (על כסאות נפרדים) — <strong>550 ש"ח</strong> (הנחה של 150 ש"ח)</p>
+            <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.9; font-family:'Assistant', sans-serif;">אורך המפגש הוא עד שעה ורבע.</p>
+          </div>
+
+          <div style="text-align:center; margin-top:28px;">
+            <a href="index.html#contact" class="btn-primary">בואי נקבע</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div id="halitot" class="service-card" style="scroll-margin-top:90px;">
+      <div class="service-card-body">
+        <p style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--olive-mid); margin-bottom:10px; font-family:'Assistant', sans-serif;">צמחי מרפא</p>
+        <h3 style="font-size:1.45rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; line-height:1.25;"><em>*בקרוב*</em> — חליטות למגוון שימושים</h3>
+        <p style="font-size:0.95rem; color:var(--text-mid); line-height:1.82; margin:0 0 18px; font-family:'Assistant', sans-serif;">
+          חליטות צמחי מרפא מותאמות אישית למגוון צרכים גופניים ורגשיים.
+        </p>
+        <a href="index.html#contact" style="color:var(--olive-dark); font-weight:700; text-decoration:none; font-size:0.9rem; font-family:'Assistant', sans-serif; letter-spacing:0.02em; display:inline-flex; align-items:center; gap:6px; transition:gap 0.2s;" onmouseover="this.style.gap='10px'" onmouseout="this.style.gap='6px'">
+          ← קראי עוד
+        </a>
+      </div>
+      <div class="service-card-img">
+        <img src="photos/healing_plants_service.png" alt="חליטות" />
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 100%); padding:72px 24px; text-align:center;">
+  <h2 style="font-size:2rem; font-weight:600; color:#ffffff; margin-bottom:16px; letter-spacing:-0.01em;">מוכנה להתחיל?</h2>
+  <p style="color:rgba(255,255,255,0.75); font-family:'Assistant', sans-serif; font-size:1rem; line-height:1.7; margin-bottom:32px;">
+    פגישת היכרות ראשונה ללא התחייבות – בואי נדבר
+  </p>
+  <a href="index.html#contact" class="btn-primary">קבעי פגישת היכרות</a>
+</section>
+
+
+<!-- FOOTER -->
+<footer style="background-color:var(--brown-dark); padding:56px 24px 32px; text-align:center; position:relative; overflow:hidden;">
+  <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), var(--olive-mid), var(--gold), transparent);"></div>
+
+  <div style="max-width:900px; margin:0 auto;">
+
+    <img src="brand_assets/WiseTree_logo.png" alt="עצה תומכת"
+      style="height:68px; width:auto; margin-bottom:8px; filter:brightness(1.15) saturate(0.85);" />
+
+    <p style="color:var(--gold-light); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-family:'Assistant', sans-serif; margin:0 0 28px; opacity:0.8;">
+      ייעוץ הוליסטי · תמיכה לנשים
+    </p>
+
+    <div style="margin-bottom:24px; display:flex; justify-content:center; flex-wrap:wrap; gap:2px;">
+      <a href="index.html"              style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">בית</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="about.html"             style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">אודות</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="service.html"           style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">שירותים</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="index.html#testimonials" style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">המלצות</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="index.html#contact"      style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">צרי קשר</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="blog.html"               style="color:var(--gold-light); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='var(--gold-light)'">בלוג</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="friends.html"            style="color:var(--gold-light); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='var(--gold-light)'">חברות והמלצות</a>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <a href="https://www.facebook.com/shoshi.miraz/about" target="_blank" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Facebook</a>
+      <a href="https://www.instagram.com/sh0shi.m/" target="_blank" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Instagram</a>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:24px;">
+      <p style="color:rgba(255,255,255,0.25); font-size:12px; margin:0; font-family:'Assistant', sans-serif; letter-spacing:0.04em;">
+        © 2024 עצה תומכת. כל הזכויות שמורות.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  const btn  = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+  function toggleExpand(id, btn) {
+    const el = document.getElementById(id);
+    const isOpen = el.style.maxHeight && el.style.maxHeight !== '0px';
+    if (isOpen) {
+      el.style.maxHeight = '0';
+      btn.innerHTML = '← קראי עוד';
+    } else {
+      el.style.maxHeight = el.scrollHeight + 'px';
+      btn.innerHTML = '← סגרי';
+    }
+  }
+</script>
+</body>
+</html>

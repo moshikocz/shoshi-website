@@ -90,7 +90,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 110px 24px 70px;
+      padding: 55px 24px 35px;
       position: relative;
     }
 
@@ -210,13 +210,13 @@
       color: var(--olive-mid);
       border-bottom: 1.5px solid var(--olive-light);
       padding-bottom: 4px;
-      margin-bottom: 18px;
+      margin-bottom: 9px;
     }
 
     /* ── CIRCLE IMAGES ── */
     .circle-img {
-      width: 140px;
-      height: 140px;
+      width: 210px;
+      height: 210px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--olive-mid);
@@ -246,7 +246,7 @@
       width: 52px;
       height: 2px;
       background: linear-gradient(90deg, var(--gold-light), var(--gold));
-      margin: 0 auto 28px;
+      margin: 0 auto 14px;
       border-radius: 2px;
     }
 
@@ -316,8 +316,10 @@
       border: 1px solid rgba(200, 165, 90, 0.2);
       border-radius: 8px;
       padding: 30px 28px;
-      flex: 1 1 260px;
-      max-width: 360px;
+      flex: 0 0 100%;
+      max-width: 100%;
+      min-width: 100%;
+      box-sizing: border-box;
       text-align: right;
       transition: border-color 0.2s;
     }
@@ -352,6 +354,8 @@
       .hero-sub    { font-size: 1rem !important; }
       .service-card-img { flex: 0 0 100%; min-height: 210px; }
       .two-col { flex-direction: column; }
+      #testimonial-slider-wrapper { padding: 0 36px !important; }
+      .testimonial-card { padding: 22px 18px !important; }
     }
   </style>
 </head>
@@ -364,7 +368,7 @@
   <div style="max-width:1170px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:80px;">
 
     <a href="#home" style="display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0;">
-      <img src="brand_assets/WiseTree_logo.png" alt="עצה תומכת" class="nav-logo-img" style="height:56px; width:auto;" />
+      <img src="brand_assets/WiseTree_logo.png" alt="לוגו עצה תומכת – עץ חיים עם דמות אישה עוטפת" class="nav-logo-img" style="height:56px; width:auto;" />
     </a>
 
     <!-- Company name centered -->
@@ -433,14 +437,14 @@
 <!-- ═══════════════════════════════════════
      ABOUT / THERAPIST INTRO
 ════════════════════════════════════════ -->
-<section id="about" style="background-color:var(--cream); padding:100px 24px;">
+<section id="about" style="background-color:var(--cream); padding:50px 24px;">
   <div style="max-width:760px; margin:0 auto; text-align:center;">
 
     <p class="section-label">אודות</p>
     <div class="gold-divider"></div>
 
     <div class="circle-img-lg-wrap">
-      <img src="photos/circle_logo_shoshi.png" alt="שושי מיראז" />
+      <img src="photos/circle_logo_shoshi.png" alt="שושי מיראז – תמונת פרופיל עגולה על רקע טבעי" />
     </div>
 
     <h2 style="font-size:2.4rem; font-weight:600; color:var(--brown-dark); margin:0 0 6px; letter-spacing:-0.01em; line-height:1.15; font-family:Arial, sans-serif;">
@@ -470,7 +474,7 @@
 <!-- ═══════════════════════════════════════
      SERVICES – CIRCLES
 ════════════════════════════════════════ -->
-<section id="services" style="background-color:var(--cream-mid); padding:90px 24px;">
+<section id="services" style="background-color:var(--cream-mid); padding:45px 24px;">
   <div style="max-width:980px; margin:0 auto; text-align:center;">
 
     <p class="section-label">שירותים</p>
@@ -479,38 +483,38 @@
     <h2 style="font-size:2.4rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; letter-spacing:-0.01em; line-height:1.2;">
       במה אני מתמחה
     </h2>
-    <p style="color:var(--text-light); font-size:1rem; margin:0 0 56px; font-family:'Assistant', sans-serif; line-height:1.65; max-width:480px; margin-left:auto; margin-right:auto; margin-bottom:56px;">
+    <p style="color:var(--text-light); font-size:1rem; margin:0 0 56px; font-family:'Assistant', sans-serif; line-height:1.65; max-width:480px; margin-left:auto; margin-right:auto; margin-bottom:28px;">
       שירותים מקצועיים המותאמים אישית לכל מטופלת
     </p>
 
     <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
 
-      <a href="service.html#livy-holisti" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
-        <img src="photos/livui_rigshi_main_page_service.jpg" alt="ליווי הוליסטי רגשי" class="circle-img" />
+      <a href="service.html#livy-holisti" style="text-align:center; flex:0 0 220px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/livui_rigshi_main_page_service.jpg" alt="אישה בישיבה מדיטטיבית – ליווי רגשי הוליסטי" class="circle-img" />
         <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">ליווי רגשי הוליסטי</h3>
         <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">מפגשים אישיים מותאמים לצרכייך בקליניקה ובזום</p>
       </a>
 
-      <a href="service.html#kvutza" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
-        <img src="photos/service_group.jpeg" alt="קבוצה תהליכית" class="circle-img" />
+      <a href="service.html#kvutza" style="text-align:center; flex:0 0 220px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/service_group.jpeg" alt="נשים יושבות במעגל סביב מדורה בטבע – קבוצה תהליכית" class="circle-img" />
         <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">קבוצה תהליכית</h3>
         <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">מודעות למחזוריות- מעגל לימוד במרחב מכיל ומאפשר</p>
       </a>
 
-      <a href="service.html#sauna" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
-        <img src="photos/steam_sauna_service.png" alt="סאונת אדים לאגן" class="circle-img" />
+      <a href="service.html#sauna" style="text-align:center; flex:0 0 220px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/steam_sauna_service.png" alt="כיסא עץ לסאונת אדים לאגן עם צמחי מרפא" class="circle-img" />
         <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">סאונת אדים לאגן</h3>
         <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">פרקטיקה עתיקה לאיזון רגשי וגופני באמצעות צמחי מרפא (בלבוש מלא)</p>
       </a>
 
-      <a href="service.html#takas" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
-        <img src="photos/sgirat_agan_service_main_page.png" alt="טקס סגירת אגן" class="circle-img" />
+      <a href="service.html#takas" style="text-align:center; flex:0 0 220px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/sgirat_agan_service_main_page.png" alt="ידיים אוחזות באבן עגולה – טקס סגירת האגן" class="circle-img" />
         <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">טקס סגירת אגן ("איסוף עצמות")</h3>
         <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">טכניקה מסורתית המומלצת לאחר לידה, הפלה או חוויה רגשית אחרת המבקשת מקום</p>
       </a>
 
-      <a href="service.html#halitot" style="text-align:center; flex:0 0 190px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
-        <img src="photos/healing_plants_service.png" alt="חליטות" class="circle-img" />
+      <a href="service.html#halitot" style="text-align:center; flex:0 0 220px; text-decoration:none; display:block; transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.opacity='0.85'" onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'">
+        <img src="photos/healing_plants_service.png" alt="צנצנות זכוכית עם עשבי מרפא וצמחים מיובשים" class="circle-img" />
         <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;"><em>*בקרוב*</em><br>חליטות למגוון שימושים</h3>
       </a>
 
@@ -524,7 +528,7 @@
 <!-- ═══════════════════════════════════════
      BOOKING CTA BAND
 ════════════════════════════════════════ -->
-<section style="background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 100%); padding:72px 24px; text-align:center; position:relative; overflow:hidden;">
+<section style="background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 100%); padding:36px 24px; text-align:center; position:relative; overflow:hidden;">
   <!-- decorative olive accent line -->
   <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent, var(--gold), var(--olive-mid), var(--gold), transparent);"></div>
 
@@ -545,7 +549,7 @@
 <!-- ═══════════════════════════════════════
      TESTIMONIALS
 ════════════════════════════════════════ -->
-<section id="testimonials" style="background-color:var(--brown-dark); padding:100px 24px; text-align:center;">
+<section id="testimonials" style="background-color:var(--brown-dark); padding:50px 24px; text-align:center;">
   <div style="max-width:1080px; margin:0 auto;">
 
     <p class="section-label" style="color:var(--gold-light); border-bottom-color:rgba(223,192,126,0.35);">המלצות</p>
@@ -556,7 +560,7 @@
     </h2>
 
     <!-- Slider wrapper -->
-    <div style="position:relative; max-width:720px; margin:0 auto; padding:0 56px;">
+    <div id="testimonial-slider-wrapper" style="position:relative; max-width:720px; margin:0 auto; padding:0 56px;">
 
       <div id="testimonial-track" style="overflow:hidden;">
         <div id="testimonial-slides" style="display:flex; transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);">
@@ -685,10 +689,10 @@
 <!-- ═══════════════════════════════════════
      CONTACT + MAP
 ════════════════════════════════════════ -->
-<section id="contact" style="background-color:var(--cream); padding:100px 24px;">
+<section id="contact" style="background-color:var(--cream); padding:50px 24px;">
   <div style="max-width:1040px; margin:0 auto;">
 
-    <div style="text-align:center; margin-bottom:56px;">
+    <div style="text-align:center; margin-bottom:28px;">
       <p class="section-label">צרי קשר</p>
       <div class="gold-divider"></div>
       <h2 style="font-size:2.4rem; font-weight:600; color:var(--brown-dark); margin:0 0 12px; letter-spacing:-0.01em;">
@@ -767,13 +771,13 @@
 <!-- ═══════════════════════════════════════
      FOOTER
 ════════════════════════════════════════ -->
-<footer style="background-color:var(--brown-dark); padding:56px 24px 32px; text-align:center; position:relative; overflow:hidden;">
+<footer style="background-color:var(--brown-dark); padding:28px 24px 16px; text-align:center; position:relative; overflow:hidden;">
   <!-- top accent line -->
   <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), var(--olive-mid), var(--gold), transparent);"></div>
 
   <div style="max-width:900px; margin:0 auto;">
 
-    <img src="brand_assets/WiseTree_logo.png" alt="עצה תומכת"
+    <img src="brand_assets/WiseTree_logo.png" alt="לוגו עצה תומכת – עץ חיים עם דמות אישה עוטפת"
       style="height:68px; width:auto; margin-bottom:8px; filter:brightness(1.15) saturate(0.85);" />
 
     <p style="color:var(--gold-light); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-family:'Assistant', sans-serif; margin:0 0 28px; opacity:0.8;">

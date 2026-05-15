@@ -46,6 +46,12 @@
 - **Spacing:** Use intentional, consistent spacing tokens — not random Tailwind steps.
 - **Depth:** Surfaces should have a layering system (base → elevated → floating), not all sit at the same z-plane.
 
+## Image Alt Text
+- **Every time a new image is added** to `photos/` or `brand_assets/`, immediately add a descriptive Hebrew `alt` attribute to every `<img>` tag referencing that file across all HTML files.
+- The alt text must describe what is **visually seen** in the image (people, objects, scene, mood) — not just the service/section name.
+- Format: short phrase in Hebrew, e.g. `"נשים יושבות במעגל סביב מדורה בטבע"`, `"כיסא עץ לסאונת אדים לאגן עם צמחי מרפא"`.
+- Apply to all pages: `index.html`, `about.html`, `service.html`, `blog.html`, `friends.html`.
+
 ## Hard Rules
 - Do not add sections, features, or content not in the reference
 - Do not "improve" a reference design — match it

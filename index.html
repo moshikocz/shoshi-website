@@ -763,35 +763,42 @@
 
       <!-- Form -->
       <div style="flex:1; min-width:280px;">
-        <form id="contact-form" onsubmit="sendToGmail(event);">
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" onsubmit="submitForm(event);">
+          <input type="hidden" name="access_key" value="cfeffb37-6803-4cfa-a389-1274faa228ca" />
+          <input type="hidden" name="subject"    value="פנייה חדשה מהאתר – עצה תומכת" />
+          <input type="hidden" name="from_name"  value="אתר עצה תומכת" />
+          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" aria-hidden="true" />
           <label for="f-name"    class="sr-only">שם מלא</label>
-          <input  type="text"  id="f-name"    placeholder="שם מלא *"  aria-required="true" aria-describedby="form-error" class="form-field" />
+          <input  type="text"  id="f-name"    name="name"    placeholder="שם מלא *"  aria-required="true" aria-describedby="form-error" class="form-field" />
           <label for="f-phone"   class="sr-only">טלפון</label>
-          <input  type="tel"   id="f-phone"   placeholder="טלפון *"    aria-required="true" aria-describedby="form-error" class="form-field" />
+          <input  type="tel"   id="f-phone"   name="phone"   placeholder="טלפון *"    aria-required="true" aria-describedby="form-error" class="form-field" />
           <label for="f-email"   class="sr-only">דואר אלקטרוני</label>
-          <input  type="email" id="f-email"   placeholder='דוא"ל'      class="form-field" />
+          <input  type="email" id="f-email"   name="email"   placeholder='דוא"ל'      class="form-field" />
           <label for="f-message" class="sr-only">הודעה</label>
-          <textarea            id="f-message" placeholder="הודעה"      class="form-field" rows="4" style="resize:vertical;"></textarea>
+          <textarea            id="f-message" name="message" placeholder="הודעה"      class="form-field" rows="4" style="resize:vertical;"></textarea>
           <div id="form-error" role="alert" aria-live="assertive" style="display:none; color:#c0392b; font-size:0.9rem; font-family:'Assistant',sans-serif; margin-bottom:12px; padding:10px 14px; background:rgba(192,57,43,0.07); border-radius:4px; border-right:3px solid #c0392b;"></div>
           <button type="submit" class="btn-primary" style="width:100%; font-size:1rem; padding:15px; font-family:'Assistant', sans-serif;">שלחי הודעה</button>
         </form>
+        <div id="form-success" role="status" aria-live="polite" style="display:none; text-align:center; padding:32px 20px; background:rgba(90,107,40,0.08); border:1px solid rgba(90,107,40,0.25); border-radius:8px; font-family:'Assistant',sans-serif;">
+          <div style="font-size:2rem; margin-bottom:12px;">🌿</div>
+          <p style="color:var(--olive-dark); font-size:1.05rem; font-weight:600; margin:0 0 6px;">ההודעה נשלחה בהצלחה!</p>
+          <p style="color:var(--text-mid); font-size:0.95rem; margin:0;">אחזור אלייך בהקדם ✨</p>
+        </div>
         <script>
-        function sendToGmail(e) {
+        async function submitForm(e) {
           e.preventDefault();
-          var nameEl  = document.getElementById('f-name');
-          var phoneEl = document.getElementById('f-phone');
-          var name    = nameEl.value.trim();
-          var phone   = phoneEl.value.trim();
-          var email   = document.getElementById('f-email').value.trim();
-          var message = document.getElementById('f-message').value.trim();
+          var nameEl   = document.getElementById('f-name');
+          var phoneEl  = document.getElementById('f-phone');
+          var name     = nameEl.value.trim();
+          var phone    = phoneEl.value.trim();
           var errorDiv = document.getElementById('form-error');
-          var errors  = [];
+          var errors   = [];
 
           nameEl.removeAttribute('aria-invalid');
           phoneEl.removeAttribute('aria-invalid');
 
-          if (!name)  { errors.push('נא למלא שם מלא');        nameEl.setAttribute('aria-invalid','true'); }
-          if (!phone) { errors.push('נא למלא מספר טלפון');    phoneEl.setAttribute('aria-invalid','true'); }
+          if (!name)  { errors.push('נא למלא שם מלא');     nameEl.setAttribute('aria-invalid','true'); }
+          if (!phone) { errors.push('נא למלא מספר טלפון'); phoneEl.setAttribute('aria-invalid','true'); }
 
           if (errors.length > 0) {
             errorDiv.textContent = errors.join(' · ');
@@ -801,9 +808,25 @@
           }
 
           errorDiv.style.display = 'none';
-          var subject = encodeURIComponent('פנייה חדשה מהאתר – ' + name);
-          var body    = encodeURIComponent('שם: ' + name + '\nטלפון: ' + phone + '\nאימייל: ' + email + '\n\nהודעה:\n' + message);
-          window.open('https://mail.google.com/mail/?view=cm&to=Shoshimiraz%40gmail.com&su=' + subject + '&body=' + body, '_blank');
+          var btn = document.querySelector('#contact-form button[type=submit]');
+          btn.disabled = true;
+          btn.textContent = 'שולחת...';
+
+          try {
+            var res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body: new FormData(e.target) });
+            var json = await res.json();
+            if (json.success) {
+              document.getElementById('contact-form').style.display = 'none';
+              document.getElementById('form-success').style.display = 'block';
+            } else {
+              throw new Error(json.message);
+            }
+          } catch(err) {
+            btn.disabled = false;
+            btn.textContent = 'שלחי הודעה';
+            errorDiv.textContent = 'שגיאה בשליחה, נסי שוב.';
+            errorDiv.style.display = 'block';
+          }
         }
         </script>
 

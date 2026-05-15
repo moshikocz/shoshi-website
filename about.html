@@ -42,6 +42,13 @@
       font-family: 'Cormorant Garamond', Georgia, serif;
     }
 
+    /* ── FOCUS ── */
+    :focus-visible {
+      outline: 3px solid var(--gold-light);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
     /* ── NAV ── */
     @keyframes logo-float {
       0%, 100% { transform: translateY(0); }
@@ -263,7 +270,7 @@
   <!-- Vision box -->
   <div style="margin-top:56px; position:relative; border-radius:4px; overflow:hidden; text-align:center;">
     <!-- background tree image -->
-    <img src="photos/tree.png" alt="איור עץ דקורטיבי – סמל צמיחה ושורשים" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.42; filter:sepia(0.2) saturate(1.1);" />
+    <img src="photos/tree.png" alt="" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.42; filter:sepia(0.2) saturate(1.1);" />
     <!-- warm overlay for readability -->
     <div style="position:absolute; inset:0; background:linear-gradient(145deg, rgba(253,246,236,0.55), rgba(245,232,208,0.55));"></div>
 

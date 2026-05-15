@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>אודות שושי מיראז – עצה תומכת</title>
+  <meta name="description" content="שושי מיראז – עובדת סוציאלית וגינקוסופית. ליווי רגשי הוליסטי לנשים, מודעות למחזוריות, העצמה אישית ויצירת מרחב בטוח לצמיחה." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
@@ -77,6 +78,27 @@
     .nav-link:hover::after { width: 100%; right: 0; }
     .nav-link:active { color: var(--gold); transform: translateY(0); }
     .nav-link:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; border-radius: 2px; }
+
+    main a:not([class]) { text-decoration: underline; text-underline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    .skip-link {
+      position: absolute; top: -44px; right: 0;
+      background: var(--brown-dark); color: #fff;
+      padding: 8px 18px; font-family: 'Assistant', sans-serif;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      z-index: 10000; border-radius: 0 0 4px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
 
     /* ── MOBILE NAV ── */
     #mobile-menu { display: none; }
@@ -163,6 +185,7 @@
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">דלג לתוכן</a>
 
 <!-- HEADER -->
 <header style="background-color:var(--brown-dark); position:sticky; top:0; z-index:1000; box-shadow:0 2px 16px rgba(0,0,0,0.32);">
@@ -204,7 +227,7 @@
 </header>
 
 <!-- CONTENT -->
-<main style="max-width:760px; margin:0 auto; padding:80px 24px 100px; text-align:center;">
+<main id="main-content" style="max-width:760px; margin:0 auto; padding:80px 24px 100px; text-align:center;">
 
   <p class="section-label">אודות</p>
   <div class="gold-divider"></div>
@@ -331,8 +354,8 @@
     </div>
 
     <div style="margin-bottom:24px;">
-      <a href="https://www.facebook.com/shoshi.miraz/about" target="_blank" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Facebook</a>
-      <a href="https://www.instagram.com/sh0shi.m/" target="_blank" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Instagram</a>
+      <a href="https://www.facebook.com/shoshi.miraz/about" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.65); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Facebook</a>
+      <a href="https://www.instagram.com/sh0shi.m/" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.65); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Instagram</a>
     </div>
 
     <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:24px;">

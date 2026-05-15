@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תקנון ותנאי שימוש – עצה תומכת</title>
+  <meta name="description" content="תקנון ותנאי שימוש של אתר עצה תומכת – שושי מיראז. השימוש באתר כפוף לתנאים אלה." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --brown-dark:  #3b2210;
+      --brown-mid:   #6b4423;
+      --brown-light: #9a7252;
+      --olive-dark:  #586b28;
+      --olive-mid:   #7a8c42;
+      --olive-light: #aab870;
+      --gold:        #c8a55a;
+      --gold-light:  #dfc07e;
+      --cream:       #faf4ec;
+      --cream-mid:   #f2e8d8;
+      --cream-dark:  #e8d5bc;
+      --text:        #2d1e0e;
+      --text-mid:    #6b5040;
+      --text-light:  #9a8070;
+    }
+    body { font-family: 'Assistant', Arial, sans-serif; direction: rtl; color: var(--text); background-color: var(--cream); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    .skip-link { position: absolute; top: -40px; right: 0; background: var(--gold); color: var(--brown-dark); padding: 8px 16px; font-weight: 700; z-index: 9999; text-decoration: none; border-radius: 0 0 4px 0; transition: top 0.2s; }
+    .skip-link:focus { top: 0; }
+
+    .nav-link { color: rgba(255,255,255,0.88); text-decoration: none; font-family: 'Assistant', sans-serif; font-size: 15px; font-weight: 500; padding: 6px 8px; letter-spacing: 0.04em; position: relative; transition: color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1); }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; right: 50%; width: 0; height: 2px; background: var(--gold-light); border-radius: 2px; transition: width 0.22s cubic-bezier(0.34,1.56,0.64,1), right 0.22s cubic-bezier(0.34,1.56,0.64,1); }
+    .nav-link:hover { color: var(--gold-light); transform: translateY(-1px); }
+    .nav-link:hover::after { width: 100%; right: 0; }
+    .nav-link:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; border-radius: 2px; }
+
+    .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 28px; height: 20px; background: none; border: none; cursor: pointer; padding: 0; }
+    .hamburger span { display: block; width: 100%; height: 2px; background: rgba(255,255,255,0.88); border-radius: 2px; transition: opacity 0.2s; }
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+    @media (max-width: 768px) {
+      .desktop-nav { display: none !important; }
+      .hamburger { display: flex; }
+    }
+
+    .legal-hero {
+      background: linear-gradient(135deg, var(--brown-dark) 0%, #2a1808 60%, #1e1006 100%);
+      padding: 80px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .legal-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(200,165,90,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .legal-content { max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; }
+    .legal-content h2 { font-size: 1.6rem; font-weight: 600; color: var(--brown-mid); margin: 2.4rem 0 0.8rem; padding-bottom: 6px; border-bottom: 1px solid var(--cream-dark); }
+    .legal-content h3 { font-size: 1.2rem; font-weight: 600; color: var(--text); margin: 1.6rem 0 0.5rem; font-family: 'Assistant', sans-serif; }
+    .legal-content p { font-size: 1rem; line-height: 1.85; color: var(--text-mid); margin-bottom: 1rem; }
+    .legal-content ul { margin: 0.5rem 0 1rem 0; padding-right: 1.4rem; }
+    .legal-content li { font-size: 1rem; line-height: 1.85; color: var(--text-mid); margin-bottom: 0.4rem; list-style: disc; }
+    .legal-content a { color: var(--brown-mid); text-decoration: underline; text-underline-offset: 3px; }
+    .legal-content a:hover { color: var(--olive-dark); }
+
+    .disclaimer-box {
+      background: linear-gradient(135deg, rgba(200,165,90,0.12), rgba(200,165,90,0.06));
+      border: 1px solid rgba(200,165,90,0.3);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 1.5rem 0;
+    }
+    .disclaimer-box p { margin-bottom: 0; color: var(--text); font-weight: 500; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--brown-mid));
+      color: #fff; font-family: 'Assistant', sans-serif; font-size: 13px; font-weight: 600;
+      padding: 6px 16px; border-radius: 20px; letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">דלג לתוכן</a>
+
+<header style="background-color:var(--brown-dark); position:sticky; top:0; z-index:1000; box-shadow:0 2px 16px rgba(0,0,0,0.32);">
+  <div style="max-width:1170px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:80px;">
+    <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0;">
+      <img src="brand_assets/WiseTree_logo.png" alt="לוגו עצה תומכת – עץ חיים עם דמות אישה עוטפת" style="height:56px; width:auto;" />
+    </a>
+    <a href="index.html" style="flex:1; text-decoration:none; text-align:center; line-height:1.15;">
+      <span style="display:block; font-family:'Cormorant Garamond', Georgia, serif; font-size:1.55rem; font-weight:600; color:#ffffff; letter-spacing:0.04em;">עצה תומכת</span>
+      <span style="display:block; font-family:'Assistant', sans-serif; font-size:10px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-light); opacity:0.85; margin-top:2px;">ליווי הוליסטי לנשים</span>
+    </a>
+    <nav class="desktop-nav" style="display:flex; align-items:center; gap:0;">
+      <a href="index.html"    class="nav-link">בית</a>
+      <a href="about.html"   class="nav-link">אודות</a>
+      <a href="service.html" class="nav-link">שירותים</a>
+      <a href="index.html#contact" class="nav-link">צרי קשר</a>
+      <a href="blog.html"    class="nav-link" style="color:var(--gold-light);">בלוג</a>
+      <a href="friends.html" class="nav-link" style="color:var(--gold-light);">חברות והמלצות</a>
+    </nav>
+    <button class="hamburger" id="hamburger-btn" aria-label="תפריט">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div id="mobile-menu" style="background-color:#2d1a0a; padding:6px 0; border-top:1px solid rgba(255,255,255,0.08);">
+    <a href="index.html"    class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">בית</a>
+    <a href="about.html"   class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">אודות</a>
+    <a href="service.html" class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">שירותים</a>
+    <a href="index.html#contact" class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">צרי קשר</a>
+    <a href="blog.html"    class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); color:var(--gold-light);">בלוג</a>
+    <a href="friends.html" class="nav-link" style="display:block; padding:13px 28px; color:var(--gold-light);">חברות והמלצות</a>
+  </div>
+</header>
+
+<main id="main-content">
+
+<div class="legal-hero">
+  <div style="position:relative; z-index:1;">
+    <div class="badge">📋 תקנון</div>
+    <h1 style="font-family:'Cormorant Garamond', Georgia, serif; font-size:clamp(2rem,5vw,3rem); font-weight:600; color:#ffffff; letter-spacing:-0.01em; margin-top:12px; margin-bottom:16px;">
+      תקנון ותנאי שימוש
+    </h1>
+    <p style="font-family:'Assistant', sans-serif; color:rgba(255,255,255,0.65); font-size:0.95rem; letter-spacing:0.06em;">
+      עודכן לאחרונה: מאי 2025
+    </p>
+  </div>
+</div>
+
+<div class="legal-content">
+
+  <p>ברוכה הבאה לאתר <strong>עצה תומכת</strong>. השימוש באתר מהווה הסכמה לתנאים המפורטים להלן. אנא קראי אותם בעיון לפני השימוש באתר.</p>
+
+  <h2>1. בעלות האתר</h2>
+  <p>האתר מופעל על ידי <strong>שושי מיראז – עצה תומכת</strong>, ייעוץ הוליסטי לנשים, קריית טבעון.</p>
+
+  <h2>2. תחום הפעילות</h2>
+  <p>האתר מציג מידע אודות שירותי ליווי הוליסטי לנשים, לרבות: גינקוסופיה, סאונת אדים לאגן, טקסי סגירת אגן, מעגלי נשים וצמחי מרפא. המידע מיועד לנשים המעוניינות ללמוד על שירותים אלה ולהיכנס לקשר עם שושי מיראז.</p>
+
+  <h2>3. אזהרה רפואית חשובה</h2>
+  <div class="disclaimer-box">
+    <p>התכנים באתר זה, לרבות מאמרים, תיאורי שירותים ומידע כללי, מיועדים למטרות <strong>מידע והעשרה בלבד</strong> ואינם מהווים ייעוץ רפואי, אבחון רפואי או המלצה לטיפול רפואי. אין להסתמך על תכנים אלה כתחליף לייעוץ של רופא/ה או איש מקצוע רפואי מוסמך. לכל שאלה רפואית יש לפנות לרופא/ה מוסמך/ת.</p>
+  </div>
+
+  <h2>4. קניין רוחני</h2>
+  <p>כל התכנים באתר – לרבות טקסטים, תמונות, לוגו, עיצוב, גרפיקה ומידע – הם רכושה של שושי מיראז ומוגנים על-פי חוקי זכויות יוצרים ישראליים ובינלאומיים.</p>
+  <p>אין להעתיק, לשכפל, לפרסם, להפיץ או לעשות שימוש מסחרי בתכנים האתר ללא אישור מפורש בכתב מבעלת האתר.</p>
+  <p>ציטוט קצר לצרכים לא-מסחריים מותר בתנאי ציון מקור מפורש.</p>
+
+  <h2>5. שימוש מותר באתר</h2>
+  <p>השימוש באתר מותר למטרות אישיות ולא-מסחריות בלבד. אסור:</p>
+  <ul>
+    <li>לאסוף נתונים מהאתר בצורה אוטומטית (scraping)</li>
+    <li>לנסות לפגוע בתפקוד האתר</li>
+    <li>להתחזות לאדם אחר בעת יצירת קשר</li>
+    <li>לפרסם תכנים פוגעניים דרך טופס יצירת הקשר</li>
+  </ul>
+
+  <h2>6. הגבלת אחריות</h2>
+  <p>בעלת האתר אינה אחראית לנזקים ישירים, עקיפים, מקריים או תוצאתיים הנובעים מהשימוש באתר או מהסתמכות על תכניו.</p>
+  <p>האתר מסופק "כפי שהוא" (as-is) ללא אחריות מפורשת או משתמעת לזמינות, דיוק או שלמות המידע.</p>
+
+  <h2>7. קישורים לאתרים חיצוניים</h2>
+  <p>האתר עשוי לכלול קישורים לאתרים חיצוניים (פייסבוק, אינסטגרם וכד'). בעלת האתר אינה אחראית לתכנים, מדיניות או שירותים של אתרים אלה.</p>
+
+  <h2>8. שינויים בתנאים</h2>
+  <p>בעלת האתר שומרת לעצמה את הזכות לשנות תנאים אלה בכל עת. המשך השימוש באתר לאחר פרסום שינויים מהווה הסכמה לתנאים המעודכנים.</p>
+
+  <h2>9. דין ושיפוט</h2>
+  <p>תנאי שימוש אלה כפופים לדין הישראלי. סמכות השיפוט הבלעדית לכל סכסוך הנוגע לאתר או לתנאים אלה נתונה לבתי המשפט המוסמכים בישראל.</p>
+
+  <h2>10. יצירת קשר</h2>
+  <p>לשאלות בנושא תנאי שימוש אלה:</p>
+  <ul>
+    <li><strong>שושי מיראז – עצה תומכת</strong></li>
+    <li>וואטסאפ: <a href="https://wa.me/972528753214">052-8753214</a></li>
+    <li>קריית טבעון</li>
+  </ul>
+
+</div>
+
+</main>
+
+<footer style="background-color:var(--brown-dark); padding:28px 24px 16px; text-align:center; position:relative; overflow:hidden;">
+  <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), var(--olive-mid), var(--gold), transparent);"></div>
+  <div style="max-width:900px; margin:0 auto;">
+    <img src="brand_assets/WiseTree_logo.png" alt="לוגו עצה תומכת – עץ חיים עם דמות אישה עוטפת" style="height:68px; width:auto; margin-bottom:8px; filter:brightness(1.15) saturate(0.85);" />
+    <p style="color:var(--gold-light); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-family:'Assistant', sans-serif; margin:0 0 28px; opacity:0.8;">ייעוץ הוליסטי · תמיכה לנשים</p>
+    <div style="margin-bottom:24px; display:flex; justify-content:center; flex-wrap:wrap; gap:2px;">
+      <a href="index.html"    style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">בית</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="about.html"   style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">אודות</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="service.html" style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">שירותים</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="blog.html"    style="color:var(--gold-light); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='var(--gold-light)'">בלוג</a>
+      <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
+      <a href="friends.html" style="color:var(--gold-light); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='var(--gold-light)'">חברות והמלצות</a>
+    </div>
+    <div style="margin-bottom:20px; display:flex; justify-content:center; flex-wrap:wrap; gap:2px;">
+      <a href="accessibility.html" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">הצהרת נגישות</a>
+      <span style="color:rgba(255,255,255,0.12); font-size:12px; padding:3px 0;">|</span>
+      <a href="privacy.html"       style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">מדיניות פרטיות</a>
+      <span style="color:rgba(255,255,255,0.12); font-size:12px; padding:3px 0;">|</span>
+      <a href="terms.html"         style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">תקנון ותנאי שימוש</a>
+    </div>
+    <div style="margin-bottom:24px;">
+      <a href="https://www.facebook.com/shoshi.miraz/about" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.65); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Facebook</a>
+      <a href="https://www.instagram.com/sh0shi.m/" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.65); text-decoration:none; font-size:12px; margin:0 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Instagram</a>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:24px;">
+      <p style="color:rgba(255,255,255,0.25); font-size:12px; margin:0; font-family:'Assistant', sans-serif; letter-spacing:0.04em;">© 2024 עצה תומכת. כל הזכויות שמורות.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btn  = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+</script>
+</body>
+</html>

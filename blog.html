@@ -220,7 +220,7 @@
       <a href="friends.html"            class="nav-link" style="color:var(--gold-light);">חברות והמלצות</a>
     </nav>
 
-    <button class="hamburger" id="hamburger-btn" aria-label="תפריט">
+    <button class="hamburger" id="hamburger-btn" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -378,8 +378,21 @@
 <script>
   const btn  = document.getElementById('hamburger-btn');
   const menu = document.getElementById('mobile-menu');
-  btn.addEventListener('click', () => menu.classList.toggle('open'));
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  btn.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    if (isOpen) {
+      const firstLink = menu.querySelector('a');
+      if (firstLink) firstLink.focus();
+    } else {
+      btn.focus();
+    }
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.focus();
+  }));
 </script>
 <script src="accessibility-widget.js"></script>
 </body>

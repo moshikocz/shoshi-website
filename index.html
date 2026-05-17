@@ -420,7 +420,7 @@
       <a href="friends.html"  class="nav-link" style="color:var(--gold-light);">חברות והמלצות</a>
     </nav>
 
-    <button class="hamburger" id="hamburger-btn" aria-label="תפריט">
+    <button class="hamburger" id="hamburger-btn" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -769,11 +769,11 @@
           <input type="hidden" name="from_name"  value="אתר עצה תומכת" />
           <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" aria-hidden="true" />
           <label for="f-name"    class="sr-only">שם מלא</label>
-          <input  type="text"  id="f-name"    name="name"    placeholder="שם מלא *"  aria-required="true" aria-describedby="form-error" class="form-field" />
+          <input  type="text"  id="f-name"    name="name"    placeholder="שם מלא *"  aria-required="true" aria-describedby="form-error" class="form-field" autocomplete="name" />
           <label for="f-phone"   class="sr-only">טלפון</label>
-          <input  type="tel"   id="f-phone"   name="phone"   placeholder="טלפון *"    aria-required="true" aria-describedby="form-error" class="form-field" />
+          <input  type="tel"   id="f-phone"   name="phone"   placeholder="טלפון *"    aria-required="true" aria-describedby="form-error" class="form-field" autocomplete="tel" />
           <label for="f-email"   class="sr-only">דואר אלקטרוני</label>
-          <input  type="email" id="f-email"   name="email"   placeholder='דוא"ל'      class="form-field" />
+          <input  type="email" id="f-email"   name="email"   placeholder='דוא"ל'      class="form-field" autocomplete="email" />
           <label for="f-message" class="sr-only">הודעה</label>
           <textarea            id="f-message" name="message" placeholder="הודעה"      class="form-field" rows="4" style="resize:vertical;"></textarea>
           <div id="form-error" role="alert" aria-live="assertive" style="display:none; color:#c0392b; font-size:0.9rem; font-family:'Assistant',sans-serif; margin-bottom:12px; padding:10px 14px; background:rgba(192,57,43,0.07); border-radius:4px; border-right:3px solid #c0392b;"></div>
@@ -931,8 +931,21 @@
 <script>
   const btn  = document.getElementById('hamburger-btn');
   const menu = document.getElementById('mobile-menu');
-  btn.addEventListener('click', () => menu.classList.toggle('open'));
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  btn.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    if (isOpen) {
+      const firstLink = menu.querySelector('a');
+      if (firstLink) firstLink.focus();
+    } else {
+      btn.focus();
+    }
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.focus();
+  }));
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {

@@ -12,5 +12,8 @@
   "type": "commonjs",
   "dependencies": {
     "puppeteer": "^24.37.5"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.1"
   }
 }

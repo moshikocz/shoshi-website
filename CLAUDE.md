@@ -52,6 +52,27 @@
 - Format: short phrase in Hebrew, e.g. `"נשים יושבות במעגל סביב מדורה בטבע"`, `"כיסא עץ לסאונת אדים לאגן עם צמחי מרפא"`.
 - Apply to all pages: `index.html`, `about.html`, the dedicated `service-*.html` pages, `blog.html`, `friends.html`.
 
+## Image Optimization
+- **Every time a new image is added** to `photos/` or `brand_assets/`, optimize it before referencing it in any HTML — never reference a raw `.png`/`.jpg`/`.jpeg` in HTML, only the resulting `.webp`.
+- Workflow:
+  1. Determine the image's display context(s) via the table below. If it's reused in multiple places (e.g. thumbnail on `index.html` + hero on its own `service-*.html` page + card on `blog.html`), use the **largest** applicable width.
+  2. Run `node optimize-images.mjs <path> --class <name>` (or `--width N` for a custom size).
+  3. The script auto-backs-up the original to `image_originals_backup/` and deletes it from `photos/`/`brand_assets/` on success. Pass `--keep-original` to skip the delete.
+  4. Update every `<img src="...">` / CSS `url(...)` reference across all HTML files to the new `.webp` path.
+  5. Still apply the **Image Alt Text** rule above to the new `<img>` tags.
+- CSS class → target width lookup table (2x retina; the script never upscales past the source):
+
+  | Class | Rendered size | Target width |
+  |---|---|---|
+  | `circle-img` | 210px circle | 420 |
+  | `circle-img-lg-wrap` | 240px circle | 800 |
+  | `detail-hero-img` | ≤760px column, 380px max-height | 1520 |
+  | `blog-card-img` | 100% width, 220px height | 900 |
+  | `friend-card-photo` | ~300-380px, 1:1 ratio | 760 |
+  | `hero-bg` | full viewport background | 1920 |
+
+- **Cache-busting caveat:** `_headers` sets a 1-year immutable cache on `/photos/*` and `/brand_assets/*`. If you replace an existing image under the same filename, returning visitors will keep seeing the old cached file for up to a year — always give a replacement a **new filename**.
+
 ## Hard Rules
 - Do not add sections, features, or content not in the reference
 - Do not "improve" a reference design — match it

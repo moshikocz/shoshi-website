@@ -1,49 +1,107 @@
 import sharp from "sharp";
 import path from "node:path";
-import { stat } from "node:fs/promises";
+import { stat, copyFile, unlink, mkdir } from "node:fs/promises";
 
-// input: source file (already backed up to image_originals_backup/)
-// output: new .webp file written next to it
-// width: target display width at 2x retina for the largest real usage on the site (sharp won't enlarge past the source)
-// quality: webp quality
-const jobs = [
-  { input: "photos/circle_logo_shoshi.png", output: "photos/circle_logo_shoshi.webp", width: 480, quality: 82 },
-  { input: "photos/healing_plants_service.png", output: "photos/healing_plants_service.webp", width: 900, quality: 80 },
-  { input: "photos/sgirat_agan_service_main_page.png", output: "photos/sgirat_agan_service_main_page.webp", width: 900, quality: 80 },
-  { input: "photos/steam_sauna_service.png", output: "photos/steam_sauna_service.webp", width: 900, quality: 80 },
-  { input: "photos/tree.png", output: "photos/tree.webp", width: 1100, quality: 78 },
-  { input: "photos/SHOSHI1.jpg", output: "photos/SHOSHI1.webp", width: 1400, quality: 78 },
-  { input: "photos/shoshi_outdoor.jpg", output: "photos/shoshi_outdoor.webp", width: 840, quality: 82 },
-  { input: "photos/Mirit_levona.jpeg", output: "photos/Mirit_levona.webp", width: 760, quality: 82 },
-  { input: "photos/service_group.jpeg", output: "photos/service_group.webp", width: 1000, quality: 80 },
-  { input: "photos/livui_rigshi_main_page_service.jpg", output: "photos/livui_rigshi_main_page_service.webp", width: 900, quality: 82 },
-  { input: "brand_assets/WiseTree_logo.png", output: "brand_assets/WiseTree_logo.webp", width: 140, quality: 90 },
-];
+// CSS class -> target width (2x retina of the real rendered size on this site).
+// sharp's withoutEnlargement means it's always safe to over-specify.
+// If an image is reused across multiple contexts (several site photos are: a small
+// circle-img thumbnail on index.html + a detail-hero-img on its own service-*.html page
+// + a blog-card-img on blog.html), pick the largest applicable class below, or pass
+// --width directly. Don't try to auto-detect usage from HTML/CSS for a site this size.
+const CLASS_WIDTHS = {
+  "circle-img": 420, // 210px circle
+  "circle-img-lg-wrap": 800, // 240px circle
+  "detail-hero-img": 1520, // <=760px column, 380px max-height
+  "blog-card-img": 900, // 100% width, 220px height
+  "friend-card-photo": 760, // ~300-380px, 1:1 ratio
+  "hero-bg": 1920, // full viewport background
+};
 
+const DEFAULT_QUALITY = 82;
 const root = path.resolve(import.meta.dirname);
-let totalBefore = 0;
-let totalAfter = 0;
 
-for (const job of jobs) {
-  const inPath = path.join(root, job.input);
-  const outPath = path.join(root, job.output);
+function parseArgs(argv) {
+  const files = [];
+  let width = null;
+  let quality = DEFAULT_QUALITY;
+  let keepOriginal = false;
+  let cls = null;
 
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i];
+    if (arg === "--width") width = Number(argv[++i]);
+    else if (arg === "--quality") quality = Number(argv[++i]);
+    else if (arg === "--class") cls = argv[++i];
+    else if (arg === "--keep-original") keepOriginal = true;
+    else if (arg.startsWith("--")) throw new Error(`Unknown flag: ${arg}`);
+    else files.push(arg);
+  }
+
+  if (files.length === 0) {
+    throw new Error("No input files given.");
+  }
+
+  if (width === null) {
+    if (cls === null) {
+      throw new Error("Pass either --class <name> or --width <N>.");
+    }
+    if (!(cls in CLASS_WIDTHS)) {
+      throw new Error(`Unknown --class "${cls}". Known classes: ${Object.keys(CLASS_WIDTHS).join(", ")}`);
+    }
+    width = CLASS_WIDTHS[cls];
+  }
+
+  return { files, width, quality, keepOriginal };
+}
+
+async function processFile(relPath, { width, quality, keepOriginal }) {
+  const inPath = path.join(root, relPath);
   const before = (await stat(inPath)).size;
 
+  const backupPath = path.join(root, "image_originals_backup", relPath);
+  await mkdir(path.dirname(backupPath), { recursive: true });
+  try {
+    await stat(backupPath);
+    console.log(`(backup already exists at image_originals_backup/${relPath}, skipping backup copy)`);
+  } catch {
+    await copyFile(inPath, backupPath);
+  }
+
+  const outPath = inPath.replace(/\.(png|jpe?g)$/i, ".webp");
+  const outRelPath = relPath.replace(/\.(png|jpe?g)$/i, ".webp");
+
   await sharp(inPath)
-    .resize({ width: job.width, withoutEnlargement: true })
-    .webp({ quality: job.quality })
+    .resize({ width, withoutEnlargement: true })
+    .webp({ quality })
     .toFile(outPath);
 
   const after = (await stat(outPath)).size;
 
-  totalBefore += before;
-  totalAfter += after;
+  if (!keepOriginal) {
+    await unlink(inPath);
+  }
 
   console.log(
-    `${job.input.padEnd(45)} ${(before / 1024).toFixed(0).padStart(6)}KB -> ${job.output.padEnd(40)} ${(after / 1024).toFixed(0).padStart(6)}KB`
+    `${relPath.padEnd(45)} ${(before / 1024).toFixed(0).padStart(6)}KB -> ${outRelPath.padEnd(45)} ${(after / 1024).toFixed(0).padStart(6)}KB`
   );
+  console.log(`  -> update HTML references to ${outRelPath}, and add Hebrew alt text (see CLAUDE.md § Image Alt Text)`);
 }
 
-console.log("---");
-console.log(`Total: ${(totalBefore / 1024).toFixed(0)}KB -> ${(totalAfter / 1024).toFixed(0)}KB (${(100 - (totalAfter / totalBefore) * 100).toFixed(0)}% smaller)`);
+async function main() {
+  const { files, width, quality, keepOriginal } = parseArgs(process.argv.slice(2));
+
+  for (const file of files) {
+    await stat(path.join(root, file)); // throws clearly if missing
+  }
+
+  for (const file of files) {
+    await processFile(file, { width, quality, keepOriginal });
+  }
+}
+
+main().catch((err) => {
+  console.error(`Error: ${err.message}`);
+  console.error("Usage: node optimize-images.mjs <file...> --class <name>|--width <N> [--quality <N>] [--keep-original]");
+  console.error(`Known classes: ${Object.keys(CLASS_WIDTHS).join(", ")}`);
+  process.exitCode = 1;
+});

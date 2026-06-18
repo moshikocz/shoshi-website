@@ -36,7 +36,7 @@ node serve.mjs
 | `serve.mjs` | שרת סטטי מקומי לפיתוח |
 | `screenshot.mjs` | צילום מסך של עמוד עם Puppeteer — `node screenshot.mjs http://localhost:3000` |
 | `screenshot_sections.mjs` | צילום מסך לפי סקשנים בעמוד |
-| `optimize-images.mjs` | המרת תמונות ל-WebP בעזרת sharp |
+| `optimize-images.mjs` | המרת תמונה חדשה ל-WebP בגודל הנכון בעזרת sharp — `node optimize-images.mjs photos/new.jpg --class circle-img` (ראו `CLAUDE.md` § Image Optimization) |
 | `nav_crop.mjs` | חיתוך/עיבוד תמונות לתפריט הניווט |
 
 ## התקנה

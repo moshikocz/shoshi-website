@@ -42,6 +42,44 @@
     .nav-link:hover::after { width: 100%; right: 0; }
     .nav-link:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; border-radius: 2px; }
 
+    /* ── NAV DROPDOWN ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { background: none; border: none; cursor: pointer; font: inherit; }
+    .nav-dropdown-arrow { transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1); flex-shrink: 0; }
+    .nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-arrow { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 14px);
+      right: 50%;
+      transform: translateX(50%);
+      background: var(--brown-dark);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.24);
+      padding: 8px;
+      min-width: 230px;
+      z-index: 1001;
+    }
+    .nav-dropdown-menu.open { display: block; }
+    .nav-dropdown-link {
+      display: block;
+      padding: 10px 16px;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-family: 'Assistant', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 5px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .nav-dropdown-link:hover,
+    .nav-dropdown-link:focus-visible {
+      background-color: rgba(255,255,255,0.08);
+      color: var(--gold-light);
+    }
+    .mobile-submenu { display: none; flex-direction: column; background: rgba(0,0,0,0.16); }
+    .mobile-submenu.open { display: flex; }
+
     .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 28px; height: 20px; background: none; border: none; cursor: pointer; padding: 0; }
     .hamburger span { display: block; width: 100%; height: 2px; background: rgba(255,255,255,0.88); border-radius: 2px; transition: opacity 0.2s; }
     #mobile-menu { display: none; }
@@ -104,19 +142,41 @@
     <nav class="desktop-nav" style="display:flex; align-items:center; gap:0;">
       <a href="index.html"    class="nav-link">בית</a>
       <a href="about.html"   class="nav-link">אודות</a>
-      <a href="service.html" class="nav-link">שירותים</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-link nav-dropdown-trigger" style="display:inline-flex; align-items:center; gap:5px;" aria-expanded="false" aria-controls="services-menu" id="services-trigger">
+          שירותים
+          <svg class="nav-dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu" id="services-menu">
+          <a href="service-livui-rigshi.html" class="nav-dropdown-link">ליווי רגשי הוליסטי</a>
+          <a href="service-maagal-nashim.html" class="nav-dropdown-link">מעגל נשים - מודעות למחזוריות</a>
+          <a href="service-sgirat-agan.html" class="nav-dropdown-link">טקס סגירת אגן</a>
+          <a href="service-sauna-adim.html" class="nav-dropdown-link">סאונת אדים לאגן</a>
+          <a href="service-halitot.html" class="nav-dropdown-link">חליטות למגוון שימושים</a>
+        </div>
+      </div>
       <a href="index.html#contact" class="nav-link">צרי קשר</a>
       <a href="blog.html"    class="nav-link" style="color:var(--gold-light);">בלוג</a>
       <a href="friends.html" class="nav-link" style="color:var(--gold-light);">חברות והמלצות</a>
     </nav>
-    <button class="hamburger" id="hamburger-btn" aria-label="תפריט">
+    <button class="hamburger" id="hamburger-btn" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
     </button>
   </div>
   <div id="mobile-menu" style="background-color:#2d1a0a; padding:6px 0; border-top:1px solid rgba(255,255,255,0.08);">
     <a href="index.html"    class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">בית</a>
     <a href="about.html"   class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">אודות</a>
-    <a href="service.html" class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">שירותים</a>
+    <button type="button" class="nav-link nav-dropdown-trigger" style="display:flex; justify-content:space-between; align-items:center; width:100%; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); text-align:right;" aria-expanded="false" aria-controls="mobile-services-menu" id="mobile-services-trigger">
+      שירותים
+      <svg class="nav-dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="mobile-submenu" id="mobile-services-menu">
+      <a href="service-livui-rigshi.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">ליווי רגשי הוליסטי</a>
+      <a href="service-maagal-nashim.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">מעגל נשים - מודעות למחזוריות</a>
+      <a href="service-sgirat-agan.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">טקס סגירת אגן</a>
+      <a href="service-sauna-adim.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">סאונת אדים לאגן</a>
+      <a href="service-halitot.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; font-size:14px;">חליטות למגוון שימושים</a>
+    </div>
     <a href="index.html#contact" class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">צרי קשר</a>
     <a href="blog.html"    class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); color:var(--gold-light);">בלוג</a>
     <a href="friends.html" class="nav-link" style="display:block; padding:13px 28px; color:var(--gold-light);">חברות והמלצות</a>
@@ -252,7 +312,7 @@
       <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
       <a href="about.html"   style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">אודות</a>
       <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
-      <a href="service.html" style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">שירותים</a>
+      <a href="index.html#services" style="color:rgba(255,255,255,0.58); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.58)'">שירותים</a>
       <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
       <a href="blog.html"    style="color:var(--gold-light); text-decoration:none; font-size:13px; padding:4px 13px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='var(--gold-light)'">בלוג</a>
       <span style="color:rgba(255,255,255,0.15); font-size:13px; padding:4px 0;">|</span>
@@ -278,8 +338,46 @@
 <script>
   const btn  = document.getElementById('hamburger-btn');
   const menu = document.getElementById('mobile-menu');
-  btn.addEventListener('click', () => menu.classList.toggle('open'));
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  const svcBtn   = document.getElementById('services-trigger');
+  const svcMenu  = document.getElementById('services-menu');
+  const mSvcBtn  = document.getElementById('mobile-services-trigger');
+  const mSvcMenu = document.getElementById('mobile-services-menu');
+
+  btn.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    if (!isOpen) {
+      mSvcMenu.classList.remove('open');
+      mSvcBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }));
+
+  svcBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = svcMenu.classList.toggle('open');
+    svcBtn.setAttribute('aria-expanded', isOpen);
+  });
+  document.addEventListener('click', (e) => {
+    if (svcMenu.classList.contains('open') && !svcBtn.contains(e.target) && !svcMenu.contains(e.target)) {
+      svcMenu.classList.remove('open');
+      svcBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && svcMenu.classList.contains('open')) {
+      svcMenu.classList.remove('open');
+      svcBtn.setAttribute('aria-expanded', 'false');
+      svcBtn.focus();
+    }
+  });
+  mSvcBtn.addEventListener('click', () => {
+    const isOpen = mSvcMenu.classList.toggle('open');
+    mSvcBtn.setAttribute('aria-expanded', isOpen);
+  });
 </script>
 <script src="accessibility-widget.js"></script>
 </body>

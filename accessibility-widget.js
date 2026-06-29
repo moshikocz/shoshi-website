@@ -34,8 +34,8 @@
 
     /* Trigger button */
     '#a11y-trigger {',
-    '  width:48px; height:48px; border-radius:50%; border:none; cursor:pointer;',
-    '  background:#3b6cc7; color:#fff; font-size:22px; line-height:1;',
+    '  width:45px; height:45px; border-radius:50%; border:none; cursor:pointer;',
+    '  background:#3b6cc7; color:#fff; font-size:20px; line-height:1;',
     '  display:flex; align-items:center; justify-content:center;',
     '  box-shadow:0 3px 12px rgba(0,0,0,0.35);',
     '  transition:transform 0.18s, box-shadow 0.18s;',
@@ -45,7 +45,7 @@
 
     /* Panel */
     '#a11y-panel {',
-    '  position:absolute; bottom:58px; left:0;',
+    '  position:absolute; bottom:55px; left:0;',
     '  background:#3b2210; border:1px solid rgba(200,165,90,0.4); border-radius:10px;',
     '  padding:14px 16px; width:220px;',
     '  box-shadow:0 8px 28px rgba(0,0,0,0.45);',

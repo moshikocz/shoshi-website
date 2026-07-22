@@ -44,13 +44,22 @@
   var nav = document.getElementById('testimonial-nav');
   if (!track || !nav) return;
   var slides = Array.prototype.slice.call(track.children);
+  // Scroll only the track's own horizontal axis — scrollIntoView() walks up
+  // through ancestor scroll containers (including the page itself) and on
+  // mobile browsers can end up jumping the whole page vertically even with
+  // block:'nearest', so we compute and apply scrollLeft directly instead.
+  // NEVER swap this back for scrollIntoView() on the track's children.
+  function scrollSlideIntoView(el, behavior) {
+    var delta = el.getBoundingClientRect().left - track.getBoundingClientRect().left;
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: behavior });
+  }
   var dots = slides.map(function (slide, i) {
     var dot = document.createElement('button');
     dot.className = 'testimonial-dot';
     dot.type = 'button';
     dot.setAttribute('aria-label', 'המלצה ' + (i + 1));
     dot.addEventListener('click', function () {
-      slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      scrollSlideIntoView(slide, 'smooth');
     });
     nav.appendChild(dot);
     return dot;
@@ -94,12 +103,12 @@
     timer = setInterval(function () {
       var nextPos = activeIndex + 1;
       if (nextPos >= n) {
-        children[n].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        scrollSlideIntoView(children[n], 'smooth');
         snapTimeout = setTimeout(function () {
-          slides[0].scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+          scrollSlideIntoView(slides[0], 'auto');
         }, 450);
       } else {
-        slides[nextPos].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        scrollSlideIntoView(slides[nextPos], 'smooth');
       }
     }, 5000);
   }

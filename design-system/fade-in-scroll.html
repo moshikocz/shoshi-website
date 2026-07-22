@@ -1,0 +1,87 @@
+<!-- ============================================================
+     FADE-IN-ON-SCROLL SNIPPET — Landing Page Design System
+     Source: course-isha-magalit.html
+     Uses AOS (Animate On Scroll) v2.3.4 via CDN — zero build step,
+     matches this site's "no bundler, plain files" approach.
+     ============================================================
+
+     1) Put this in <head>, alongside the Google Fonts + Tailwind
+        CDN includes:
+-->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+<!--
+     2) Put this right before </body>, AFTER your other inline
+        <script> blocks (so AOS.init runs last):
+-->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1750,
+    once: true,
+    offset: 80,
+    easing: 'ease-out-cubic',
+    disable: function () {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+  });
+</script>
+
+<!-- ============================================================
+     3) Usage in markup — add data-aos to any element you want to
+     reveal on scroll. Combine with data-aos-delay to stagger a
+     group of siblings (list items, cards, etc).
+
+     Effects used on the course page: fade-up, fade-right, fade-left, zoom-in
+
+     <div data-aos="fade-right" data-aos-duration="800">...</div>
+     <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="150">...</div>
+
+     Staggering convention seen in the source file:
+       - Tight list items (whom-items): 0, 80, 160, 240, 320 (80ms step)
+       - Wider rows (gain-rows, syllabus items): 250, 310, 370, 430, 490 (60ms step)
+       - Just a couple of paired elements (price cards): 0, 100
+
+     Section-header trio (label + divider + h2) — give each its own
+     data-aos="fade-up" (no delay needed, they render together):
+       <p class="section-label" data-aos="fade-up">קטגוריה</p>
+       <div class="gold-divider" data-aos="fade-up"></div>
+       <h2 data-aos="fade-up">כותרת</h2>
+
+     Single quote/testimonial blocks tend to use data-aos="zoom-in"
+     instead of fade-up — reserve zoom-in for one "hero" element per
+     section (a price card, a standout quote), not for lists.
+
+     HEADING-TO-CONTENT SEPARATION (required, not optional):
+     A section-label + gold-divider + h2 cluster animates together
+     with no delay. If the content directly below it (a card grid,
+     paragraph, list) ALSO starts at delay 0, both clusters fade in
+     simultaneously and read as cluttered. Fix: give the first
+     content element after the heading a base data-aos-delay="250",
+     and shift every one of its staggered children by that same
+     +250 offset, preserving their relative spacing
+     (e.g. 0/60/120/180/240 -> 250/310/370/430/490). Apply this to
+     EVERY section with this label+divider+heading -> content shape
+     (about, pricing, testimonials, FAQ, feature lists, etc), not
+     just one flagged instance. Exception: a cluster where the
+     heading itself is the first staggered element (no separate
+     label/divider above it, e.g. a plain CTA block) doesn't need
+     this — the heading is already part of the same sequence.
+     ============================================================ -->
+
+<!-- ============================================================
+     4) Global reduced-motion respect — put in <style>, in addition
+     to the `disable` function above (AOS also needs this CSS
+     override so anything NOT using data-aos still honors the OS
+     setting, e.g. the .btn-primary breathing glow):
+-->
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>

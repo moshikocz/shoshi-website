@@ -2,6 +2,7 @@
 
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
+- **Building a new landing page** (a new course page, or any standalone topic/campaign page, e.g. "FADE IN")? Check `design-system/README.md` first and reuse its tokens/components/AOS scripts instead of designing from scratch. Only the `--accent`/`--accent-deep` color pair should change per topic — see that folder for the full system extracted from `course-isha-magalit.html`.
 
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.

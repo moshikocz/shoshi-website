@@ -1,0 +1,291 @@
+/* ============================================================
+   REUSABLE COMPONENTS — Landing Page Design System
+   Source: course-isha-magalit.html
+   Pairs with tokens.css (uses --accent/--accent-deep instead of
+   the original --terracotta/--terracotta-deep so the same CSS
+   works unchanged on any re-themed landing page).
+   ============================================================ */
+
+/* ── SECTION HEADER TRIO ──
+   Usage:
+   <p class="section-label" data-aos="fade-up">קטגוריה</p>
+   <div class="gold-divider" data-aos="fade-up"></div>
+   <h2 data-aos="fade-up">כותרת הסקשן</h2>
+*/
+.gold-divider {
+  width: 52px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+  margin: 0 auto 26px;
+  border-radius: 2px;
+}
+.section-label {
+  display: inline-block;
+  font-family: 'Assistant', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--olive-dark);
+  border-bottom: 1.5px solid var(--olive-light);
+  padding-bottom: 4px;
+  margin-bottom: 18px;
+}
+
+/* ── PRIMARY BUTTON (breathing-glow CTA) ── */
+@keyframes btn-breathe {
+  0%, 100% { box-shadow: 0 2px 8px rgba(181,98,60,0.35), 0 8px 24px rgba(181,98,60,0.18), 0 0 0 0 rgba(181,98,60,0.0); }
+  50%       { box-shadow: 0 2px 8px rgba(181,98,60,0.35), 0 8px 24px rgba(181,98,60,0.18), 0 0 0 7px rgba(181,98,60,0.12); }
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-family: 'Assistant', Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 15px 34px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 8px rgba(181,98,60,0.35), 0 8px 24px rgba(181,98,60,0.18);
+  transition: background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+  animation: btn-breathe 2.8s ease-in-out infinite;
+}
+.btn-primary:hover {
+  background-color: var(--accent-deep);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(181,98,60,0.45), 0 16px 36px rgba(181,98,60,0.25);
+  animation: none;
+}
+.btn-primary:active { transform: translateY(0) scale(0.97); }
+.btn-primary:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
+/* NOTE: btn-breathe's rgba shadow values are hardcoded to the terracotta hue.
+   If --accent changes color meaningfully, re-tint these rgba() to match. */
+
+/* ── GRADIENT CARD (whom-item / syllabus-item / faq-item base) ── */
+.ds-card {
+  background: linear-gradient(165deg, #ffffff 0%, var(--cream-card) 100%);
+  border-radius: 14px;
+  padding: 18px 22px;
+  box-shadow: 0 8px 18px -12px rgba(45,36,16,0.22), 0 2px 6px -2px rgba(111,127,58,0.16);
+}
+.ds-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 26px -14px rgba(45,36,16,0.3);
+}
+
+/* ── CHIP / BADGE ── */
+.ds-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fffdf6;
+  border: 1px solid rgba(143,74,44,0.14);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-family: 'Assistant', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  box-shadow: 0 3px 8px -4px rgba(45,36,16,0.16);
+}
+
+/* ── PERK PILL ── */
+.perk-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(74,88,36,0.08);
+  border: 1px solid var(--olive-light);
+  border-radius: 30px;
+  padding: 9px 18px;
+  font-family: 'Assistant', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--olive-dark);
+}
+
+/* ── FAQ ACCORDION (native <details>/<summary>, no JS needed) ──
+   Usage:
+   <details class="faq-item" data-aos="fade-up">
+     <summary>שאלה?</summary>
+     <p>תשובה.</p>
+   </details>
+*/
+.faq-item {
+  background: linear-gradient(165deg, #ffffff 0%, var(--cream-card) 100%);
+  border-radius: 14px;
+  padding: 4px 22px;
+  box-shadow: 0 8px 18px -12px rgba(45,36,16,0.2);
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 0;
+  font-family: 'Assistant', sans-serif;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--olive-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 1.3rem;
+  color: var(--accent);
+  transition: transform 0.25s ease;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; border-radius: 6px; }
+.faq-item p {
+  font-family: 'Assistant', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+/* ── ZIGZAG NUMBERED TIMELINE ("gains path") ──
+   Alternating left/right rows with a numbered node on a vertical
+   gradient spine. Collapses to a single column + hides visuals
+   under 720px. See landing-page-template.html for full markup.
+*/
+.gains-path {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.gains-path::before {
+  content: '';
+  position: absolute;
+  top: 8px; bottom: 8px;
+  right: 50%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--olive-light) 8%, var(--gold) 50%, var(--olive-light) 92%, transparent);
+  transform: translateX(1px);
+}
+@media (max-width: 720px) {
+  .gains-path::before { right: 24px; }
+}
+.gain-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 0 40px;
+  padding: 34px 0;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.gain-row:hover { transform: translateY(-2px); }
+.gain-row:nth-child(even) .gain-text { order: 2; text-align: right; padding-right: 46px; }
+.gain-row:nth-child(even) .gain-visual { order: 1; }
+.gain-row:nth-child(odd) .gain-text { order: 1; text-align: left; padding-left: 46px; }
+.gain-row:nth-child(odd) .gain-visual { order: 2; }
+@media (max-width: 720px) {
+  .gain-row { grid-template-columns: 1fr; padding-right: 56px; gap: 10px; text-align: right !important; }
+  .gain-row:nth-child(even) .gain-text,
+  .gain-row:nth-child(odd) .gain-text { order: 1; text-align: right !important; padding-left: 0; padding-right: 0; }
+  .gain-row .gain-visual { order: 2; display: none; }
+}
+.gain-number {
+  position: absolute;
+  top: 50%; right: 50%;
+  transform: translate(50%, -50%);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, var(--gold-soft), var(--gold) 60%, var(--olive-mid) 100%);
+  color: #2d2410;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  box-shadow: 0 6px 16px rgba(200,165,90,0.4), 0 0 0 6px var(--cream-bg);
+  z-index: 2;
+}
+@media (max-width: 720px) {
+  .gain-number { right: 24px; width: 44px; height: 44px; font-size: 1.1rem; }
+}
+
+/* ── WHATSAPP FLOAT BUTTON ──
+   Fixed circular button, hidden until scroll passes the hero CTA
+   (see fade-in-scroll.html or testimonial-carousel.js dir's sibling
+   script pattern for the show/hide scroll listener).
+*/
+.wa-float {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 900;
+  width: 45px; height: 45px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(37,211,102,0.45), 0 2px 6px rgba(0,0,0,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+}
+.wa-float.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.wa-float:hover { transform: translateY(-3px); }
+
+/* ── TESTIMONIAL CAROUSEL (scroll-snap track + JS dot nav) ──
+   Pair with testimonial-carousel.js for the IntersectionObserver
+   dot-sync logic.
+*/
+.testimonial-carousel { position: relative; }
+.testimonial-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 22px;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.testimonial-track::-webkit-scrollbar { display: none; }
+.testimonial-track > * {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+}
+@media (min-width: 720px) {
+  .testimonial-track > * { flex: 0 0 calc(50% - 11px); }
+}
+.testimonial-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+.testimonial-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(223,192,126,0.35);
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.25s;
+}
+.testimonial-dot.is-active { background: var(--gold-soft); transform: scale(1.25); }
+.testimonial-dot:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
+
+/* ── SKIP LINK (accessibility) ── */
+.skip-link {
+  position: absolute; top: -44px; right: 0;
+  background: var(--olive-dark); color: #fff;
+  padding: 8px 18px; font-family: 'Assistant', sans-serif;
+  font-size: 14px; font-weight: 700; text-decoration: none;
+  z-index: 10000; border-radius: 0 0 4px 0;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }

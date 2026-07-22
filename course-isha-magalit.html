@@ -133,7 +133,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background-color: var(--terracotta);
+      background-color: var(--terracotta-deep);
       color: #ffffff;
       font-family: 'Assistant', Arial, sans-serif;
       font-size: 15px;
@@ -149,7 +149,7 @@
       animation: btn-breathe 2.8s ease-in-out infinite;
     }
     .btn-primary:hover {
-      background-color: var(--terracotta-deep);
+      filter: brightness(0.9);
       transform: translateY(-3px) scale(1.03);
       box-shadow: 0 6px 20px rgba(181,98,60,0.45), 0 16px 36px rgba(181,98,60,0.25);
       animation: none;
@@ -257,7 +257,7 @@
       width: 132px;
       height: 132px;
       border-radius: 50%;
-      background: radial-gradient(circle at 32% 28%, var(--terracotta) 0%, var(--terracotta-deep) 100%);
+      background: radial-gradient(circle at 32% 28%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 45%), var(--terracotta-deep);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -316,14 +316,12 @@
     .hero-badge .badge-old {
       font-family: 'Assistant', sans-serif;
       font-size: 0.7rem;
-      opacity: 0.85;
       text-decoration: line-through;
     }
     .hero-badge .badge-until {
       font-family: 'Assistant', sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
-      opacity: 0.92;
       margin-top: 3px;
       line-height: 1.3;
       max-width: 92px;
@@ -519,12 +517,9 @@
     .syllabus-item > div { flex: 1 1 200px; }
     .syllabus-num {
       flex-shrink: 0;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--olive-light);
-      line-height: 1;
-      min-width: 36px;
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
     }
     .syllabus-item h3 {
       font-size: 1.05rem;
@@ -532,6 +527,7 @@
       color: var(--olive-dark);
       margin-bottom: 4px;
     }
+    .syllabus-num.is-waning { transform: scaleX(-1); }
     .syllabus-item p {
       font-family: 'Assistant', sans-serif;
       font-size: 0.9rem;
@@ -578,7 +574,7 @@
       position: relative;
     }
     .price-card.is-early {
-      background: linear-gradient(165deg, var(--terracotta) 0%, var(--terracotta-deep) 100%);
+      background: linear-gradient(165deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 40%), var(--terracotta-deep);
       color: #fff;
       box-shadow: 0 12px 26px -12px rgba(143,74,44,0.4), 0 4px 12px -4px rgba(143,74,44,0.3);
       transform: scale(1.03);
@@ -639,7 +635,7 @@
       font-family: 'Assistant', sans-serif;
       font-size: 0.85rem;
     }
-    .price-card.is-early .price-note { color: rgba(255,255,255,0.88); font-size: 0.95rem; }
+    .price-card.is-early .price-note { color: #fff; font-size: 0.95rem; }
     .price-note-highlight {
       font-weight: 800;
       color: #fff;
@@ -651,6 +647,15 @@
     .price-card.is-mid .price-note { color: var(--text-mid); }
     .price-card.is-full .price-note { color: var(--text-mid); }
 
+    .perk-label {
+      text-align: center;
+      font-family: 'Assistant', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--olive-dark);
+      margin: 0 0 14px;
+      letter-spacing: -0.01em;
+    }
     .perk-list {
       display: flex;
       flex-wrap: wrap;
@@ -663,13 +668,14 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(74,88,36,0.08);
-      border: 1px solid var(--olive-light);
+      background: rgba(74,88,36,0.1);
+      border: 1.5px solid var(--olive-light);
+      box-shadow: 0 4px 14px -4px rgba(74,88,36,0.18);
       border-radius: 30px;
-      padding: 9px 18px;
+      padding: 10px 20px;
       font-family: 'Assistant', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--olive-dark);
     }
 
@@ -680,7 +686,12 @@
       gap: 28px;
       max-width: 780px;
       margin: 0 auto 40px;
+      padding: 28px 36px;
       text-align: center;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(198,168,110,0.25);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px -20px rgba(74,88,36,0.22), 0 4px 14px -6px rgba(74,88,36,0.12);
     }
     .logistics-item {
       font-family: 'Assistant', sans-serif;
@@ -799,6 +810,20 @@
     }
     .testimonial-dot.is-active { background: var(--gold-soft); transform: scale(1.25); }
     .testimonial-dot:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
+    .testimonial-pause {
+      width: auto;
+      height: auto;
+      border-radius: 20px;
+      background: rgba(223,192,126,0.16);
+      color: var(--gold-soft);
+      font-size: 13px;
+      line-height: 1;
+      padding: 5px 11px;
+      margin-inline-start: 4px;
+      transition: background-color 0.25s;
+    }
+    .testimonial-pause:hover { background: rgba(223,192,126,0.28); }
+    .testimonial-pause:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
   </style>
 </head>
 <body>
@@ -909,7 +934,7 @@
         </div>
         <div class="whom-item" data-aos="fade-up" data-aos-delay="320">
           <span class="whom-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 6l2 6-2 6-2-6z"/></svg></span>
-          <p>את באמצע שינוי גדול — קריירה, זוגיות, גיל המעבר, קן שמתרוקן — ומרגישה שאין לך עם מי לעצור ולהיבחן באמת.</p>
+          <p>את בתהליך התפתחות ומבקשת עוד רובד קליל של העמקה בחברה טובה.</p>
         </div>
       </div>
       <p data-aos="fade-up" data-aos-delay="450" style="font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; font-size:1.15rem; color:var(--olive-dark); margin-top:32px;">
@@ -922,18 +947,19 @@
   </section>
 
   <!-- TESTIMONIAL — SAFE SPACE OBJECTION -->
-  <section style="background:var(--cream-bg); padding:56px 24px;">
+  <section style="background:var(--cream-bg); padding:56px 24px 32px;">
     <div data-aos="zoom-in" style="max-width:600px; margin:0 auto; text-align:center;">
       <div style="color:var(--gold); font-size:15px; letter-spacing:3px; margin-bottom:14px;" aria-hidden="true">★★★★★</div>
       <p style="font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; font-size:1.2rem; color:var(--text-dark); line-height:1.7; margin-bottom:16px;">
-        "טקס סגירת האגן עם שושי היה חוויה עמוקה ומרגיעה. שושי יוצרת מרחב בטוח, נעים ומכיל, שמאפשר להרפות ולהתחבר לגוף ולנשיות בטבעיות. הרגשתי מוחזקת ומלווה ברגישות ובנוכחות שקטה."
+        "אני עוד מהדהדת את המפגשים לנשים קרובות. התמלאתי השראה ממך שושית! מדברת על המפגשים עם מלא הודיה בלב 💕"
       </p>
-      <p style="font-family:'Assistant', sans-serif; font-size:0.85rem; font-weight:700; color:var(--terracotta-deep);">מוניקה, מעסה רפואית</p>
+      <p style="font-family:'Assistant', sans-serif; font-size:0.85rem; font-weight:700; color:var(--terracotta-deep);">משתתפת בקורס הראשון</p>
+      <img src="photos/Course/צלחת פרחים מסודרת.webp" alt="סידור פרחים עגול על אדמה כהה – חמניות, גרברות ורודות ואדומות וכותרות עלים בתפזורת" style="width:100px; height:100px; object-fit:cover; border-radius:50%; margin:20px auto 0; display:block; box-shadow:0 4px 16px rgba(90,107,40,0.2), 0 1px 4px rgba(0,0,0,0.12);">
     </div>
   </section>
 
   <!-- WHAT YOU'LL GAIN — FLOWING PATH -->
-  <section style="background:var(--cream-bg); padding:90px 24px;">
+  <section style="background:var(--cream-bg); padding:48px 24px 90px;">
     <div style="max-width:900px; margin:0 auto;">
       <div style="text-align:center; margin-bottom:20px;">
         <p class="section-label" data-aos="fade-up">עם מה תצאי מהקורס</p>
@@ -1006,41 +1032,39 @@
 
       <div class="syllabus-list">
         <div class="syllabus-item" data-aos="fade-up" data-aos-delay="250">
-          <span class="syllabus-num">1</span>
+          <svg class="syllabus-num" viewBox="0 0 40 40" role="img" aria-label="ירח חדש"><circle cx="20" cy="20" r="18" fill="var(--olive-dark)"/></svg>
           <div>
             <h3>האקו סייקל</h3>
             <p>למידה על השלבים במחזור החודשי בהשוואה לעונות הטבע המתחלפות — כדי שתדעי מתי בחודש להאיץ ומתי לעצור.</p>
           </div>
         </div>
         <div class="syllabus-item" data-aos="fade-up" data-aos-delay="310">
-          <span class="syllabus-num">2</span>
+          <svg class="syllabus-num" viewBox="0 0 40 40" role="img" aria-label="ירח הולך וגדל"><circle cx="20" cy="20" r="18" fill="var(--olive-dark)"/><path d="M20,2 A18,18 0 0,1 20,38 A7,18 0 0,0 20,2 Z" fill="var(--gold)"/></svg>
           <div>
             <h3>בשער הגוף</h3>
             <p>גוף האישה, הורמונים וזיהוי הפרשות צוואר הרחם — ידע מעשי שיחליף את "מה קורה לי?" בהבנה בטוחה.</p>
           </div>
         </div>
         <div class="syllabus-item" data-aos="fade-up" data-aos-delay="370">
-          <span class="syllabus-num">3</span>
+          <svg class="syllabus-num" viewBox="0 0 40 40" role="img" aria-label="ירח מלא"><circle cx="20" cy="20" r="18" fill="var(--gold)"/></svg>
           <div>
             <h3>הארכיטיפיות שבנו</h3>
-            <p>זיהוי ארכיטיפיות נשייות מעצימות בשילוב יצירה תרפויטית — כלים לזהות איזה חלק בך צריך במה ברגע נתון.</p>
+            <p>זיהוי ארכיטיפיות נשייות מעצימות בשילוב יצירה תרפויטית — כלים לזהות את העוצמות הנשיות שבך ואת החלקים שמבקשים במה נוספת.</p>
           </div>
         </div>
         <div class="syllabus-item" data-aos="fade-up" data-aos-delay="430">
-          <span class="syllabus-num">4</span>
+          <svg class="syllabus-num is-waning" viewBox="0 0 40 40" role="img" aria-label="ירח הולך וקטן"><circle cx="20" cy="20" r="18" fill="var(--olive-dark)"/><path d="M20,2 A18,18 0 0,1 20,38 A7,18 0 0,0 20,2 Z" fill="var(--gold)"/></svg>
           <div>
             <h3>"מה עובד לך?"</h3>
             <p>חקירה משותפת, טיפים מעשיים, משאבים וצמחי מרפא לבריאות נשית — תיק כלים ביתי שתשתמשי בו גם אחרי הקורס.</p>
           </div>
-          <img src="photos/healing_plants_service.webp" alt="צמחי מרפא וחליטות טבעיות לתמיכה בבריאות נשית" style="width:64px; height:64px; border-radius:12px; object-fit:cover; flex-shrink:0; box-shadow:0 4px 10px rgba(45,36,16,0.18);" />
         </div>
         <div class="syllabus-item" data-aos="fade-up" data-aos-delay="490">
-          <span class="syllabus-num">5</span>
+          <svg class="syllabus-num is-waning" viewBox="0 0 40 40" role="img" aria-label="ירח דועך במגל"><circle cx="20" cy="20" r="18" fill="var(--olive-dark)"/><path d="M20,2 A18,18 0 0,1 20,38 A12,18 0 0,0 20,2 Z" fill="var(--gold)"/></svg>
           <div>
-            <h3>מפגש סיום מורחב וטקס וסת</h3>
-            <p>מרחב שיתופי עמוק על הנערה שהיינו והאישה שאנו היום — טקס חניכה וסגירה, כדי שתצאי עם נקודת סיום ברורה ולא עוד "משהו פתוח".</p>
+            <h3>מפגש סיום וטקס חניכה</h3>
+            <p>'הנערה שהייתי והאישה שאני היום' - שלב משמעותי במסע האישי שלך כצידה להמשך הדרך.</p>
           </div>
-          <img src="photos/rebozo-closing-ritual.webp" alt="טקס סגירת אגן ברבוזו, בד ארוג עוטף סביב גוף אישה שוכבת" style="width:64px; height:64px; border-radius:12px; object-fit:cover; flex-shrink:0; box-shadow:0 4px 10px rgba(45,36,16,0.18);" />
         </div>
       </div>
     </div>
@@ -1073,8 +1097,9 @@
   </section>
 
   <!-- LOGISTICS + PRICING -->
-  <section id="pricing" style="background:var(--cream-card); padding:90px 24px; scroll-margin-top:90px;">
-    <div style="max-width:780px; margin:0 auto; text-align:center;">
+  <section id="pricing" style="background:var(--cream-card); padding:90px 24px; scroll-margin-top:90px; position:relative; overflow:hidden;">
+    <img src="photos/Course/פרח ועלה.webp" alt="" aria-hidden="true" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.18; pointer-events:none;" />
+    <div style="max-width:780px; margin:0 auto; text-align:center; position:relative; z-index:1;">
       <p class="section-label" data-aos="fade-up">מועדים, מיקום ומחיר</p>
       <div class="gold-divider" data-aos="fade-up"></div>
       <h2 data-aos="fade-up" style="font-size:1.7rem; font-weight:500; color:var(--olive-dark); margin-bottom:36px; letter-spacing:-0.01em;">כל הפרטים הטכניים</h2>
@@ -1116,6 +1141,7 @@
         </div>
       </div>
 
+      <p class="perk-label" data-aos="fade-up">🎉 בנוסף, כל נרשמת לקורס מקבלת:</p>
       <div class="perk-list" data-aos="fade-up" style="margin-bottom:40px;">
         <span class="perk-item"><span aria-hidden="true">🎁</span> חליטת צמחי מרפא במתנה, בהרכבה אישית</span>
         <span class="perk-item"><span aria-hidden="true">💚</span> 15% הנחה על שירותי הקליניקה המשלימים</span>
@@ -1138,27 +1164,31 @@
         <div class="testimonial-track" id="testimonial-track" tabindex="0" role="region" aria-label="קרוסלת המלצות">
           <div data-aos="fade-up" data-aos-delay="250" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
             <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
-            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:14px;">"טקס סגירת אגן עם שושי הייתה חוויה מיוחדת ומרפאה. המרחב שהיא יוצרת עוטף ברכות, ברגישות רבה ובאהבה."</p>
-            <p style="color:var(--gold-soft); font-family:'Assistant', sans-serif; font-size:0.82rem; font-weight:700;">שי, אם ל-2 קטנים</p>
+            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"שושי מביאה לב פתוח, ידע עמוק והחזקה אימהית שמאפשרת להרפות באמת."</p>
           </div>
           <div data-aos="fade-up" data-aos-delay="350" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
             <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
-            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:14px;">"דרכה למדתי להקשיב לנשיות שלי, למחזוריות, לתנועות הרחם ולרגש — טקסיות מלווה בידע עשיר בעולם הצמחים."</p>
-            <p style="color:var(--gold-soft); font-family:'Assistant', sans-serif; font-size:0.82rem; font-weight:700;">מירית, רפלקסולוגית</p>
+            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"דרכה למדתי להקשיב לנשיות שלי, למחזוריות, לתנועות הרחם ולרגש — טקסיות מלווה בידע עשיר בעולם הצמחים."</p>
           </div>
           <div data-aos="fade-up" data-aos-delay="450" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
             <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
-            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:14px;">"עוד מהדהדת את המפגשים לנשים קרובות. יצאתי עם תובנות, עם תחושה של שייכות ועוד סקרנות להקשיב לגוף שלי."</p>
-            <p style="color:var(--gold-soft); font-family:'Assistant', sans-serif; font-size:0.82rem; font-weight:700;">משתתפת במעגל הנשים</p>
+            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"עוד מהדהדת את המפגשים לנשים קרובות. יצאתי עם תובנות, עם תחושה של שייכות ועוד סקרנות להקשיב לגוף שלי."</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="550" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
+            <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
+            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"ממליצה על שושי באהבה גדולה!! מעבר לזה שהיא מיוחדת מאוד וזו זכות להיתרם ממנה ולהכיר- זו הזדמנות לכל אחת להתחבר לעצמה ולהנות מחכמתן של נשים רבות לפנינו ומידע שקצת הלך לאיבוד בדרך."</p>
           </div>
         </div>
-        <div class="testimonial-nav" id="testimonial-nav" role="tablist" aria-label="בחירת המלצה"></div>
+        <div style="display:flex; align-items:center; justify-content:center; gap:4px;">
+          <div class="testimonial-nav" id="testimonial-nav" role="tablist" aria-label="בחירת המלצה"></div>
+          <button type="button" id="testimonial-pause" class="testimonial-dot testimonial-pause" aria-pressed="false" aria-label="השהה קרוסלת המלצות">⏸</button>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" style="background:var(--cream-bg); padding:90px 24px; scroll-margin-top:90px;">
+  <section id="faq" style="background:var(--cream-bg); padding:90px 24px 50px; scroll-margin-top:90px;">
     <div style="max-width:680px; margin:0 auto;">
       <div style="text-align:center;">
         <p class="section-label" data-aos="fade-up">שאלות נפוצות</p>
@@ -1173,10 +1203,11 @@
         <details class="faq-item" data-aos="fade-up" data-aos-delay="290">
           <summary>מה מדיניות התשלומים והביטולים?</summary>
           <p>
-            ביטול מעל 30 יום לפני ההכשרה — החזר כספי מלא.<br>
-            ביטול בין 30–14 יום לפני האירוע — החזר כספי של 70% מעלות הריטריט.<br>
-            ביטול 14 יום לפני האירוע — ללא החזר כספי (אלא אם כן יש הרשמה של מישהי אחרת במקומך).<br><br>
-            במקרה של ביטול בשל החמרה במצב הביטחוני או כוח עליון: במידת האפשר נזיז את הריטריט למיקום חדש. במידה ולא יתאפשר, נקבע תאריך חדש לריטריט. במידה ולא תוכלי להגיע לתאריך החדש, נחזיר לך את מלוא הסכום ששילמת על הריטריט.
+            אני יודעת שהחיים מזמנים הפתעות, ולכן חשוב לי לשמור על שקיפות והגינות:<br><br>
+            • ביטול עד 30 ימים לפני פתיחת הקורס: החזר כספי מלא (בניכוי 100 ש"ח דמי רישום וטיפול).<br>
+            • ביטול בין 30 ל-14 ימים לפני פתיחת הקורס: החזר כספי של 50% מעלות הקורס.<br>
+            • ביטול במהלך 14 הימים שלפני פתיחת הקורס: לא ניתן יהיה לקבל החזר כספי, אלא אם תמצא משתתפת חלופית שתירשם במקומך.<br><br>
+            התחשבות במצב הביטחוני: במידה ויהיה שינוי במצב הביטחוני שלא יאפשר את קיום המפגשים כסדרם, נקבע תאריכים חלופיים בהתחשב בנוחות רוב חברות הקבוצה. במידה ולא תוכלי להצטרף לתאריכים החדשים, יוחזר לך החלק היחסי של התשלום עבור המפגשים שלא התקיימו.
           </p>
         </details>
         <details class="faq-item" data-aos="fade-up" data-aos-delay="330">
@@ -1204,8 +1235,9 @@
   </section>
 
   <!-- FINAL CTA -->
-  <section style="background-color:var(--cream-light); background-image:radial-gradient(ellipse at 20% 20%, rgba(200,165,90,0.16), transparent 55%), radial-gradient(ellipse at 80% 80%, rgba(181,98,60,0.12), transparent 50%); padding:80px 24px; text-align:center;">
-    <div style="max-width:620px; margin:0 auto;">
+  <section style="position:relative; background-color:var(--cream-light); background-image:radial-gradient(ellipse at 20% 20%, rgba(200,165,90,0.16), transparent 55%), radial-gradient(ellipse at 80% 80%, rgba(181,98,60,0.12), transparent 50%); padding:40px 24px 80px; text-align:center; overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute; inset:0; background-image:url('photos/Course/אשה יש לך מקום.webp'); background-size:cover; background-position:center 30%; opacity:0.18; mix-blend-mode:multiply;"></div>
+    <div style="position:relative; max-width:620px; margin:0 auto;">
       <h2 data-aos="fade-up" style="font-size:2rem; font-weight:500; color:var(--text-dark); margin-bottom:16px; letter-spacing:-0.01em;">מקום ממתין לך במעגל <span aria-hidden="true">🌙</span></h2>
       <p data-aos="fade-up" data-aos-delay="80" style="color:var(--text-mid); font-family:'Assistant', sans-serif; font-size:1rem; line-height:1.8; margin-bottom:12px;">
         אם הלב שלך מרגיש קריאה, או אם יש לך שאלות והתלבטויות — אני כאן בשבילך באהבה. את מרגישה שהגיע הזמן לעצור לרגע בשבילך?
@@ -1230,6 +1262,9 @@
     </p>
     <p style="margin-bottom:18px;">
       <a href="tel:0528753214" style="color:rgba(255,255,255,0.65); text-decoration:none; font-family:'Assistant', sans-serif; font-size:0.85rem;">052-8753214</a>
+    </p>
+    <p style="margin-bottom:10px;">
+      <a href="accessibility.html" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">הצהרת נגישות</a>
     </p>
     <p style="color:rgba(255,255,255,0.25); font-size:12px; font-family:'Assistant', sans-serif;">© 2026 עצה תומכת. כל הזכויות שמורות.</p>
   </div>
@@ -1272,7 +1307,9 @@
       nav.appendChild(dot);
       return dot;
     });
+    var activeIndex = 0;
     function setActive(index) {
+      activeIndex = index;
       dots.forEach(function (d, i) { d.classList.toggle('is-active', i === index); });
     }
     setActive(0);
@@ -1286,6 +1323,56 @@
       }, { root: track, threshold: 0.6 });
       slides.forEach(function (slide) { slideObserver.observe(slide); });
     }
+
+    // Append clones of the leading slides after the last one, so autoplay can keep
+    // scrolling in the same direction and land on a clone that looks identical to
+    // slide 1 — then snap back to the real slide 1 instantly, with no visible cut.
+    var n = slides.length;
+    var cloneCount = Math.min(2, n - 1);
+    for (var ci = 0; ci < cloneCount; ci++) {
+      var clone = slides[ci].cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute('data-aos');
+      clone.removeAttribute('data-aos-delay');
+      track.appendChild(clone);
+    }
+    var children = Array.prototype.slice.call(track.children);
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var timer, snapTimeout;
+    function startTimer() {
+      if (reduceMotion || n < 2) return;
+      timer = setInterval(function () {
+        var nextPos = activeIndex + 1;
+        if (nextPos >= n) {
+          children[n].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          snapTimeout = setTimeout(function () {
+            slides[0].scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+          }, 450);
+        } else {
+          slides[nextPos].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }, 5000);
+    }
+    function stopTimer() { clearInterval(timer); clearTimeout(snapTimeout); }
+    track.addEventListener('mouseenter', stopTimer);
+    track.addEventListener('mouseleave', function () { if (!userPaused) startTimer(); });
+    track.addEventListener('focusin', stopTimer);
+    track.addEventListener('focusout', function () { if (!userPaused) startTimer(); });
+
+    var userPaused = false;
+    var pauseBtn = document.getElementById('testimonial-pause');
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function () {
+        userPaused = !userPaused;
+        pauseBtn.setAttribute('aria-pressed', String(userPaused));
+        pauseBtn.textContent = userPaused ? '▶' : '⏸';
+        pauseBtn.setAttribute('aria-label', userPaused ? 'המשך קרוסלת המלצות' : 'השהה קרוסלת המלצות');
+        if (userPaused) stopTimer(); else startTimer();
+      });
+    }
+
+    startTimer();
   })();
 
 </script>

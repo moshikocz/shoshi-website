@@ -724,15 +724,12 @@
           <div class="testimonial-card" style="min-width:100%; flex-shrink:0;">
             <div style="color:var(--gold); font-size:17px; letter-spacing:3px; margin-bottom:16px;">★★★★★</div>
             <p style="color:rgba(255,255,255,0.84); font-size:0.96rem; line-height:1.86; margin:0 0 20px; font-family:'Assistant', sans-serif; font-style:italic;">
-              "טקס סגירת האגן עם שושי היה חוויה עמוקה ומרגיעה.
-              שושי יוצרת מרחב בטוח, נעים ומכיל, שמאפשר להרפות ולהתחבר לגוף ולנשיות בטבעיות.
-              הרגשתי מוחזקת ומלווה ברגישות ובנוכחות שקטה.
-              ממליצה בחום לכל אישה שמבקשת רגע לעצמה וחיבור אמיתי פנימה <span aria-hidden="true">🤍</span>"
+              "אני עוד מהדהדת את המפגשים לנשים קרובות. התמלאתי השראה ממך שושית!
+              מדברת על המפגשים עם מלא הודיה בלב <span aria-hidden="true">💕</span>"
             </p>
             <div style="display:flex; align-items:center; gap:10px; justify-content:flex-end;">
               <div>
-                <p style="color:var(--gold-light); font-weight:700; font-size:0.88rem; margin:0; font-family:'Assistant', sans-serif;">מוניקה</p>
-                <p style="color:rgba(255,255,255,0.72); font-size:0.78rem; margin:0; font-family:'Assistant', sans-serif;">מעסה רפואית</p>
+                <p style="color:var(--gold-light); font-weight:700; font-size:0.88rem; margin:0; font-family:'Assistant', sans-serif;">משתתפת בקורס הראשון</p>
               </div>
               <div style="width:36px; height:36px; border-radius:50%; background:var(--olive-mid); opacity:0.6;"></div>
             </div>
@@ -836,19 +833,11 @@
       </div>
 
       <!-- Prev/Next arrows -->
-      <button aria-label="הקודמת" onclick="goToSlide(current-1)" style="position:absolute; top:50%; right:0; transform:translateY(-50%); background:rgba(200,165,90,0.12); border:1px solid rgba(200,165,90,0.5); color:var(--gold-light); font-size:1.4rem; line-height:1; width:40px; height:40px; border-radius:50%; cursor:pointer; transition:background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1); z-index:2;" onmouseover="this.style.backgroundColor='rgba(200,165,90,0.28)';this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.backgroundColor='rgba(200,165,90,0.12)';this.style.transform='translateY(-50%) scale(1)'" aria-controls="testimonial-slides">‹</button>
-      <button aria-label="הבאה" onclick="goToSlide(current+1)" style="position:absolute; top:50%; left:0; transform:translateY(-50%); background:rgba(200,165,90,0.12); border:1px solid rgba(200,165,90,0.5); color:var(--gold-light); font-size:1.4rem; line-height:1; width:40px; height:40px; border-radius:50%; cursor:pointer; transition:background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1); z-index:2;" onmouseover="this.style.backgroundColor='rgba(200,165,90,0.28)';this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.backgroundColor='rgba(200,165,90,0.12)';this.style.transform='translateY(-50%) scale(1)'" aria-controls="testimonial-slides">›</button>
+      <button aria-label="הקודמת" onclick="window.testimonialStepPrev()" style="position:absolute; top:50%; right:0; transform:translateY(-50%); background:rgba(200,165,90,0.12); border:1px solid rgba(200,165,90,0.5); color:var(--gold-light); font-size:1.4rem; line-height:1; width:40px; height:40px; border-radius:50%; cursor:pointer; transition:background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1); z-index:2;" onmouseover="this.style.backgroundColor='rgba(200,165,90,0.28)';this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.backgroundColor='rgba(200,165,90,0.12)';this.style.transform='translateY(-50%) scale(1)'" aria-controls="testimonial-slides">‹</button>
+      <button aria-label="הבאה" onclick="window.testimonialStepNext()" style="position:absolute; top:50%; left:0; transform:translateY(-50%); background:rgba(200,165,90,0.12); border:1px solid rgba(200,165,90,0.5); color:var(--gold-light); font-size:1.4rem; line-height:1; width:40px; height:40px; border-radius:50%; cursor:pointer; transition:background-color 0.2s, transform 0.18s cubic-bezier(0.34,1.56,0.64,1); z-index:2;" onmouseover="this.style.backgroundColor='rgba(200,165,90,0.28)';this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.backgroundColor='rgba(200,165,90,0.12)';this.style.transform='translateY(-50%) scale(1)'" aria-controls="testimonial-slides">›</button>
 
-      <!-- Dot indicators -->
-      <div id="testimonial-dots" style="display:flex; justify-content:center; gap:8px; margin-top:28px;">
-        <button aria-label="עדות 1" onclick="goToSlide(0)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:1; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
-        <button aria-label="עדות 2" onclick="goToSlide(1)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
-        <button aria-label="עדות 3" onclick="goToSlide(2)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
-        <button aria-label="עדות 4" onclick="goToSlide(3)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
-        <button aria-label="עדות 5" onclick="goToSlide(4)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
-        <button aria-label="עדות 6" onclick="goToSlide(5)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
-        <button aria-label="עדות 7" onclick="goToSlide(6)" style="width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:0.3; transition:opacity 0.3s, transform 0.3s; padding:0;"></button>
-      </div>
+      <!-- Dot indicators — generated dynamically by the script below, one per real slide -->
+      <div id="testimonial-dots" style="display:flex; justify-content:center; gap:8px; margin-top:28px;"></div>
       <div style="text-align:center; margin-top:14px;">
         <button id="carousel-pause" aria-label="עצרי הגלשה אוטומטית" onclick="toggleCarousel()" style="background:none; border:1px solid rgba(200,165,90,0.4); color:var(--gold-light); font-size:13px; padding:4px 14px; border-radius:20px; cursor:pointer; font-family:'Assistant',sans-serif; transition:border-color 0.2s, color 0.2s;" onmouseover="this.style.borderColor='rgba(200,165,90,0.9)'" onmouseout="this.style.borderColor='rgba(200,165,90,0.4)'">⏸ השהייה</button>
       </div>
@@ -856,25 +845,86 @@
     </div>
 
     <script>
+      /* Fully dynamic testimonial carousel — slide count and dots are read from
+         the DOM (#testimonial-slides children) at runtime, so adding/removing a
+         testimonial later is just editing the HTML, never this script.
+         Loops in one direction only (no visible rewind) via a clone-and-snap
+         trick: a clone of the last slide is prepended and a clone of the first
+         slide is appended (both aria-hidden). Stepping past a real boundary
+         animates onto the matching clone, then — once the transition ends —
+         the transform snaps instantly (transition disabled for one frame) to
+         the equivalent real slide, which is pixel-identical to the clone. */
       (function() {
-        var current = 0;
-        var total = 7;
         var slides = document.getElementById('testimonial-slides');
-        var dots = document.getElementById('testimonial-dots').querySelectorAll('button');
+        var dotsWrap = document.getElementById('testimonial-dots');
+        var track = document.getElementById('testimonial-track');
+        var realSlides = Array.prototype.slice.call(slides.children);
+        var n = realSlides.length;
+        if (n < 1) return;
+
+        var dots = realSlides.map(function(_, i) {
+          var dot = document.createElement('button');
+          dot.setAttribute('aria-label', 'עדות ' + (i + 1));
+          dot.style.cssText = 'width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:' + (i === 0 ? '1' : '0.3') + '; transition:opacity 0.3s, transform 0.3s; padding:0;';
+          dot.addEventListener('click', function() { goToSlide(i); });
+          dotsWrap.appendChild(dot);
+          return dot;
+        });
+
+        // pos 0 = leading clone (last slide), pos 1..n = real slides, pos n+1 = trailing clone (first slide)
+        var hasClones = n > 1;
+        var pos = hasClones ? 1 : 0;
+        if (hasClones) {
+          var cloneLast = realSlides[n - 1].cloneNode(true);
+          cloneLast.setAttribute('aria-hidden', 'true');
+          slides.insertBefore(cloneLast, slides.firstChild);
+          var cloneFirst = realSlides[0].cloneNode(true);
+          cloneFirst.setAttribute('aria-hidden', 'true');
+          slides.appendChild(cloneFirst);
+        }
+
+        function render(withTransition) {
+          slides.style.transition = withTransition ? 'transform 0.6s cubic-bezier(0.4,0,0.2,1)' : 'none';
+          slides.style.transform = 'translateX(' + (pos * 100) + '%)';
+        }
+        function updateActiveDot(realIndex) {
+          dots.forEach(function(d, i) { d.style.opacity = i === realIndex ? '1' : '0.3'; });
+        }
+        render(false);
+
+        function goToSlide(realIndex) {
+          pos = (hasClones ? 1 : 0) + realIndex;
+          render(true);
+          updateActiveDot(realIndex);
+        }
+        function stepNext() {
+          pos++;
+          render(true);
+          if (hasClones && pos === n + 1) {
+            setTimeout(function() { pos = 1; render(false); }, 620);
+            updateActiveDot(0);
+          } else {
+            updateActiveDot(pos - (hasClones ? 1 : 0));
+          }
+        }
+        function stepPrev() {
+          pos--;
+          render(true);
+          if (hasClones && pos === 0) {
+            setTimeout(function() { pos = n; render(false); }, 620);
+            updateActiveDot(n - 1);
+          } else {
+            updateActiveDot(pos - (hasClones ? 1 : 0));
+          }
+        }
+        window.testimonialStepNext = stepNext;
+        window.testimonialStepPrev = stepPrev;
+
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var timer;
         var isPaused = false;
 
-        function goToSlide(n) {
-          current = (n + total) % total;
-          window.current = current;
-          slides.style.transform = 'translateX(' + (current * 100) + '%)';
-          dots.forEach(function(d, i) { d.style.opacity = i === current ? '1' : '0.3'; });
-        }
-
-        window.goToSlide = goToSlide;
-        window.current = current;
-
-        function startTimer() { timer = setInterval(function() { goToSlide(current + 1); }, 5000); }
+        function startTimer() { if (!reduceMotion && n > 1) timer = setInterval(stepNext, 5000); }
         function stopTimer()  { clearInterval(timer); }
 
         window.toggleCarousel = function() {
@@ -891,7 +941,6 @@
           }
         };
 
-        var track = document.getElementById('testimonial-track');
         // Pause on hover
         track.addEventListener('mouseenter', stopTimer);
         track.addEventListener('mouseleave', function() { if (!isPaused) startTimer(); });

@@ -16,7 +16,7 @@ into a new page**, not linked/imported at runtime.
 | `tokens.css` | `:root` color variables (cream/olive/gold + swappable `--accent`) + base reset/rhythm | Paste into the new page's `<style>` block first |
 | `components.css` | Buttons, section-header trio, cards, chips, FAQ accordion, zigzag timeline, testimonial carousel, WhatsApp float | Paste right after tokens.css |
 | `fade-in-scroll.html` | AOS (Animate On Scroll) CDN includes + init + usage/staggering notes | Copy the `<link>`/`<script>` blocks into `<head>`/before `</body>` |
-| `testimonial-carousel.js` | IntersectionObserver dot-nav sync for the testimonial carousel, + WhatsApp float show/hide | Paste into a `<script>` block before the AOS init script |
+| `testimonial-carousel.js` | IntersectionObserver dot-nav sync + one-direction looping autoplay for the testimonial carousel, + WhatsApp float show/hide | Paste into a `<script>` block before the AOS init script |
 | `landing-page-template.html` | Full skeleton page combining all of the above, with `[טקסט placeholder]` markers | Duplicate this file the same way `new-page-scaffold` duplicates existing pages, then fill in placeholders |
 
 ## Design language
@@ -41,6 +41,18 @@ FADE IN page feel different from a course page, while everything else
 
 Both respect `prefers-reduced-motion` (AOS `disable` option + a global CSS
 override) — keep both when reusing.
+
+**Testimonial carousel autoplay**: fully dynamic — reads the slide count from
+`#testimonial-track`'s children at runtime, so adding/removing testimonials
+later is just editing the HTML (add/remove a `<div>` child), never the JS.
+Loops in one direction only (no visible "rewind" back to slide 1) via a
+clone-and-snap trick — see the header comment in `testimonial-carousel.js`
+for the mechanism and the markup rules that keep it working. The home-page
+carousel (`index.html`) is a separate, single-slide-per-view variant (arrows
++ pause button instead of a scroll-snap track) but follows the same rule —
+it also reads its slide count from the DOM and loops the same way. For a
+*new* landing page, use `testimonial-carousel.js` (the scroll-snap/dot-nav
+variant); it's the one meant to be copy-pasted.
 
 **Recurring structural patterns worth copying, not just the CSS:**
 - **Section header trio**: `.section-label` (eyebrow) + `.gold-divider` +

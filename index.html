@@ -128,16 +128,31 @@
 
     /* ── HERO ── */
     .hero-bg {
-      background:
-        linear-gradient(to bottom, rgba(10,8,4,0.62) 0%, rgba(15,12,6,0.50) 50%, rgba(10,8,4,0.68) 100%),
-        url('photos/SHOSHI1.webp') center 30% / cover no-repeat;
+      background-image:
+        linear-gradient(to right, rgba(59,34,16,0.80) 0%, rgba(59,34,16,0.5) 32%, rgba(59,34,16,0.14) 58%, rgba(59,34,16,0) 80%),
+        url('photos/SHOSHI1.webp');
+      background-repeat: no-repeat, no-repeat;
+      background-size: auto, 109% auto;
+      background-position: 0 0, 0% 22%;
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
+      justify-content: flex-end;
+      text-align: right;
       padding: 55px 24px 35px;
       position: relative;
+    }
+    @media (max-width: 768px) {
+      .hero-bg {
+        background:
+          linear-gradient(to bottom, rgba(10,8,4,0.62) 0%, rgba(15,12,6,0.50) 50%, rgba(10,8,4,0.68) 100%),
+          url('photos/SHOSHI1.webp') center 30% / cover no-repeat;
+        justify-content: center;
+        text-align: center;
+      }
+      .hero-bg .hero-content-wrap { margin-inline-start: 0; }
+      .hero-bg .gold-divider-hero { margin: 0 auto 24px !important; }
+      .hero-bg .hero-actions-row { justify-content: center !important; }
     }
 
     /* grain texture on hero */
@@ -449,6 +464,15 @@
       transition: transform 0.25s, opacity 0.25s;
     }
 
+    .about-photo-img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      box-shadow:
+        0 2px 8px rgba(59,34,16,0.08),
+        0 16px 40px rgba(59,34,16,0.14);
+    }
+
     @media (max-width: 768px) {
       .desktop-nav { display: none !important; }
       .hamburger   { display: flex; }
@@ -558,7 +582,7 @@
      HERO
 ════════════════════════════════════════ -->
 <section id="home" class="hero-bg">
-  <div style="max-width:720px; position:relative; z-index:1;">
+  <div class="hero-content-wrap" style="max-width:520px; margin-inline-start:auto; position:relative; z-index:1;">
 
     <p class="section-label" style="color:var(--gold-light); border-bottom-color:rgba(223,192,126,0.45); margin-bottom:24px;">
       ליווי הוליסטי • תמיכה לנשים
@@ -569,13 +593,13 @@
       <em style="font-style:italic; color:var(--gold-light);">בדיוק כמו שאת</em>
     </h1>
 
-    <div style="width:48px; height:1px; background:linear-gradient(90deg, transparent, var(--gold-light), transparent); margin:0 auto 24px;"></div>
+    <div class="gold-divider-hero" style="width:48px; height:1px; background:linear-gradient(90deg, transparent, var(--gold-light), transparent); margin:0 0 24px auto;"></div>
 
-    <p class="hero-sub" style="color:rgba(255,255,255,0.82); font-size:1.15rem; line-height:1.78; max-width:560px; margin:0 auto 40px; font-weight:400; font-family:'Assistant', sans-serif;">
+    <p class="hero-sub" style="color:rgba(255,255,255,0.82); font-size:1.15rem; line-height:1.78; max-width:520px; margin:0 0 40px auto; font-weight:400; font-family:'Assistant', sans-serif;">
       מרחב בטוח לנשים המחפשות שינוי, צמיחה ותמיכה<br>בדרכן לחיים מלאים ושלווים
     </p>
 
-    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+    <div class="hero-actions-row" style="display:flex; gap:14px; justify-content:flex-end; flex-wrap:wrap;">
       <a href="#contact" class="btn-primary">קבעי פגישת היכרות</a>
       <a href="#about"   class="btn-outline">הכירי אותי</a>
     </div>
@@ -588,36 +612,49 @@
      ABOUT / THERAPIST INTRO
 ════════════════════════════════════════ -->
 <section id="about" style="background-color:var(--cream); padding:50px 24px;">
-  <div style="max-width:760px; margin:0 auto; text-align:center;">
+  <div style="max-width:960px; margin:0 auto;">
 
-    <p class="section-label">אודות</p>
-    <div class="gold-divider"></div>
+    <div style="max-width:760px; margin:0 auto; text-align:center;">
+      <p class="section-label">אודות</p>
+      <div class="gold-divider"></div>
 
-    <div class="circle-img-lg-wrap">
-      <img src="photos/circle_logo_shoshi.webp" alt="שושי מיראז – תמונת פרופיל עגולה על רקע טבעי" loading="lazy" />
+      <div class="circle-img-lg-wrap">
+        <img src="photos/circle_logo_shoshi.webp" alt="שושי מיראז – תמונת פרופיל עגולה על רקע טבעי" loading="lazy" />
+      </div>
     </div>
 
-    <h2 style="margin:0 0 6px; line-height:1.2;">
-      <span style="display:block; font-family:'Assistant', sans-serif; font-size:1.05rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--text-light); margin-bottom:4px;">היי, שמי</span>
-      <span style="display:block; font-family:'Cormorant Garamond', Georgia, serif; font-size:2.4rem; font-weight:500; font-style:italic; letter-spacing:-0.02em; line-height:1.05; background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 60%, var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">שושי מיראז</span>
-    </h2>
-    <p style="color:var(--olive-mid); font-size:1rem; font-weight:700; margin:0 0 32px; letter-spacing:0.08em; text-transform:uppercase; font-family:'Assistant', sans-serif; font-size:13px;">
-      עובדת סוציאלית • גינקוסופית
-    </p>
+    <div class="two-col" style="display:flex; gap:48px; align-items:center; margin-top:32px;">
 
-    <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); margin-bottom:18px; font-family:'Assistant', sans-serif; font-weight:700;">
-      ברוכה הבאה למרחב של "עצה <span aria-hidden="true">🌳</span> תומכת"
-    </p>
-    <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); margin-bottom:18px; font-family:'Assistant', sans-serif;">
-      ליווי רגשי הוליסטי, הנועד להעצמה אישית וחומלת מתוך מודעות למחזוריות גוף-נפש האישה.
-    </p>
-    <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); font-family:'Assistant', sans-serif; margin-bottom:10px;">
-      במרחב הטיפולי אני משלבת <strong>כלים מודרניים</strong> מעולמות העבודה הסוציאלית, מיינדפולנס, התמקדות, קונסטלציה, קלפים טיפוליים ויצירה תרפויטית; לצד, <strong>כלים וידע מסורתי עתיק</strong> כמו סאונת אדים לאגן, טקס סגירת אגן, רפואת העשן וצמחי מרפא.
-    </p>
+      <div style="flex:1; min-width:260px;">
+        <img src="photos/shoshi_smile.webp" alt="שושי מיראז מחייכת בחום למצלמה" class="about-photo-img" loading="lazy" />
+      </div>
 
-    <a href="about.html" aria-label="קראי עוד על שושי מיראז והגישה הטיפולית" style="display:block; margin-bottom:20px; font-family:'Assistant', sans-serif; font-size:1rem; font-weight:700; color:var(--olive-mid); text-decoration:underline; text-underline-offset:4px; transition:color 0.2s;" onmouseover="this.style.color='var(--brown-dark)'" onmouseout="this.style.color='var(--olive-mid)'">קראי עוד ›</a>
-    <a href="#contact" class="btn-primary">בואי נדבר</a>
+      <div style="flex:1; min-width:280px; text-align:center;">
 
+        <h2 style="margin:0 0 6px; line-height:1.2;">
+          <span style="display:block; font-family:'Assistant', sans-serif; font-size:1.05rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--text-light); margin-bottom:4px;">היי, שמי</span>
+          <span style="display:block; font-family:'Cormorant Garamond', Georgia, serif; font-size:2.4rem; font-weight:500; font-style:italic; letter-spacing:-0.02em; line-height:1.05; background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 60%, var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">שושי מיראז</span>
+        </h2>
+        <p style="color:var(--olive-mid); font-size:1rem; font-weight:700; margin:0 0 32px; letter-spacing:0.08em; text-transform:uppercase; font-family:'Assistant', sans-serif; font-size:13px;">
+          עובדת סוציאלית • גינקוסופית
+        </p>
+
+        <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); margin-bottom:18px; font-family:'Assistant', sans-serif; font-weight:700;">
+          ברוכה הבאה למרחב של "עצה <span aria-hidden="true">🌳</span> תומכת"
+        </p>
+        <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); margin-bottom:18px; font-family:'Assistant', sans-serif;">
+          ליווי רגשי הוליסטי, הנועד להעצמה אישית וחומלת מתוך מודעות למחזוריות גוף-נפש האישה.
+        </p>
+        <p style="font-size:1.05rem; line-height:1.88; color:var(--text-mid); font-family:'Assistant', sans-serif; margin-bottom:10px;">
+          במרחב הטיפולי אני משלבת <strong>כלים מודרניים</strong> מעולמות העבודה הסוציאלית, מיינדפולנס, התמקדות, קונסטלציה, קלפים טיפוליים ויצירה תרפויטית; לצד, <strong>כלים וידע מסורתי עתיק</strong> כמו סאונת אדים לאגן, טקס סגירת אגן, רפואת העשן וצמחי מרפא.
+        </p>
+
+        <a href="about.html" aria-label="קראי עוד על שושי מיראז והגישה הטיפולית" style="display:block; margin-bottom:20px; font-family:'Assistant', sans-serif; font-size:1rem; font-weight:700; color:var(--olive-mid); text-decoration:underline; text-underline-offset:4px; transition:color 0.2s;" onmouseover="this.style.color='var(--brown-dark)'" onmouseout="this.style.color='var(--olive-mid)'">קראי עוד ›</a>
+        <a href="#contact" class="btn-primary">בואי נדבר</a>
+
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -664,13 +701,13 @@
         </svg>
         <img src="photos/sgirat_agan_service_main_page.webp" alt="ידיים אוחזות באבן עגולה – טקס סגירת האגן" class="circle-img circle-img--gold" loading="lazy" />
         <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">טקס סגירת אגן ("איסוף עצמות")</h3>
-        <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">תמיכה מסורתית לאחר לידה, לאחר אובדן הריון/הפלה או בשער משמעותי אחר</p>
+        <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">תמיכה מסורתית לאחר לידה, לאחר אובדן הריון/הפלה או בשער משמעותי עבורך</p>
       </a>
 
       <a href="service-halitot.html" class="svc-card">
         <img src="photos/healing_plants_service.webp" alt="צנצנות זכוכית עם עשבי מרפא וצמחים מיובשים" class="circle-img" loading="lazy" />
         <h3 style="font-size:1.15rem; font-weight:600; color:var(--brown-dark); margin:0 0 8px;">מוצרים משלימים</h3>
-        <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">שוקולדים בעבודת יד וחליטות צמחי מרפא</p>
+        <p style="font-size:0.88rem; color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">שוקולדים בעבודת יד, חליטות צמחי מרפא, סבונים ומתנות</p>
       </a>
 
     </div>

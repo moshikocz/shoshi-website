@@ -295,6 +295,57 @@
       margin: 0;
       line-height: 1.4;
     }
+
+    /* ── TESTIMONIAL CAROUSEL ── */
+    .testimonial-carousel { position: relative; }
+    .testimonial-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .testimonial-track::-webkit-scrollbar { display: none; }
+    .testimonial-track > * {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+    }
+    @media (min-width: 720px) {
+      .testimonial-track > * { flex: 0 0 calc(50% - 8px); }
+    }
+    .testimonial-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .testimonial-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      background: rgba(200,165,90,0.35);
+      cursor: pointer;
+      transition: background-color 0.25s, transform 0.25s;
+    }
+    .testimonial-dot.is-active { background: var(--gold); transform: scale(1.25); }
+    .testimonial-dot:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .testimonial-pause {
+      width: auto;
+      height: auto;
+      border-radius: 20px;
+      background: rgba(200,165,90,0.16);
+      color: var(--brown-mid);
+      font-size: 13px;
+      line-height: 1;
+      padding: 5px 11px;
+      margin-inline-start: 4px;
+      transition: background-color 0.25s;
+    }
+    .testimonial-pause:hover { background: rgba(200,165,90,0.28); }
+    .testimonial-pause:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
   </style>
 </head>
 <body>
@@ -460,27 +511,45 @@
 
       <h3 style="font-size:1.25rem; font-weight:700; color:var(--brown-dark); margin:40px 0 20px; font-family:'Assistant', sans-serif; text-align:center;">מה נשים מספרות על המעגל <span aria-hidden="true">🌙</span></h3>
 
-      <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="testimonial-carousel">
+        <div class="testimonial-track" id="testimonial-track" tabindex="0" role="region" aria-label="קרוסלת המלצות">
 
-        <div style="background:var(--cream-mid); border-radius:12px; padding:20px 22px; border-right:4px solid var(--gold);">
-          <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.85; font-family:'Assistant', sans-serif; margin:0; font-style:italic;">
-            "...יאו ! זה ממש הרגעים שבהם היינו נפגשות יחד ממש לפני שבוע. זה ממלא בי כבר געגועים אלינו, למעגל האינטימי הנשי היפה שלנו<span aria-hidden="true">🙏🏻❤️</span><br>
-            אמליץ באהבה לאחרות להירשם ואשמח להגיע לעוד תכנים <span aria-hidden="true">🪇🙌🏼😻</span>…"
-          </p>
+          <div style="background:var(--cream-mid); border-radius:12px; padding:20px 22px; border-right:4px solid var(--gold);">
+            <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.85; font-family:'Assistant', sans-serif; margin:0; font-style:italic;">
+              "...יאו ! זה ממש הרגעים שבהם היינו נפגשות יחד ממש לפני שבוע. זה ממלא בי כבר געגועים אלינו, למעגל האינטימי הנשי היפה שלנו<span aria-hidden="true">🙏🏻❤️</span><br>
+              אמליץ באהבה לאחרות להירשם ואשמח להגיע לעוד תכנים <span aria-hidden="true">🪇🙌🏼😻</span>…"
+            </p>
+          </div>
+
+          <div style="background:var(--cream-mid); border-radius:12px; padding:20px 22px; border-right:4px solid var(--gold);">
+            <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.85; font-family:'Assistant', sans-serif; margin:0; font-style:italic;">
+              "…אני עוד מהדהדת את המפגשים לנשים קרובות. התמלאתי השראה ממך שושית! מדברת על המפגשים עם מלא הודיה בלב <span aria-hidden="true">💕❣️</span>יצאתי עם תובנות, עם תחושה של שייכות ועוד סקרנות לגלות מה עוד ינבע מהקשבה למחזוריות שלי. למדריכות שלי. ובהקשבה נוספת לגוף לרחם שלי<span aria-hidden="true">🌝</span>…"
+            </p>
+          </div>
+
+          <div style="background:var(--cream-mid); border-radius:12px; padding:20px 22px; border-right:4px solid var(--gold);">
+            <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.85; font-family:'Assistant', sans-serif; margin:0; font-style:italic;">
+              "...איזה כיף שהתקיימנו שזה קרה והתחיל בנו. איזה כיף שאת ממשיכה לפעום ולייצר את המרחב החדש. מאחלת לך בריקמה החדשה שתיצרי, לעוף על עצמך, לדעת שאת נדירה ואת באמת מביאה מתנה גדולה ייחודית שמגיעה מתוך מעמקי הלב, תקופות חיים של חקירה והנתינה האוהבת שלך<span aria-hidden="true">🪷🌾</span> ממליצה בחום לכל אישה.."
+            </p>
+          </div>
+
+          <div style="background:var(--cream-mid); border-radius:12px; padding:20px 22px; border-right:4px solid var(--gold);">
+            <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.85; font-family:'Assistant', sans-serif; margin:0; font-style:italic;">
+              "שושי מביאה לב פתוח, ידע עמוק והחזקה אימהית שמאפשרת להרפות באמת. דרכה למדתי להקשיב לנשיות שלי, למחזוריות, לתנועות הרחם ולרגש. דרכה למדתי על טקסיות עם האשה השלמה, טקסיות מלווה בידע עשיר בעולם הצמחים דרך תפילה אל הירח. ממליצה מכל הלב לכל אישה שמרגישה קריאה לחזור הביתה לעצמה להגיע אליה<span aria-hidden="true">❤️</span>"
+            </p>
+          </div>
+
+          <div style="background:var(--cream-mid); border-radius:12px; padding:20px 22px; border-right:4px solid var(--gold);">
+            <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.85; font-family:'Assistant', sans-serif; margin:0; font-style:italic;">
+              "ממליצה על שושי באהבה גדולה!! מעבר לזה שהיא מיוחדת מאוד וזו זכות להיתרם ממנה ולהכיר- זו הזדמנות לכל אחת להתחבר לעצמה ולהנות מחכמתן של נשים רבות לפנינו ומידע שקצת הלך לאיבוד בדרך. אני מרגישה שהתחלתי איזשהו מסע איתה אותו עוד אמשיך.. היא ליוותה אותי בתהליך בו התחברתי לעצמי, לגוף שלי, קיבלתי על דברים מסוימים פרספקטיבה חדשה ומרעננת והחוויה הייתה מעצימה ממש"
+            </p>
+          </div>
+
         </div>
-
-        <div style="background:var(--cream-mid); border-radius:12px; padding:20px 22px; border-right:4px solid var(--gold);">
-          <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.85; font-family:'Assistant', sans-serif; margin:0; font-style:italic;">
-            "…אני עוד מהדהדת את המפגשים לנשים קרובות. התמלאתי השראה ממך שושית! מדברת על המפגשים עם מלא הודיה בלב <span aria-hidden="true">💕❣️</span>יצאתי עם תובנות, עם תחושה של שייכות ועוד סקרנות לגלות מה עוד ינבע מהקשבה למחזוריות שלי. למדריכות שלי. ובהקשבה נוספת לגוף לרחם שלי<span aria-hidden="true">🌝</span>…"
-          </p>
+        <div style="display:flex; align-items:center; justify-content:center; gap:4px;">
+          <div class="testimonial-nav" id="testimonial-nav" role="tablist" aria-label="בחירת המלצה"></div>
+          <button type="button" id="testimonial-pause" class="testimonial-dot testimonial-pause" aria-pressed="false" aria-label="השהה קרוסלת המלצות">⏸</button>
         </div>
-
-        <div style="background:var(--cream-mid); border-radius:12px; padding:20px 22px; border-right:4px solid var(--gold);">
-          <p style="font-size:0.92rem; color:var(--text-mid); line-height:1.85; font-family:'Assistant', sans-serif; margin:0; font-style:italic;">
-            "...איזה כיף שהתקיימנו שזה קרה והתחיל בנו. איזה כיף שאת ממשיכה לפעום ולייצר את המרחב החדש. מאחלת לך בריקמה החדשה שתיצרי, לעוף על עצמך, לדעת שאת נדירה ואת באמת מביאה מתנה גדולה ייחודית שמגיעה מתוך מעמקי הלב, תקופות חיים של חקירה והנתינה האוהבת שלך<span aria-hidden="true">🪷🌾</span> ממליצה בחום לכל אישה.."
-          </p>
-        </div>
-
       </div>
 
     </div>
@@ -632,6 +701,90 @@
     const isOpen = mSvcMenu.classList.toggle('open');
     mSvcBtn.setAttribute('aria-expanded', isOpen);
   });
+</script>
+<script>
+  (function () {
+    var track = document.getElementById('testimonial-track');
+    var nav = document.getElementById('testimonial-nav');
+    if (!track || !nav) return;
+    var slides = Array.prototype.slice.call(track.children);
+    function scrollSlideIntoView(el, behavior) {
+      var delta = el.getBoundingClientRect().left - track.getBoundingClientRect().left;
+      track.scrollTo({ left: track.scrollLeft + delta, behavior: behavior });
+    }
+    var dots = slides.map(function (slide, i) {
+      var dot = document.createElement('button');
+      dot.className = 'testimonial-dot';
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'המלצה ' + (i + 1));
+      dot.addEventListener('click', function () {
+        scrollSlideIntoView(slide, 'smooth');
+      });
+      nav.appendChild(dot);
+      return dot;
+    });
+    var activeIndex = 0;
+    function setActive(index) {
+      activeIndex = index;
+      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === index); });
+    }
+    setActive(0);
+    if ('IntersectionObserver' in window) {
+      var slideObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            setActive(slides.indexOf(entry.target));
+          }
+        });
+      }, { root: track, threshold: 0.6 });
+      slides.forEach(function (slide) { slideObserver.observe(slide); });
+    }
+
+    var n = slides.length;
+    var cloneCount = Math.min(2, n - 1);
+    for (var ci = 0; ci < cloneCount; ci++) {
+      var clone = slides[ci].cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    }
+    var children = Array.prototype.slice.call(track.children);
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var timer, snapTimeout;
+    function startTimer() {
+      if (reduceMotion || n < 2) return;
+      timer = setInterval(function () {
+        var nextPos = activeIndex + 1;
+        if (nextPos >= n) {
+          scrollSlideIntoView(children[n], 'smooth');
+          snapTimeout = setTimeout(function () {
+            scrollSlideIntoView(slides[0], 'auto');
+          }, 450);
+        } else {
+          scrollSlideIntoView(slides[nextPos], 'smooth');
+        }
+      }, 5000);
+    }
+    function stopTimer() { clearInterval(timer); clearTimeout(snapTimeout); }
+    track.addEventListener('mouseenter', stopTimer);
+    track.addEventListener('mouseleave', function () { if (!userPaused) startTimer(); });
+    track.addEventListener('focusin', stopTimer);
+    track.addEventListener('focusout', function () { if (!userPaused) startTimer(); });
+
+    var userPaused = false;
+    var pauseBtn = document.getElementById('testimonial-pause');
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function () {
+        userPaused = !userPaused;
+        pauseBtn.setAttribute('aria-pressed', String(userPaused));
+        pauseBtn.textContent = userPaused ? '▶' : '⏸';
+        pauseBtn.setAttribute('aria-label', userPaused ? 'המשך קרוסלת המלצות' : 'השהה קרוסלת המלצות');
+        if (userPaused) stopTimer(); else startTimer();
+      });
+    }
+
+    startTimer();
+  })();
 </script>
 <script src="accessibility-widget.js"></script>
 </body>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>קורס אשה מעגלית | מחזור #2 - ספטמבר 2026 | עצה תומכת</title>
-  <meta name="description" content="קורס אשה מעגלית - 5 מפגשים אינטימיים בלב קרית טבעון ללימוד המודעות למחזוריות האישה בגישה הוליסטית. הרשמה מוקדמת עד 10.8 - 750 ש״ח בלבד." />
+  <meta name="description" content="קורס אשה מעגלית - 5 מפגשים אינטימיים בלב קרית טבעון ללימוד המודעות למחזוריות האישה בגישה הוליסטית. מחיר מבצע 950 ש״ח, בתוקף עד 17.8." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
@@ -598,6 +598,29 @@
       flex-direction: column;
       justify-content: center;
     }
+    .price-card.is-expired {
+      border-color: #c9c2b2;
+      overflow: hidden;
+      filter: grayscale(1);
+      opacity: 0.6;
+    }
+    .price-expired-ribbon {
+      position: absolute;
+      top: 16px;
+      inset-inline-end: -34px;
+      width: 130px;
+      padding: 4px 0;
+      background: var(--text-dark);
+      color: #fff;
+      font-family: 'Assistant', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-align: center;
+      transform: rotate(45deg);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      pointer-events: none;
+    }
     .price-card.is-full {
       background: var(--cream-deep);
       color: var(--text-mid);
@@ -876,16 +899,16 @@
           <div class="hero-chips">
             <span class="hero-chip"><span aria-hidden="true">🗓️</span> 5 מפגשים</span>
             <span class="hero-chip"><span aria-hidden="true">📍</span> לב קרית טבעון</span>
-            <span class="hero-chip hero-chip-full"><span aria-hidden="true">🕐</span> ימי ה׳ 18:00–22:00 · מתחילות 17.9</span>
+            <span class="hero-chip hero-chip-full"><span aria-hidden="true">🕐</span> ימי ה׳ 18:30–21:30 · מתחילות 17.9</span>
           </div>
         </div>
       </div>
       <div class="hero-media" data-aos="fade-left" data-aos-duration="800" data-aos-delay="150">
         <img src="photos/service_group.webp" alt="נשים יושבות במעגל סביב מדורה בטבע בשעת בין ערביים – מרחב תהליכי נשי" loading="eager" />
         <div class="hero-badge">
-          <span class="badge-price">750 ₪</span>
+          <span class="badge-price">950 ₪</span>
           <span class="badge-old">במקום 1,250 ₪</span>
-          <span class="badge-until">עד 10.8</span>
+          <span class="badge-until">עד 17.8</span>
         </div>
       </div>
     </div>
@@ -904,7 +927,7 @@
         יחד, בעיניים טובות, רכות וסקרניות, נלמד לזהות את המסרים והאיתותים שהרחם והגוף שלנו שולחים לנו לאורך כל החודש. זה כלי עוצמתי להתפתחות אישית, ריפוי והעמקה של ההיכרות שלך עם עצמך — עם הצרכים, הגבולות והתקשורת הפנימית שלך מול עצמך ומול העולם.
       </p>
       <p data-aos="fade-up" data-aos-delay="200" style="font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; font-size:1.1rem; color:var(--terracotta-deep); text-align:right;">
-        את לא צריכה עוד כלי אחד לנהל. את צריכה מקום אחד לעצור בו.
+        מוזמנת לחקור איתנו יחד את הדלת הבאה שמבקשת להיפתח בפניך🌹
       </p>
     </div>
   </section>
@@ -996,7 +1019,7 @@
           <span class="gain-number">4</span>
           <div class="gain-text">
             <h3>ריפוי וכלים תרפויטיים</h3>
-            <p>התנסות בהתמקדות (Focusing), קונסטלציה משפחתית, תטא הילינג, תנועה אגנית, יצירה ותרפיה בקול — כלומר בפועל: איך להרגיע מחשבות מרוצות בלילה ולתקשר גבול בבית בלי להתפוצץ.</p>
+            <p>התנסות בהתמקדות (Focusing), קונסטלציה משפחתית, תטא הילינג, תנועה אגנית, יצירה ותרפיה בקול — כלומר בפועל: איך לעזור לעצמך ולהרגיע מחשבות עמוסות או כאבים מעייפים.</p>
           </div>
           <div class="gain-visual"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="var(--olive-mid)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-9-9C1.5 8 3 4 6.5 4c2 0 4 1.5 5.5 3.5C13.5 5.5 15.5 4 17.5 4 21 4 22.5 8 21 12c-2 4.5-9 9-9 9z"/></svg></div>
         </div>
@@ -1115,7 +1138,7 @@
         </div>
         <div class="logistics-item">
           <span class="lab">שעות</span>
-          <span class="val">ימי חמישי, 18:00–22:00</span>
+          <span class="val">ימי חמישי, 18:30–21:30</span>
         </div>
         <div class="logistics-item">
           <span class="lab">גודל קבוצה</span>
@@ -1124,15 +1147,16 @@
       </div>
 
       <div class="price-grid">
-        <div class="price-card is-early" data-aos="zoom-in">
+        <div class="price-card is-mid is-expired" data-aos="zoom-in">
+          <span class="price-expired-ribbon" aria-hidden="true">הסתיים</span>
           <span class="price-tag">הרשמה מוקדמת</span>
-          <span class="price-amount">750 ₪</span>
-          <span class="price-note">בתוקף עד <strong class="price-note-highlight">10.8</strong></span>
+          <span class="price-amount" style="text-decoration:line-through; opacity:0.6;">750 ₪</span>
+          <span class="price-note">המבצע הסתיים ב-10.8</span>
         </div>
-        <div class="price-card is-mid" data-aos="zoom-in" data-aos-delay="80">
-          <span class="price-tag">תפסתי בזמן</span>
-          <span class="price-amount">1,000 ₪</span>
-          <span class="price-note">מ-10.8 עד 17.8</span>
+        <div class="price-card is-early" data-aos="zoom-in" data-aos-delay="80">
+          <span class="price-tag">🔥 המחיר בתוקף עכשיו</span>
+          <span class="price-amount">950 ₪</span>
+          <span class="price-note">רק עד <strong class="price-note-highlight">17.8</strong></span>
         </div>
         <div class="price-card is-full" data-aos="zoom-in" data-aos-delay="160">
           <span class="price-tag">מחיר מלא</span>
@@ -1193,7 +1217,7 @@
       <div style="text-align:center;">
         <p class="section-label" data-aos="fade-up">שאלות נפוצות</p>
         <div class="gold-divider" data-aos="fade-up"></div>
-        <h2 data-aos="fade-up" style="font-size:1.7rem; font-weight:500; color:var(--olive-dark); margin-bottom:36px; letter-spacing:-0.01em;">לפני שאת נרשמת</h2>
+        <h2 data-aos="fade-up" style="font-size:1.7rem; font-weight:500; color:var(--olive-dark); margin-bottom:36px; letter-spacing:-0.01em;">יש לי שאלה...</h2>
       </div>
       <div class="faq-list">
         <details class="faq-item" data-aos="fade-up" data-aos-delay="250">
@@ -1243,7 +1267,7 @@
         אם הלב שלך מרגיש קריאה, או אם יש לך שאלות והתלבטויות — אני כאן בשבילך באהבה. את מרגישה שהגיע הזמן לעצור לרגע בשבילך?
       </p>
       <p data-aos="fade-up" data-aos-delay="160" style="color:var(--terracotta-deep); font-family:'Assistant', sans-serif; font-size:0.9rem; font-weight:600; margin-bottom:32px;">
-        הקבוצה מוגבלת ל-8 נשים · הטבת הרישום המוקדם בתוקף עד 10.8
+        הקבוצה מוגבלת ל-8 נשים · מחיר 950 ש״ח בתוקף עד 17.8, לאחר מכן המחיר עולה ל-1,250 ש״ח
       </p>
       <a href="https://wa.me/972528753214" id="final-whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn-primary" data-aos="zoom-in" data-aos-delay="240">
         <span>מחכה לך, שושי מיראז' 🌺</span>

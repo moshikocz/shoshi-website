@@ -36,6 +36,12 @@
 - If assets exist there, use them. Do not use placeholders where real assets are available.
 - If a logo is present, use it. If a color palette is defined, use those exact values — do not invent brand colors.
 
+## Site-Wide Components
+- **Floating WhatsApp button (`.wa-float`)** is required on **every page** of the site — main site and landing pages alike. If a page is missing it, that's a bug, not an intentional omission.
+- Contract: fixed bottom-right, `id="float-whatsapp-link"`, links to `https://wa.me/972528753214` (desktop swaps to `https://web.whatsapp.com/send?phone=972528753214` via the existing isMobile-check script pattern). Fades in after **~40px of scroll** — never tie visibility to a specific element's position (e.g. a hero CTA's bottom edge); that produced a multi-second-feeling delay bug once already.
+- Canonical source for landing pages: `design-system/components.css` (`.wa-float` CSS) + `design-system/testimonial-carousel.js` (scroll show/hide script) — `design-system/landing-page-template.html` already wires both in.
+- Main-site pages have no shared include, so copy the CSS/markup/script block verbatim from any existing page (e.g. `service-halitot.html`) when scaffolding a new one — see the `new-page-scaffold` skill.
+
 ## Anti-Generic Guardrails
 - **Colors:** Never use default Tailwind palette (indigo-500, blue-600, etc.). Pick a custom brand color and derive from it.
 - **Shadows:** Never use flat `shadow-md`. Use layered, color-tinted shadows with low opacity.

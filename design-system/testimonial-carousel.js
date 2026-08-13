@@ -121,20 +121,18 @@
 })();
 
 /* ============================================================
-   BONUS — WhatsApp float button show/hide on scroll
-   (a common companion pattern seen alongside the carousel in the
-   source file; not required by the carousel itself)
+   WhatsApp float button show/hide on scroll — required on every
+   page site-wide, not just pages with a carousel.
 
    Markup: <a class="wa-float" id="float-whatsapp-link">...</a>
-   Requires an element with id="hero-whatsapp-link" as the
-   scroll-position reference (typically the hero's primary CTA).
+   Appears after ~40px of scroll — do not tie visibility to a
+   specific element's position (e.g. hero CTA bottom); that caused
+   a multi-second-feeling delay bug once already.
    ============================================================ */
 (function () {
   var floatBtn = document.querySelector('.wa-float');
-  var heroCta = document.getElementById('hero-whatsapp-link');
-  if (!floatBtn || !heroCta) return;
-  var ctaBottom = heroCta.getBoundingClientRect().bottom + window.scrollY;
+  if (!floatBtn) return;
   window.addEventListener('scroll', function () {
-    floatBtn.classList.toggle('is-visible', window.scrollY > ctaBottom);
+    floatBtn.classList.toggle('is-visible', window.scrollY > 40);
   }, { passive: true });
 })();

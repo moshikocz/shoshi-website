@@ -217,9 +217,11 @@
 }
 
 /* ── WHATSAPP FLOAT BUTTON ──
-   Fixed circular button, hidden until scroll passes the hero CTA
-   (see fade-in-scroll.html or testimonial-carousel.js dir's sibling
-   script pattern for the show/hide scroll listener).
+   Fixed circular button, required on every page site-wide.
+   Hidden until ~40px of scroll (see testimonial-carousel.js for the
+   show/hide scroll listener) — never tie visibility to a specific
+   element's position (e.g. hero CTA bottom), that caused a
+   multi-second-feeling delay bug once already.
 */
 .wa-float {
   position: fixed;

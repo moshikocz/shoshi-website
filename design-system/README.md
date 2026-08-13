@@ -16,7 +16,7 @@ into a new page**, not linked/imported at runtime.
 | `tokens.css` | `:root` color variables (cream/olive/gold + swappable `--accent`) + base reset/rhythm | Paste into the new page's `<style>` block first |
 | `components.css` | Buttons, section-header trio, cards, chips, FAQ accordion, zigzag timeline, testimonial carousel, WhatsApp float | Paste right after tokens.css |
 | `fade-in-scroll.html` | AOS (Animate On Scroll) CDN includes + init + usage/staggering notes | Copy the `<link>`/`<script>` blocks into `<head>`/before `</body>` |
-| `testimonial-carousel.js` | IntersectionObserver dot-nav sync + one-direction looping autoplay for the testimonial carousel, + WhatsApp float show/hide | Paste into a `<script>` block before the AOS init script |
+| `testimonial-carousel.js` | IntersectionObserver dot-nav sync + one-direction looping autoplay for the testimonial carousel, + WhatsApp float show/hide (required on every page, not optional) | Paste into a `<script>` block before the AOS init script |
 | `landing-page-template.html` | Full skeleton page combining all of the above, with `[טקסט placeholder]` markers | Duplicate this file the same way `new-page-scaffold` duplicates existing pages, then fill in placeholders |
 
 ## Design language
@@ -69,8 +69,10 @@ variant); it's the one meant to be copy-pasted.
 2. Paste `tokens.css` + `components.css` into its `<style>` block.
 3. Pick a new `--accent`/`--accent-deep` pair for the topic (re-tint the
    `btn-breathe` keyframe's rgba values to match if the hue changes a lot).
-4. Paste in the AOS includes from `fade-in-scroll.html` and the carousel
-   script from `testimonial-carousel.js` if using a testimonial carousel.
+4. Paste in the AOS includes from `fade-in-scroll.html`. From
+   `testimonial-carousel.js`, always paste the WhatsApp float show/hide
+   section (required on every page) — paste the carousel dot-nav/autoplay
+   section too only if the page actually uses a testimonial carousel.
 5. Fill in the `[placeholder]` text/images, following this repo's existing
    rules: run new images through `optimize-images.mjs` (see the
    `image-optimize-and-alt` skill) and add Hebrew alt text before referencing

@@ -1307,11 +1307,9 @@
 
   (function () {
     var floatBtn = document.querySelector('.wa-float');
-    var heroCta = document.getElementById('hero-whatsapp-link');
-    if (!floatBtn || !heroCta) return;
-    var ctaBottom = heroCta.getBoundingClientRect().bottom + window.scrollY;
+    if (!floatBtn) return;
     window.addEventListener('scroll', function () {
-      floatBtn.classList.toggle('is-visible', window.scrollY > ctaBottom);
+      floatBtn.classList.toggle('is-visible', window.scrollY > 40);
     }, { passive: true });
   })();
 

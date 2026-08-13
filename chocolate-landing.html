@@ -746,11 +746,9 @@
 
   (function () {
     var floatBtn = document.querySelector('.wa-float');
-    var hero = document.querySelector('.choc-hero');
-    if (!floatBtn || !hero) return;
-    var heroBottom = hero.offsetTop + hero.offsetHeight;
+    if (!floatBtn) return;
     window.addEventListener('scroll', function () {
-      floatBtn.classList.toggle('is-visible', window.scrollY > heroBottom);
+      floatBtn.classList.toggle('is-visible', window.scrollY > 40);
     }, { passive: true });
   })();
 </script>

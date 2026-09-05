@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /backlog-board.html
 
 Sitemap: https://shoshimiraz.com/sitemap.xml

@@ -1,0 +1,59 @@
+<header style="background-color:var(--brown-dark); position:sticky; top:0; z-index:1000; box-shadow:0 2px 16px rgba(0,0,0,0.32);">
+  <div style="max-width:1170px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:80px;">
+
+    <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0;">
+      <img src="brand_assets/WiseTree_logo.webp" alt="לוגו עצה תומכת – עץ חיים עם דמות אישה עוטפת" class="nav-logo-img" style="height:56px; width:auto;" />
+    </a>
+
+    <a href="index.html" style="flex:1; text-decoration:none; text-align:center; line-height:1.15;">
+      <span style="display:block; font-family:'Cormorant Garamond', Georgia, serif; font-size:1.55rem; font-weight:600; color:#ffffff; letter-spacing:0.04em; text-shadow:0 1px 8px rgba(0,0,0,0.3);">עצה תומכת</span>
+      <span style="display:block; font-family:'Assistant', sans-serif; font-size:10px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-light); opacity:0.85; margin-top:2px;">ליווי הוליסטי לנשים</span>
+    </a>
+
+    <nav class="desktop-nav" style="display:flex; align-items:center; gap:0;">
+      <a href="index.html"           class="nav-link">בית</a>
+      <a href="about.html"           class="nav-link">אודות</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-link nav-dropdown-trigger" style="display:inline-flex; align-items:center; gap:5px;" aria-expanded="false" aria-controls="services-menu" id="services-trigger">
+          שירותים
+          <svg class="nav-dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu" id="services-menu">
+          <a href="service-livui-rigshi.html" class="nav-dropdown-link">ליווי רגשי הוליסטי</a>
+          <a href="service-maagal-nashim.html" class="nav-dropdown-link">קורס אשה מעגלית</a>
+          <a href="service-sgirat-agan.html" class="nav-dropdown-link">טקס סגירת אגן</a>
+          <a href="service-sauna-adim.html" class="nav-dropdown-link">סאונת אדים לאגן</a>
+          <a href="service-halitot.html" class="nav-dropdown-link">מוצרים משלימים</a>
+        </div>
+      </div>
+      <a href="index.html#testimonials" class="nav-link">המלצות</a>
+      <a href="index.html#contact"   class="nav-link">צרי קשר</a>
+      <a href="blog.html"            class="nav-link" style="color:var(--gold-light);">בלוג</a>
+      <a href="friends.html"         class="nav-link" style="color:var(--gold-light);">חברות והמלצות</a>
+    </nav>
+
+    <button class="hamburger" id="hamburger-btn" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" style="background-color:#2d1a0a; padding:6px 0; border-top:1px solid rgba(255,255,255,0.08);">
+    <a href="index.html"              class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">בית</a>
+    <a href="about.html"              class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">אודות</a>
+    <button type="button" class="nav-link nav-dropdown-trigger" style="display:flex; justify-content:space-between; align-items:center; width:100%; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); text-align:right;" aria-expanded="false" aria-controls="mobile-services-menu" id="mobile-services-trigger">
+      שירותים
+      <svg class="nav-dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="mobile-submenu" id="mobile-services-menu">
+      <a href="service-livui-rigshi.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">ליווי רגשי הוליסטי</a>
+      <a href="service-maagal-nashim.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">קורס אשה מעגלית</a>
+      <a href="service-sgirat-agan.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">טקס סגירת אגן</a>
+      <a href="service-sauna-adim.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">סאונת אדים לאגן</a>
+      <a href="service-halitot.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; font-size:14px;">מוצרים משלימים</a>
+    </div>
+    <a href="index.html#testimonials" class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">המלצות</a>
+    <a href="index.html#contact"      class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">צרי קשר</a>
+    <a href="blog.html"               class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); color:var(--gold-light);">בלוג</a>
+    <a href="friends.html"            class="nav-link" style="display:block; padding:13px 28px; color:var(--gold-light);">חברות והמלצות</a>
+  </div>
+</header>

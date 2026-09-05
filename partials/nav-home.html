@@ -1,0 +1,84 @@
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<div id="header-hover-zone"></div>
+<header id="site-header" style="background-color:var(--brown-dark); z-index:1000; box-shadow:0 2px 16px rgba(0,0,0,0.32);">
+  <div style="max-width:1170px; margin:0 auto;">
+
+    <div class="header-bar">
+
+      <a href="#home" style="display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0;">
+        <img src="brand_assets/WiseTree_logo.webp" alt="לוגו עצה תומכת – עץ חיים עם דמות אישה עוטפת" class="nav-logo-img" style="height:56px; width:auto;" />
+      </a>
+
+      <!-- Company name centered -->
+      <a href="#home" class="header-name-link" style="text-decoration:none; text-align:center; line-height:1.15;">
+        <span class="header-name-main" style="display:block; font-family:'Tinos', 'Cormorant Garamond', Georgia, serif; font-size:clamp(0.95rem, 4.3vw, 1.3rem); font-weight:700; color:#ffffff; letter-spacing:0.02em; white-space:nowrap; text-shadow:0 1px 8px rgba(0,0,0,0.3);">עצה תומכת - שושי מיראז</span>
+        <span style="display:block; font-family:'Assistant', sans-serif; font-size:10px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-light); opacity:0.85; margin-top:2px;">ליווי הוליסטי לנשים</span>
+      </a>
+
+      <button class="hamburger" id="hamburger-btn" aria-label="תפריט" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+
+    <!-- Nav row: links centered, social icons pinned to the physical left (desktop only) -->
+    <div class="nav-row-wrap">
+      <nav class="desktop-nav" style="display:flex; align-items:center; gap:0;">
+        <a href="#home"         class="nav-link">בית</a>
+        <a href="about.html"    class="nav-link">אודות</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-link nav-dropdown-trigger" style="display:inline-flex; align-items:center; gap:5px;" aria-expanded="false" aria-controls="services-menu" id="services-trigger">
+            שירותים
+            <svg class="nav-dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav-dropdown-menu" id="services-menu">
+            <a href="service-livui-rigshi.html" class="nav-dropdown-link">ליווי רגשי הוליסטי</a>
+            <a href="service-maagal-nashim.html" class="nav-dropdown-link">קורס אשה מעגלית</a>
+            <a href="service-sgirat-agan.html" class="nav-dropdown-link">טקס סגירת אגן</a>
+            <a href="service-sauna-adim.html" class="nav-dropdown-link">סאונת אדים לאגן</a>
+            <a href="service-halitot.html" class="nav-dropdown-link">מוצרים משלימים</a>
+          </div>
+        </div>
+        <a href="#testimonials" class="nav-link">המלצות</a>
+        <a href="#contact"      class="nav-link">צרי קשר</a>
+        <a href="blog.html"     class="nav-link" style="color:var(--gold-light);">בלוג</a>
+        <a href="friends.html"  class="nav-link" style="color:var(--gold-light);">חברות והמלצות</a>
+      </nav>
+
+      <div class="header-social-row" role="group" aria-label="קישורים לרשתות חברתיות">
+        <a href="https://wa.me/972528753214" target="_blank" rel="noopener noreferrer" class="header-social-link" aria-label="שלחי הודעה בוואטסאפ">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.93L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.51 2 12.04 2Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.52 3.68-8.2 8.27-8.2 2.21 0 4.28.86 5.84 2.42a8.16 8.16 0 0 1 2.41 5.79c0 4.52-3.68 8.23-8.26 8.23Zm4.52-6.16c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.79.96-.14.16-.29.18-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.48-.01-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.16 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/shoshi.miraz/about" target="_blank" rel="noopener noreferrer" class="header-social-link" aria-label="עמוד הפייסבוק שלנו">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13.5 21v-8.2h2.75l.41-3.2h-3.16V7.5c0-.93.26-1.56 1.6-1.56h1.7V3.1C15.98 3.04 15.05 3 13.96 3 11.7 3 10.15 4.37 10.15 6.9v2.7H7.4v3.2h2.75V21h3.35Z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/sh0shi.m/" target="_blank" rel="noopener noreferrer" class="header-social-link" aria-label="עמוד האינסטגרם שלנו">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="mobile-menu" style="background-color:#2d1a0a; padding:6px 0; border-top:1px solid rgba(255,255,255,0.08);">
+    <a href="#home"         class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">בית</a>
+    <a href="about.html"    class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">אודות</a>
+    <button type="button" class="nav-link nav-dropdown-trigger" style="display:flex; justify-content:space-between; align-items:center; width:100%; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); text-align:right;" aria-expanded="false" aria-controls="mobile-services-menu" id="mobile-services-trigger">
+      שירותים
+      <svg class="nav-dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="mobile-submenu" id="mobile-services-menu">
+      <a href="service-livui-rigshi.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">ליווי רגשי הוליסטי</a>
+      <a href="service-maagal-nashim.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">קורס אשה מעגלית</a>
+      <a href="service-sgirat-agan.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">טקס סגירת אגן</a>
+      <a href="service-sauna-adim.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px;">סאונת אדים לאגן</a>
+      <a href="service-halitot.html" class="nav-link" style="display:block; padding:11px 44px 11px 28px; font-size:14px;">מוצרים משלימים</a>
+    </div>
+    <a href="#testimonials" class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">המלצות</a>
+    <a href="#contact"      class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07);">צרי קשר</a>
+    <a href="blog.html"     class="nav-link" style="display:block; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.07); color:var(--gold-light);">בלוג</a>
+    <a href="friends.html"  class="nav-link" style="display:block; padding:13px 28px; color:var(--gold-light);">חברות והמלצות</a>
+  </div>
+</header>

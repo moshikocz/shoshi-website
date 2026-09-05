@@ -42,6 +42,15 @@
 - Canonical source for landing pages: `design-system/components.css` (`.wa-float` CSS) + `design-system/testimonial-carousel.js` (scroll show/hide script) — `design-system/landing-page-template.html` already wires both in.
 - Main-site pages have no shared include, so copy the CSS/markup/script block verbatim from any existing page (e.g. `service-halitot.html`) when scaffolding a new one — see the `new-page-scaffold` skill.
 
+## Build-in-Place System (main-site pages)
+- The 13 non-landing-page main-site HTML files (`index.html`, `about.html`, `accessibility.html`, `blog.html`, `blog-sgirat-agan.html`, `friends.html`, `privacy.html`, `terms.html`, `service-*.html`) are now **generated output**, not hand-edited source. `chocolate-landing.html` and `course-isha-magalit.html` stay fully standalone (per the design-system landing-page convention) and are NOT part of this system, aside from their title/meta description living in `src/pages/` too for consistency.
+- **Do NOT hand-edit the root-level page HTML files directly anymore** — they get overwritten the next time the build runs. Edit the source instead:
+  - `src/pages/<name>.html` — page-specific content (hero, unique sections), plus a `<!-- PAGE_META -->` comment block at the top (title/description/canonical/ogImage) and `<!-- INCLUDE:X -->` markers where the shared head-meta/wa-float/nav/footer blocks go.
+  - `partials/*.html` — the shared blocks: `head-meta.html` (title/description/canonical/OG tags, templated with `{{TITLE}}`/`{{DESCRIPTION}}`/`{{CANONICAL_URL}}`/`{{OG_IMAGE}}`), `wa-float.html`, and three nav/footer variants each (`nav-home`/`footer-home` for index.html's tiered nav, `nav-full`/`footer-full` for the other subpages, `nav-legal`/`footer-legal` for accessibility/privacy/terms, plus `footer-full-about.html` for about.html's one differing self-link).
+  - After editing either, run `node build-pages.mjs` to regenerate the root HTML files before testing or committing.
+- No bundler, no `dist/` folder, no `netlify.toml` — the root HTML files Netlify already serves ARE the build output; this is purely a "build-in-place" step that runs before you test locally or push.
+- Why 3 nav/footer variants instead of 1: the site already had real, pre-existing per-page differences (index.html's newer tiered/scroll-hide nav vs. the older simple sticky nav on every other page; accessibility/privacy/terms omitting the testimonials/contact links since those pages have no such section to link to). These were verified by diffing, not assumed — see the file list above for which page uses which variant.
+
 ## Anti-Generic Guardrails
 - **Colors:** Never use default Tailwind palette (indigo-500, blue-600, etc.). Pick a custom brand color and derive from it.
 - **Shadows:** Never use flat `shadow-md`. Use layered, color-tinted shadows with low opacity.

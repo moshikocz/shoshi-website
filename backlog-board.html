@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>לוח משימות — אתר שושי מיראז</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Assistant:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#F2EEE8;
+    --surface:#FFFFFF;
+    --surface-2:#E9E2D8;
+    --border:#DCD3C6;
+    --text:#2A241E;
+    --text-muted:#6E6357;
+    --accent:#6D3A42;
+    --accent-soft:#F3E4E3;
+    --urgent:#B14226;
+    --urgent-soft:#F6E1D9;
+    --normal:#9C7A2E;
+    --normal-soft:#F4EAD3;
+    --idea:#57685F;
+    --idea-soft:#E4EAE4;
+    --done:#3E7A5C;
+    --done-soft:#DEEDE4;
+    --shadow: 0 1px 2px rgba(42,36,30,0.06), 0 8px 20px -12px rgba(42,36,30,0.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1C1815;
+      --surface:#262019;
+      --surface-2:#332B22;
+      --border:#453A2E;
+      --text:#EFE8DE;
+      --text-muted:#B3A896;
+      --accent:#E4A0A2;
+      --accent-soft:#3A2427;
+      --urgent:#E38A6C;
+      --urgent-soft:#3B2620;
+      --normal:#D8B665;
+      --normal-soft:#3A311F;
+      --idea:#9DB3A7;
+      --idea-soft:#232D28;
+      --done:#8FCBAA;
+      --done-soft:#1F332A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Assistant',sans-serif;
+    padding:32px 20px 64px;
+    min-height:100%;
+  }
+
+  .wrap{ max-width:1180px; margin:0 auto; }
+
+  header.page{
+    display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+    flex-wrap:wrap;
+    margin-bottom:28px;
+    padding-bottom:20px;
+    border-bottom:1px solid var(--border);
+  }
+  h1{
+    font-family:'Frank Ruhl Libre',serif;
+    font-weight:700;
+    font-size:clamp(28px,4vw,40px);
+    margin:0 0 6px;
+    text-wrap:balance;
+    letter-spacing:-0.01em;
+  }
+  .subtitle{
+    color:var(--text-muted);
+    font-size:15px;
+    margin:0;
+  }
+  .stats{
+    display:flex; gap:10px; flex-wrap:wrap;
+  }
+  .stat{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:8px 14px;
+    text-align:center;
+    min-width:64px;
+    box-shadow:var(--shadow);
+  }
+  .stat .n{
+    font-variant-numeric:tabular-nums;
+    font-weight:700;
+    font-size:20px;
+    display:block;
+    line-height:1.1;
+  }
+  .stat .l{
+    font-size:11px;
+    color:var(--text-muted);
+    letter-spacing:0.03em;
+  }
+  .stat.urgent .n{ color:var(--urgent); }
+  .stat.normal .n{ color:var(--normal); }
+  .stat.idea .n{ color:var(--idea); }
+  .stat.done .n{ color:var(--done); }
+
+  .board{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:18px;
+    align-items:start;
+  }
+  @media (max-width:920px){
+    .board{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  }
+  @media (max-width:560px){
+    .board{ grid-template-columns:1fr; }
+  }
+
+  .col{
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .col-head{
+    display:flex; align-items:center; gap:8px;
+    padding:0 2px;
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; flex:none; }
+  .col-head h2{
+    font-size:14px; font-weight:700; margin:0;
+    letter-spacing:0.02em;
+  }
+  .col-count{
+    font-size:12px; color:var(--text-muted);
+    font-variant-numeric:tabular-nums;
+    margin-inline-start:auto;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-inline-start:3px solid var(--stripe,var(--border));
+    border-radius:12px;
+    padding:14px 16px;
+    box-shadow:var(--shadow);
+  }
+  .card h3{
+    font-size:15px;
+    margin:0 0 6px;
+    line-height:1.4;
+    font-weight:700;
+  }
+  .card p{
+    margin:0 0 10px;
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--text-muted);
+  }
+  .card .meta{
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:11.5px; color:var(--text-muted);
+  }
+  .badge{
+    display:inline-block;
+    font-size:11px; font-weight:600;
+    padding:2px 8px; border-radius:99px;
+    background:var(--pill-bg); color:var(--pill-fg);
+  }
+  details{ margin-top:8px; }
+  details summary{
+    cursor:pointer; font-size:12.5px; color:var(--accent); font-weight:600;
+    list-style:none;
+  }
+  details summary::-webkit-details-marker{ display:none; }
+  details summary:focus-visible, a:focus-visible, .stat:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px; border-radius:4px;
+  }
+  details .body{
+    margin-top:8px; font-size:13px; line-height:1.7; color:var(--text);
+  }
+  details .body ul{ margin:6px 0; padding-inline-start:18px; }
+  details .body code{
+    background:var(--surface-2); padding:1px 5px; border-radius:5px; font-size:12px;
+  }
+
+  .empty-col{
+    border:1px dashed var(--border);
+    border-radius:12px;
+    padding:18px 14px;
+    text-align:center;
+    color:var(--text-muted);
+    font-size:12.5px;
+  }
+
+  footer.note{
+    margin-top:36px;
+    padding-top:16px;
+    border-top:1px solid var(--border);
+    font-size:12px;
+    color:var(--text-muted);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="page">
+      <div>
+        <h1>לוח משימות — אתר שושי מיראז</h1>
+        <p class="subtitle">מקור האמת: <code style="background:var(--surface-2); padding:1px 6px; border-radius:5px;">BACKLOG.md</code> בריפו. עדכנו שם קודם, ואז כאן.</p>
+      </div>
+      <div class="stats">
+        <div class="stat urgent"><span class="n">0</span><span class="l">דחוף</span></div>
+        <div class="stat normal"><span class="n">3</span><span class="l">רגיל</span></div>
+        <div class="stat idea"><span class="n">9</span><span class="l">רעיון</span></div>
+        <div class="stat done"><span class="n">3</span><span class="l">בוצע</span></div>
+      </div>
+    </header>
+
+    <div class="board">
+      <!-- דחוף -->
+      <section class="col">
+        <div class="col-head">
+          <span class="dot" style="background:var(--urgent)"></span>
+          <h2>דחוף / קריטי</h2>
+          <span class="col-count">0</span>
+        </div>
+        <div class="empty-col">ריק כרגע — משימות דחופות קופצות לכאן ומעל הכל</div>
+      </section>
+
+      <!-- רגיל -->
+      <section class="col">
+        <div class="col-head">
+          <span class="dot" style="background:var(--normal)"></span>
+          <h2>רגיל</h2>
+          <span class="col-count">3</span>
+        </div>
+
+        <article class="card" style="--stripe:var(--normal)">
+          <h3>מנגנון include משותף (build step)</h3>
+          <p>15 עמודי HTML עצמאיים לגמרי, בלי שיתוף head/nav/footer — כל שינוי sitewide נדרש 15 פעמים.</p>
+          <div class="meta">
+            <span>נוסף 05.09.2026</span>
+            <span class="badge" style="--pill-bg:var(--normal-soft); --pill-fg:var(--normal);">🔄 בעבודה</span>
+          </div>
+          <details>
+            <summary>פרטים ▾</summary>
+            <div class="body">
+              <p>עיצוב build-in-place: <code>src/pages/</code> + <code>partials/</code> + <code>build-pages.mjs</code> שכותב בחזרה לשמות הקבצים בשורש. אין <code>dist/</code>, אין שינוי ב-Netlify/serve.mjs.</p>
+              <p>סוכן רקע מבצע כרגע — ראשון בתור, כל שאר הפריטים בעמודה הזו נשענים עליו.</p>
+            </div>
+          </details>
+        </article>
+
+        <article class="card" style="--stripe:var(--normal)">
+          <h3>תשתית SEO טכנית — canonical + Open Graph</h3>
+          <p>robots.txt/sitemap.xml כבר בוצעו. נותרו canonical + OG per-page.</p>
+          <div class="meta">
+            <span>נוסף 05.09.2026</span>
+            <span class="badge" style="--pill-bg:var(--normal-soft); --pill-fg:var(--normal);">☐ ממתין</span>
+          </div>
+          <details>
+            <summary>פרטים ▾</summary>
+            <div class="body">
+              <ul>
+                <li><code>&lt;link rel="canonical"&gt;</code> per-page</li>
+                <li>Open Graph מלא per-page (title/description/url/image)</li>
+                <li>תמונת og:image 1200×630 — לבדוק אם קיימת</li>
+              </ul>
+              <p>ממתין למנגנון ה-include המשותף (למעלה).</p>
+            </div>
+          </details>
+        </article>
+
+        <article class="card" style="--stripe:var(--normal)">
+          <h3>הטמעת אנליטיקס — GA4 + Search Console</h3>
+          <p>מעקב תנועה, מקורות הגעה, זמן שהייה ודפים פופולריים.</p>
+          <div class="meta">
+            <span>נוסף 05.09.2026</span>
+            <span class="badge" style="--pill-bg:var(--normal-soft); --pill-fg:var(--normal);">☐ ממתין</span>
+          </div>
+          <details>
+            <summary>פרטים ▾</summary>
+            <div class="body">
+              <p><strong>הוחלט:</strong> GA4 בלבד + Google Search Console. לא Clarity. לא Netlify Analytics.</p>
+              <p><strong>תלות חוסמת:</strong> המשתמשת צריכה להירשם בעצמה ל-GA4 ולקבל <code>G-XXXXXXX</code>.</p>
+              <p><strong>פתוח:</strong> Meta Pixel לא הוחלט במפורש — לוודא אם רלוונטי.</p>
+            </div>
+          </details>
+        </article>
+      </section>
+
+      <!-- רעיון -->
+      <section class="col">
+        <div class="col-head">
+          <span class="dot" style="background:var(--idea)"></span>
+          <h2>רעיון / לעתיד</h2>
+          <span class="col-count">9</span>
+        </div>
+
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>LocalBusiness JSON-LD</h3>
+          <p>חוסם על אימות שעות פעילות + כתובת מדויקת מהמשתמשת.</p>
+        </article>
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>Service + FAQPage JSON-LD</h3>
+          <p>לכל עמוד שירות, נשען על טיוטות התוכן.</p>
+        </article>
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>הרחבת תוכן עמודי שירות</h3>
+          <p>ליווי רגשי / סגירת אגן / סאונת אדים — חוסם: מחיר+משך ל"ליווי רגשי".</p>
+        </article>
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>דף הבית: באנר דחיפות + FAQ כללי</h3>
+          <p>חוסם: תאריך/מחיר עדכני של מחזור הקורס הבא.</p>
+        </article>
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>חידוד title tags + audit alt</h3>
+          <p>לכל 15 העמודים.</p>
+        </article>
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>Tailwind build מקומפל + דחיסת תמונות</h3>
+          <p>עבודת תשתית נפרדת, אחרי שהתוכן מתייצב.</p>
+        </article>
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>Google Business Profile + ביקורות</h3>
+          <p>פעולת המשתמשת, לא קוד; תוכן מוכן להעתקה קיים.</p>
+        </article>
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>Meta Pixel</h3>
+          <p>עלה בייעוץ אך לא הוחלט במפורש — לוודא עם המשתמשת.</p>
+        </article>
+        <article class="card" style="--stripe:var(--idea)">
+          <h3>החלטת CMS/Webflow/פאנל ניהול</h3>
+          <p>עסקית-אסטרטגית, לא פעולת קוד.</p>
+        </article>
+      </section>
+
+      <!-- בוצע -->
+      <section class="col">
+        <div class="col-head">
+          <span class="dot" style="background:var(--done)"></span>
+          <h2>בוצע</h2>
+          <span class="col-count">3</span>
+        </div>
+
+        <article class="card" style="--stripe:var(--done)">
+          <h3>תיקוני אמון גלויים באתר</h3>
+          <p>placeholder ב-friends.html, כפילות בקרוסלה, "בקרוב" בבלוג — הוסרו ואומתו ב-screenshot.</p>
+          <div class="meta">
+            <span>בוצע 05.09.2026</span>
+            <span class="badge" style="--pill-bg:var(--done-soft); --pill-fg:var(--done);">✓ בוצע</span>
+          </div>
+        </article>
+
+        <article class="card" style="--stripe:var(--done)">
+          <h3>robots.txt + sitemap.xml</h3>
+          <p>נוצרו בשורש עם 15 העמודים החיים.</p>
+          <div class="meta">
+            <span>בוצע 05.09.2026</span>
+            <span class="badge" style="--pill-bg:var(--done-soft); --pill-fg:var(--done);">✓ בוצע</span>
+          </div>
+        </article>
+
+        <article class="card" style="--stripe:var(--done)">
+          <h3>מונחי "סגירת עצמות"/"איסוף עצמות"</h3>
+          <p>עודכנו title/description/H1/תוכן ב-service-sgirat-agan.html + blog-sgirat-agan.html.</p>
+          <div class="meta">
+            <span>בוצע 05.09.2026</span>
+            <span class="badge" style="--pill-bg:var(--done-soft); --pill-fg:var(--done);">✓ בוצע</span>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <footer class="note">
+      עדכון: הוסיפי משימות חדשות ב-<code style="background:var(--surface-2); padding:1px 6px; border-radius:5px;">BACKLOG.md</code> בשיחה עם Claude, ובקשי לרענן את הלוח הזה בהתאם.
+    </footer>
+  </div>
+</body>
+</html>

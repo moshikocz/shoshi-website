@@ -51,6 +51,10 @@
 - No bundler, no `dist/` folder, no `netlify.toml` — the root HTML files Netlify already serves ARE the build output; this is purely a "build-in-place" step that runs before you test locally or push.
 - Why 3 nav/footer variants instead of 1: the site already had real, pre-existing per-page differences (index.html's newer tiered/scroll-hide nav vs. the older simple sticky nav on every other page; accessibility/privacy/terms omitting the testimonials/contact links since those pages have no such section to link to). These were verified by diffing, not assumed — see the file list above for which page uses which variant.
 
+## Site Audit Script
+- `node audit-site.mjs` — read-only check of title/description length, og:image dimensions (≥1200×630), and `<img>` alt text coverage across all pages, per the numeric rules in this file. Run it before closing out a BACKLOG.md item that touches SEO tags or images, instead of re-deriving these checks by hand.
+- When editing a numeric/structural rule in this file (page counts, size thresholds, variant counts), verify it's still true against the actual repo state at the same time, and check BACKLOG.md doesn't still contain contradicting/stale wording about the same item.
+
 ## Anti-Generic Guardrails
 - **Colors:** Never use default Tailwind palette (indigo-500, blue-600, etc.). Pick a custom brand color and derive from it.
 - **Shadows:** Never use flat `shadow-md`. Use layered, color-tinted shadows with low opacity.

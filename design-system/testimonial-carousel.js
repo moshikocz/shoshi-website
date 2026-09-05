@@ -49,8 +49,17 @@
   // mobile browsers can end up jumping the whole page vertically even with
   // block:'nearest', so we compute and apply scrollLeft directly instead.
   // NEVER swap this back for scrollIntoView() on the track's children.
+  //
+  // Align to the track's *reading-start* edge, not always its left edge: in
+  // this RTL site the first/next slide's natural resting spot is flush with
+  // the track's RIGHT edge. Diffing left edges instead made the delta land on
+  // 0 for the slide already sitting in the visible-but-not-first slot on a
+  // 2-up layout, so autoplay looked completely frozen.
+  var isRTL = getComputedStyle(track).direction === 'rtl';
   function scrollSlideIntoView(el, behavior) {
-    var delta = el.getBoundingClientRect().left - track.getBoundingClientRect().left;
+    var elRect = el.getBoundingClientRect();
+    var trackRect = track.getBoundingClientRect();
+    var delta = isRTL ? (elRect.right - trackRect.right) : (elRect.left - trackRect.left);
     track.scrollTo({ left: track.scrollLeft + delta, behavior: behavior });
   }
   var dots = slides.map(function (slide, i) {

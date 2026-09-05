@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>קורס אשה מעגלית | מחזור #2 - ספטמבר 2026 | עצה תומכת</title>
-  <meta name="description" content="קורס אשה מעגלית - 5 מפגשים אינטימיים בלב קרית טבעון ללימוד המודעות למחזוריות האישה בגישה הוליסטית. מחיר מבצע 950 ש״ח, בתוקף עד 17.8." />
+  <title>קורס אשה מעגלית | מחזור #2 - ספטמבר–אוקטובר 2026 | עצה תומכת</title>
+  <meta name="description" content="קורס אשה מעגלית - 5 מפגשים אינטימיים בלב קרית טבעון ללימוד המודעות למחזוריות האישה בגישה הוליסטית. מחיר מלא 1,250 ש״ח." />
   <link rel="canonical" href="https://shoshimiraz.com/course-isha-magalit.html" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="he_IL" />
   <meta property="og:site_name" content="עצה תומכת" />
-  <meta property="og:title" content="קורס אשה מעגלית | מחזור #2 - ספטמבר 2026 | עצה תומכת" />
-  <meta property="og:description" content="קורס אשה מעגלית - 5 מפגשים אינטימיים בלב קרית טבעון ללימוד המודעות למחזוריות האישה בגישה הוליסטית. מחיר מבצע 950 ש״ח, בתוקף עד 17.8." />
+  <meta property="og:title" content="קורס אשה מעגלית | מחזור #2 - ספטמבר–אוקטובר 2026 | עצה תומכת" />
+  <meta property="og:description" content="קורס אשה מעגלית - 5 מפגשים אינטימיים בלב קרית טבעון ללימוד המודעות למחזוריות האישה בגישה הוליסטית. מחיר מלא 1,250 ש״ח." />
   <meta property="og:url" content="https://shoshimiraz.com/course-isha-magalit.html" />
   <meta property="og:image" content="https://shoshimiraz.com/photos/service_group.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -819,7 +819,7 @@
     .testimonial-track::-webkit-scrollbar { display: none; }
     .testimonial-track > * {
       flex: 0 0 100%;
-      scroll-snap-align: center;
+      scroll-snap-align: start;
     }
     @media (min-width: 720px) {
       .testimonial-track > * { flex: 0 0 calc(50% - 11px); }
@@ -855,6 +855,34 @@
     }
     .testimonial-pause:hover { background: rgba(223,192,126,0.28); }
     .testimonial-pause:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 3px; }
+    .testimonial-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .testimonial-text.is-expanded {
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+    .testimonial-readmore {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 8px 0 0;
+      font-family: 'Assistant', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold-soft);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity 0.2s;
+    }
+    .testimonial-readmore.is-visible { display: inline-block; }
+    .testimonial-readmore:hover { opacity: 0.8; }
+    .testimonial-readmore:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 3px; }
   </style>
 </head>
 <body>
@@ -914,9 +942,8 @@
       <div class="hero-media" data-aos="fade-left" data-aos-duration="800" data-aos-delay="150">
         <img src="photos/service_group.webp" alt="נשים יושבות במעגל סביב מדורה בטבע בשעת בין ערביים – מרחב תהליכי נשי" loading="eager" />
         <div class="hero-badge">
-          <span class="badge-price">950 ₪</span>
-          <span class="badge-old">במקום 1,250 ₪</span>
-          <span class="badge-until">עד 17.8</span>
+          <span class="badge-price">1,250 ₪</span>
+          <span class="badge-until">מחיר מלא</span>
         </div>
       </div>
     </div>
@@ -1161,15 +1188,16 @@
           <span class="price-amount" style="text-decoration:line-through; opacity:0.6;">750 ₪</span>
           <span class="price-note">המבצע הסתיים ב-10.8</span>
         </div>
-        <div class="price-card is-early" data-aos="zoom-in" data-aos-delay="80">
-          <span class="price-tag">🔥 המחיר בתוקף עכשיו</span>
-          <span class="price-amount">950 ₪</span>
-          <span class="price-note">רק עד <strong class="price-note-highlight">17.8</strong></span>
+        <div class="price-card is-mid is-expired" data-aos="zoom-in" data-aos-delay="80">
+          <span class="price-expired-ribbon" aria-hidden="true">הסתיים</span>
+          <span class="price-tag">מחיר מוקדם</span>
+          <span class="price-amount" style="text-decoration:line-through; opacity:0.6;">950 ₪</span>
+          <span class="price-note">המבצע הסתיים ב-17.8</span>
         </div>
-        <div class="price-card is-full" data-aos="zoom-in" data-aos-delay="160">
-          <span class="price-tag">מחיר מלא</span>
+        <div class="price-card is-early" data-aos="zoom-in" data-aos-delay="160">
+          <span class="price-tag">🔥 המחיר בתוקף עכשיו</span>
           <span class="price-amount">1,250 ₪</span>
-          <span class="price-note">לאחר 17.8</span>
+          <span class="price-note">מחיר מלא</span>
         </div>
       </div>
 
@@ -1196,19 +1224,38 @@
         <div class="testimonial-track" id="testimonial-track" tabindex="0" role="region" aria-label="קרוסלת המלצות">
           <div data-aos="fade-up" data-aos-delay="250" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
             <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
-            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"שושי מביאה לב פתוח, ידע עמוק והחזקה אימהית שמאפשרת להרפות באמת."</p>
+            <p class="testimonial-text" style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"שושי מביאה לב פתוח, ידע עמוק והחזקה אימהית שמאפשרת להרפות באמת."</p>
+            <button type="button" class="testimonial-readmore" aria-expanded="false">קראי עוד</button>
           </div>
           <div data-aos="fade-up" data-aos-delay="350" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
             <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
-            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"דרכה למדתי להקשיב לנשיות שלי, למחזוריות, לתנועות הרחם ולרגש — טקסיות מלווה בידע עשיר בעולם הצמחים."</p>
+            <p class="testimonial-text" style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"דרכה למדתי להקשיב לנשיות שלי, למחזוריות, לתנועות הרחם ולרגש — טקסיות מלווה בידע עשיר בעולם הצמחים."</p>
+            <button type="button" class="testimonial-readmore" aria-expanded="false">קראי עוד</button>
           </div>
           <div data-aos="fade-up" data-aos-delay="450" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
             <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
-            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"עוד מהדהדת את המפגשים לנשים קרובות. יצאתי עם תובנות, עם תחושה של שייכות ועוד סקרנות להקשיב לגוף שלי."</p>
+            <p class="testimonial-text" style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"עוד מהדהדת את המפגשים לנשים קרובות. יצאתי עם תובנות, עם תחושה של שייכות ועוד סקרנות להקשיב לגוף שלי."</p>
+            <button type="button" class="testimonial-readmore" aria-expanded="false">קראי עוד</button>
           </div>
           <div data-aos="fade-up" data-aos-delay="550" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
             <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
-            <p style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"ממליצה על שושי באהבה גדולה!! מעבר לזה שהיא מיוחדת מאוד וזו זכות להיתרם ממנה ולהכיר- זו הזדמנות לכל אחת להתחבר לעצמה ולהנות מחכמתן של נשים רבות לפנינו ומידע שקצת הלך לאיבוד בדרך."</p>
+            <p class="testimonial-text" style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"ממליצה על שושי באהבה גדולה!! מעבר לזה שהיא מיוחדת מאוד וזו זכות להיתרם ממנה ולהכיר- זו הזדמנות לכל אחת להתחבר לעצמה ולהנות מחכמתן של נשים רבות לפנינו ומידע שקצת הלך לאיבוד בדרך."</p>
+            <button type="button" class="testimonial-readmore" aria-expanded="false">קראי עוד</button>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="650" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
+            <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
+            <p class="testimonial-text" style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"שושי מביאה לב פתוח, ידע עמוק והחזקה אימהית שמאפשרת להרפות באמת. דרכה למדתי להקשיב לנשיות שלי, למחזוריות, לתנועות הרחם ולרגש. דרכה למדתי על טקסיות עם האשה השלמה, טקסיות מלווה בידע עשיר בעולם הצמחים דרך תפילה אל הירח. ממליצה מכל הלב לכל אישה שמרגישה קריאה לחזור הביתה לעצמה להגיע אליה ❤️"</p>
+            <button type="button" class="testimonial-readmore" aria-expanded="false">קראי עוד</button>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="750" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
+            <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
+            <p class="testimonial-text" style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"ממליצה על שושי באהבה גדולה!! מעבר לזה שהיא מיוחדת מאוד וזו זכות להיתרם ממנה ולהכיר- זו הזדמנות לכל אחת להתחבר לעצמה ולהנות מחכמתן של נשים רבות לפנינו ומידע שקצת הלך לאיבוד בדרך. אני מרגישה שהתחלתי איזשהו מסע איתה אותו עוד אמשיך.. היא ליוותה אותי בתהליך בו התחברתי לעצמי, לגוף שלי, קיבלתי על דברים מסוימים פרספקטיבה חדשה ומרעננת והחוויה הייתה מעצימה ממש"</p>
+            <button type="button" class="testimonial-readmore" aria-expanded="false">קראי עוד</button>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="850" style="background:rgba(255,255,255,0.06); border:1px solid rgba(223,192,126,0.18); border-radius:16px; padding:24px; text-align:right;">
+            <div style="color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px;" aria-hidden="true">★★★★★</div>
+            <p class="testimonial-text" style="color:rgba(255,255,255,0.85); font-family:'Assistant', sans-serif; font-size:0.9rem; line-height:1.8; font-style:italic; margin-bottom:0;">"כשנרשמתי לקורס חשבתי שמדובר על עוד מידע שירשם בראש. כל כך הופתעתי לגלות שהידע שהועבר היה רק מפתח למשהו גדול יותר, עבורי זה הרגיש כמו חניכה עמוקה לנשיות שהיא הרבה מעבר לעוד תיאוריה או גישה לימודית. להגיע למפגש היה כמו להיכנס למרחב תודעתי אחר, מקודש, רך, עוטף. עוגן של הזנה והתמלאות בתוך העומס של החיים. שושי הנחתה את המפגשים בעדינות, ברגישות ובמקצועיות תוך שילוב כל כך ייחודי בין סוגים שונים של חוויות וחיבור לחושים וליצירה. הורגש כמה אהבה, מחשבה ונוכחות היא הביאה לכל מפגש, והחזיקה עבורינו מרחב שאפשר להרגיש בו, לחקור, לשאול ולהתחבר בקצב שלנו. אני יוצאת מהקורס עם הבנה שאולי לראשונה בחיי הצלחתי לתפוס תחושה של מה זה אומר להיות אישה בגוף, באילו חלקים אני מזוהה איתה ועם אילו אני עוד צריכה לעבור דרך וזיכוך. מלאה בהכרת תודה, ממליצה על הקורס מכל הלב לכל אישה שעוד כמוני מחפשת את הדרך לחיבור לאישה שהיא ושמרגישה קריאה להעמיק את הקשר שלה עם עצמה ❤️"</p>
+            <button type="button" class="testimonial-readmore" aria-expanded="false">קראי עוד</button>
           </div>
         </div>
         <div style="display:flex; align-items:center; justify-content:center; gap:4px;">
@@ -1275,7 +1322,7 @@
         אם הלב שלך מרגיש קריאה, או אם יש לך שאלות והתלבטויות — אני כאן בשבילך באהבה. את מרגישה שהגיע הזמן לעצור לרגע בשבילך?
       </p>
       <p data-aos="fade-up" data-aos-delay="160" style="color:var(--terracotta-deep); font-family:'Assistant', sans-serif; font-size:0.9rem; font-weight:600; margin-bottom:32px;">
-        הקבוצה מוגבלת ל-8 נשים · מחיר 950 ש״ח בתוקף עד 17.8, לאחר מכן המחיר עולה ל-1,250 ש״ח
+        הקבוצה מוגבלת ל-8 נשים · מחיר מלא 1,250 ש״ח
       </p>
       <a href="https://wa.me/972528753214" id="final-whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn-primary" data-aos="zoom-in" data-aos-delay="240">
         <span>מחכה לך, שושי מיראז' 🌺</span>
@@ -1326,12 +1373,53 @@
     var nav = document.getElementById('testimonial-nav');
     if (!track || !nav) return;
     var slides = Array.prototype.slice.call(track.children);
+
+    // "קראי עוד" — clamp long testimonials to 4 lines and only show the
+    // toggle when a card's text actually overflows that clamp.
+    function checkReadMore() {
+      slides.forEach(function (slide) {
+        var text = slide.querySelector('.testimonial-text');
+        var btn = slide.querySelector('.testimonial-readmore');
+        if (!text || !btn || text.classList.contains('is-expanded')) return;
+        btn.classList.toggle('is-visible', text.scrollHeight > text.clientHeight + 1);
+      });
+    }
+    checkReadMore();
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(checkReadMore); }
+    track.addEventListener('click', function (e) {
+      var btn = e.target.closest('.testimonial-readmore');
+      if (!btn) return;
+      var text = btn.previousElementSibling;
+      var expanded = text.classList.toggle('is-expanded');
+      btn.setAttribute('aria-expanded', String(expanded));
+      btn.textContent = expanded ? 'קראי פחות' : 'קראי עוד';
+    });
+
+    // Moving to another card always resets a "קראי עוד" expansion back to
+    // its default clamped state, so cards never arrive pre-expanded.
+    function collapseAll() {
+      Array.prototype.forEach.call(track.querySelectorAll('.testimonial-text.is-expanded'), function (text) {
+        text.classList.remove('is-expanded');
+        var btn = text.nextElementSibling;
+        if (btn && btn.classList.contains('testimonial-readmore')) {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.textContent = 'קראי עוד';
+        }
+      });
+    }
+
     // Scroll only the track's own horizontal axis — scrollIntoView() walks up
     // through ancestor scroll containers (including the page itself) and on
     // mobile browsers can end up jumping the whole page vertically even with
     // block:'nearest', so we compute and apply scrollLeft directly instead.
+    // Align to the track's reading-start edge (right, in this RTL layout) —
+    // diffing left edges made the delta land on 0 for the already-visible
+    // second slide in the 2-up layout, freezing autoplay entirely.
+    var isRTL = getComputedStyle(track).direction === 'rtl';
     function scrollSlideIntoView(el, behavior) {
-      var delta = el.getBoundingClientRect().left - track.getBoundingClientRect().left;
+      var elRect = el.getBoundingClientRect();
+      var trackRect = track.getBoundingClientRect();
+      var delta = isRTL ? (elRect.right - trackRect.right) : (elRect.left - trackRect.left);
       track.scrollTo({ left: track.scrollLeft + delta, behavior: behavior });
     }
     var dots = slides.map(function (slide, i) {
@@ -1347,6 +1435,7 @@
     });
     var activeIndex = 0;
     function setActive(index) {
+      if (index !== activeIndex) collapseAll();
       activeIndex = index;
       dots.forEach(function (d, i) { d.classList.toggle('is-active', i === index); });
     }

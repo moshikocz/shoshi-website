@@ -258,7 +258,10 @@
 .testimonial-track::-webkit-scrollbar { display: none; }
 .testimonial-track > * {
   flex: 0 0 100%;
-  scroll-snap-align: center;
+  /* 'start' (not 'center'): centering a slide that's ~50% of the track width
+     on the 2-up desktop breakpoint below leaves both neighbors peeking in
+     half-cut at the edges once the browser snaps after any scroll. */
+  scroll-snap-align: start;
 }
 @media (min-width: 720px) {
   .testimonial-track > * { flex: 0 0 calc(50% - 11px); }

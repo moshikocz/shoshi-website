@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>עורך האתר — שושי מיראז</title>
-  <!-- Decap CMS: loads its own admin UI, driven entirely by config.yml -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
+  <!-- Decap CMS: loads its own admin UI, driven entirely by config.yml.
+       Must load at the end of <body> (not <head>) — it needs document.body
+       to already exist when it bootstraps, or it crashes trying to mount
+       into it (this bit us once; see git history around 2026-09-23). -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>

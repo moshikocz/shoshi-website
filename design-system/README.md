@@ -5,9 +5,14 @@ Reusable design language + scripts extracted from `course-isha-magalit.html`
 course, or a different topic entirely (e.g. a "FADE IN" page) — instead of
 re-deriving tokens/animations from scratch.
 
-This site has **no build step or shared includes** — every page is a fully
-self-contained HTML file. These files are therefore meant to be **copy-pasted
-into a new page**, not linked/imported at runtime.
+Landing pages built from this template are still fully self-contained HTML
+files (**no build step or shared includes**), meant to be **copy-pasted
+into a new page**, not linked/imported at runtime — unlike the 13 main-site
+pages, which now go through `build-pages.mjs` (see CLAUDE.md's "Build-in-Place
+System"). A future phase of the Decap CMS work (see `BACKLOG.md`) plans a
+"landing pages" collection so campaign pages like a new course or FADE IN page
+can eventually be created from this template through the CMS too — not built
+yet, so keep following the manual copy-paste process below until it lands.
 
 ## Files
 

@@ -1,0 +1,139 @@
+backend:
+  name: github
+  repo: moshikocz/shoshi-website
+  branch: main
+  base_url: /.netlify/functions
+  auth_endpoint: auth
+
+publish_mode: simple # direct publish — her save goes straight to the live site, no draft/review step
+media_folder: "photos"
+public_folder: "photos"
+
+locale: "he"
+
+collections:
+  # ── עמודי האתר ──
+  # A "files" collection: each entry is one existing page's editable fields,
+  # stored in content/pages/<name>.json. Only index.html (hero) and
+  # friends.html (colleagues list) are wired so far — see build-pages.mjs
+  # and CLAUDE.md's Build-in-Place System section for how new pages get
+  # added to this list following the same {{PLACEHOLDER}} pattern.
+  - name: "pages"
+    label: "עמודי האתר"
+    files:
+      - name: "home"
+        label: "עמוד הבית"
+        file: "content/pages/index.json"
+        fields:
+          - { label: "שורת תיאור קצרה (מעל הכותרת)", name: "HERO_TAGLINE", widget: "string" }
+          - { label: "כותרת ראשית — שורה 1", name: "HERO_TITLE_LINE1", widget: "string" }
+          - { label: "כותרת ראשית — שורה 2 (מודגשת)", name: "HERO_TITLE_LINE2", widget: "string" }
+          - { label: "תת-כותרת", name: "HERO_SUB", widget: "text" }
+          - label: "גודל הכותרת"
+            name: "HERO_SIZE_CLASS"
+            widget: "select"
+            options:
+              - { label: "קטן", value: "hero-size-sm" }
+              - { label: "בינוני", value: "hero-size-md" }
+              - { label: "גדול", value: "hero-size-lg" }
+          - label: "סגנון הגופן"
+            name: "HERO_FONT_CLASS"
+            widget: "select"
+            options:
+              - { label: "קלאסי (הנוכחי)", value: "hero-font-classic" }
+              - { label: "חם ומסורתי", value: "hero-font-warm" }
+              - { label: "מודרני ונקי", value: "hero-font-modern" }
+          - label: "צבע מוביל"
+            name: "HERO_ACCENT_CLASS"
+            widget: "select"
+            options:
+              - { label: "זהב (הנוכחי)", value: "accent-gold" }
+              - { label: "טרקוטה", value: "accent-terracotta" }
+              - { label: "רוז אדמתי", value: "accent-rose" }
+              - { label: "זית-מרווה", value: "accent-sage" }
+
+      - name: "friends"
+        label: "חברות ושיתופי פעולה"
+        file: "content/pages/friends.json"
+        fields:
+          - label: "קולגות בעמוד"
+            name: "colleagues"
+            widget: "list"
+            label_singular: "קולגה"
+            summary: "{{name}}"
+            fields:
+              - { label: "שם", name: "name", widget: "string" }
+              - { label: "תחום עיסוק", name: "tag", widget: "string" }
+              - { label: "תיאור קצר", name: "bio", widget: "text" }
+              - { label: "תמונה", name: "photo", widget: "image" }
+              - { label: "טקסט חלופי לתמונה (נגישות)", name: "photoAlt", widget: "string" }
+              - { label: "אזור", name: "location", widget: "string" }
+              - { label: "טלפון (ספרות בלבד, ללא 0 מוביל, כולל קידומת אזור)", name: "phone", widget: "string" }
+              - { label: "טלפון לתצוגה", name: "phoneDisplay", widget: "string" }
+
+  # ── שירותים ──
+  # A "folder" collection: each entry is a markdown file in content/services/,
+  # auto-generates service-<slug>.html + a card on the homepage services list.
+  - name: "services"
+    label: "שירותים"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "שם השירות", name: "name", widget: "string" }
+      - { label: "תיאור קצר (מופיע בכרטיסייה)", name: "shortDesc", widget: "text" }
+      - { label: "מחיר", name: "price", widget: "string" }
+      - { label: "תמונה", name: "image", widget: "image" }
+      - { label: "טקסט חלופי לתמונה (נגישות)", name: "imageAlt", widget: "string" }
+      - { label: "כותרת ל-Google (אופציונלי)", name: "metaTitle", widget: "string", required: false }
+      - { label: "תיאור ל-Google (אופציונלי)", name: "metaDescription", widget: "string", required: false }
+      - { label: "תיאור מלא בעמוד השירות", name: "body", widget: "markdown" }
+
+  # ── בלוג ──
+  # A "folder" collection: each entry is a markdown file in content/blog/,
+  # auto-generates blog-<slug>.html + a card on blog.html (most recent = featured).
+  - name: "blog"
+    label: "בלוג"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "כותרת הפוסט", name: "title", widget: "string" }
+      - { label: "תאריך פרסום", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "תגית", name: "tag", widget: "string", required: false }
+      - { label: "תמונה ראשית", name: "image", widget: "image" }
+      - { label: "טקסט חלופי לתמונה (נגישות)", name: "imageAlt", widget: "string" }
+      - { label: "תקציר קצר (מופיע בכרטיסייה)", name: "excerpt", widget: "text" }
+      - { label: "כותרת ל-Google (אופציונלי)", name: "metaTitle", widget: "string", required: false }
+      - { label: "תיאור ל-Google (אופציונלי)", name: "metaDescription", widget: "string", required: false }
+      - { label: "תוכן הפוסט", name: "body", widget: "markdown" }
+
+  # ── פניות לצוות ──
+  # CMS-only: never read by build-pages.mjs, never rendered on the public site.
+  # Requests/bug reports from Shoshi to Moshiko. He triages by checking
+  # content/requests/ at the start of a work session (same habit as checking
+  # git log for her content commits) and copies worthwhile items into
+  # BACKLOG.md by hand — see BACKLOG.md's own note on this collection.
+  - name: "requests"
+    label: "פניות לצוות"
+    folder: "content/requests"
+    create: true
+    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    fields:
+      - label: "סוג הפנייה"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "💡 בקשה / רעיון", value: "request" }
+          - { label: "🐞 משהו לא עובד", value: "bug" }
+      - { label: "כותרת קצרה", name: "title", widget: "string" }
+      - { label: "ספרי לנו קצת יותר", name: "description", widget: "text" }
+      - { label: "צילום מסך (לא חובה)", name: "screenshot", widget: "image", required: false }
+      - label: "סטטוס הטיפול"
+        name: "status"
+        widget: "select"
+        default: "waiting"
+        options:
+          - { label: "ממתין", value: "waiting" }
+          - { label: "בטיפול", value: "working" }
+          - { label: "הושלם", value: "done" }

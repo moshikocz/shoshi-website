@@ -1,0 +1,4 @@
+[build]
+  command = "node optimize-images.mjs --auto photos && node build-pages.mjs"
+  publish = "."
+  functions = "netlify/functions"

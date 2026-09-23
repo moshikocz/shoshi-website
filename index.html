@@ -15,7 +15,7 @@
   <meta property="og:image" content="https://shoshimiraz.com/photos/hero-main.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@500;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -235,6 +235,22 @@
       .hero-bg .gold-divider-hero { margin: 0 auto 24px !important; }
       .hero-bg .hero-actions-row { justify-content: center !important; }
     }
+
+    /* ── HERO EDITABLE PRESETS (CMS-driven: size/font/color) ── */
+    .hero-size-sm { font-size: 2.8rem; }
+    .hero-size-md { font-size: 3.4rem; }
+    .hero-size-lg { font-size: 4rem; }
+    .hero-font-classic { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .hero-font-warm    { font-family: 'Frank Ruhl Libre', serif; }
+    .hero-font-modern  { font-family: 'Heebo', sans-serif; }
+    .accent-terracotta { color: #d98a63; }
+    .accent-rose       { color: #c98a92; }
+    .accent-gold       { color: var(--gold-light); }
+    .accent-sage       { color: #a3b26a; }
+    .gold-divider-hero.accent-terracotta { background: linear-gradient(90deg, transparent, #d98a63, transparent); }
+    .gold-divider-hero.accent-rose       { background: linear-gradient(90deg, transparent, #c98a92, transparent); }
+    .gold-divider-hero.accent-gold       { background: linear-gradient(90deg, transparent, var(--gold-light), transparent); }
+    .gold-divider-hero.accent-sage       { background: linear-gradient(90deg, transparent, #a3b26a, transparent); }
 
     /* grain texture on hero */
     .hero-bg::after {
@@ -773,12 +789,12 @@
       טיפול רגשי • ליווי הוליסטי • תמיכה לנשים
     </p>
 
-    <h1 class="hero-title" style="color:#ffffff; font-size:4rem; font-weight:600; line-height:1.12; margin-bottom:24px; letter-spacing:-0.02em; text-shadow:0 2px 24px rgba(0,0,0,0.5);">
+    <h1 class="hero-title hero-size-lg hero-font-classic" style="color:#ffffff; font-weight:600; line-height:1.12; margin-bottom:24px; letter-spacing:-0.02em; text-shadow:0 2px 24px rgba(0,0,0,0.5);">
       את מופלאה<br>
-      <em style="font-style:italic; color:var(--gold-light);">בדיוק כמו שאת</em>
+      <em class="accent-gold" style="font-style:italic;">בדיוק כמו שאת</em>
     </h1>
 
-    <div class="gold-divider-hero" style="width:48px; height:1px; background:linear-gradient(90deg, transparent, var(--gold-light), transparent); margin:0 0 24px auto;"></div>
+    <div class="gold-divider-hero accent-gold" style="width:48px; height:1px; margin:0 0 24px auto;"></div>
 
     <p class="hero-sub" style="color:rgba(255,255,255,0.82); font-size:1.15rem; line-height:1.78; max-width:520px; margin:0 0 40px auto; font-weight:400; font-family:'Assistant', sans-serif;">
       מרחב בטוח לנשים המחפשות שינוי, צמיחה ותמיכה<br>בדרכן לחיים מלאים ושלווים
@@ -899,6 +915,8 @@
         <h3 style="font-size:calc(1.15rem * var(--fs-mult-h)); font-weight:600; color:var(--brown-dark); margin:0 0 8px;">מוצרים משלימים</h3>
         <p style="font-size:calc(0.88rem * var(--fs-mult)); color:var(--text-light); line-height:1.62; margin:0; font-family:'Assistant', sans-serif;">שוקולדים בעבודת יד, חליטות צמחי מרפא, סבונים ומתנות</p>
       </a>
+
+      
 
     </div>
   </div>

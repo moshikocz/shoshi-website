@@ -1,6 +1,6 @@
 import sharp from "sharp";
 import path from "node:path";
-import { stat, copyFile, unlink, mkdir } from "node:fs/promises";
+import { stat, copyFile, unlink, mkdir, readdir } from "node:fs/promises";
 
 // CSS class -> target width (2x retina of the real rendered size on this site).
 // sharp's withoutEnlargement means it's always safe to over-specify.
@@ -18,6 +18,11 @@ const CLASS_WIDTHS = {
 };
 
 const DEFAULT_QUALITY = 82;
+// Default width for --auto mode, used for CMS-uploaded images that carry no
+// CSS class context. Matches the largest common in-page usage (detail-hero-img
+// is bigger at 1520, but that's for full-bleed heroes specifically; 1200 is a
+// safe general-purpose ceiling for blog/service/colleague photos).
+const AUTO_MODE_WIDTH = 1200;
 const root = path.resolve(import.meta.dirname);
 
 function parseArgs(argv) {
@@ -26,6 +31,7 @@ function parseArgs(argv) {
   let quality = DEFAULT_QUALITY;
   let keepOriginal = false;
   let cls = null;
+  let autoDir = null;
 
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
@@ -33,8 +39,13 @@ function parseArgs(argv) {
     else if (arg === "--quality") quality = Number(argv[++i]);
     else if (arg === "--class") cls = argv[++i];
     else if (arg === "--keep-original") keepOriginal = true;
+    else if (arg === "--auto") autoDir = argv[++i] || "photos";
     else if (arg.startsWith("--")) throw new Error(`Unknown flag: ${arg}`);
     else files.push(arg);
+  }
+
+  if (autoDir !== null) {
+    return { autoDir, width: width ?? AUTO_MODE_WIDTH, quality, keepOriginal };
   }
 
   if (files.length === 0) {
@@ -52,6 +63,30 @@ function parseArgs(argv) {
   }
 
   return { files, width, quality, keepOriginal };
+}
+
+// Recursively find .png/.jpg/.jpeg files under dir (relative to repo root),
+// skipping the backup folder. Used by --auto to catch anything a CMS upload
+// (Decap media picker) dropped in as a raw, un-optimized image.
+async function findRawImages(dir) {
+  const abs = path.join(root, dir);
+  let entries;
+  try {
+    entries = await readdir(abs, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+  const found = [];
+  for (const entry of entries) {
+    if (entry.name === "image_originals_backup") continue;
+    const relPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      found.push(...(await findRawImages(relPath)));
+    } else if (/\.(png|jpe?g)$/i.test(entry.name)) {
+      found.push(relPath);
+    }
+  }
+  return found;
 }
 
 async function processFile(relPath, { width, quality, keepOriginal }) {
@@ -88,7 +123,22 @@ async function processFile(relPath, { width, quality, keepOriginal }) {
 }
 
 async function main() {
-  const { files, width, quality, keepOriginal } = parseArgs(process.argv.slice(2));
+  const parsed = parseArgs(process.argv.slice(2));
+
+  if (parsed.autoDir) {
+    const rawImages = await findRawImages(parsed.autoDir);
+    if (rawImages.length === 0) {
+      console.log(`No un-optimized images found under ${parsed.autoDir}/ — nothing to do.`);
+      return;
+    }
+    console.log(`Auto mode: found ${rawImages.length} un-optimized image(s) under ${parsed.autoDir}/`);
+    for (const file of rawImages) {
+      await processFile(file, { width: parsed.width, quality: parsed.quality, keepOriginal: parsed.keepOriginal });
+    }
+    return;
+  }
+
+  const { files, width, quality, keepOriginal } = parsed;
 
   for (const file of files) {
     await stat(path.join(root, file)); // throws clearly if missing

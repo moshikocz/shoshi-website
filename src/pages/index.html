@@ -368,7 +368,7 @@ ogImage: https://shoshimiraz.com/photos/hero-main.webp
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--olive-mid);
+      color: var(--olive-dark);
       border-bottom: 1.5px solid var(--olive-light);
       padding-bottom: 5px;
       margin-bottom: 10px;
@@ -745,7 +745,7 @@ ogImage: https://shoshimiraz.com/photos/hero-main.webp
             <span style="display:block; font-family:'Assistant', sans-serif; font-size:1.05rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--text-light); margin-bottom:4px;">היי, שמי</span>
             <span style="display:block; font-family:'Tinos', 'Cormorant Garamond', Georgia, serif; font-size:2.4rem; font-weight:700; letter-spacing:-0.01em; line-height:1.05; background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 60%, var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">שושי מיראז</span>
           </h2>
-          <p style="color:var(--olive-mid); font-size:calc(13px * var(--fs-mult)); font-weight:700; margin:0 0 32px; letter-spacing:0.08em; text-transform:uppercase; font-family:'Assistant', sans-serif;">
+          <p style="color:var(--olive-dark); font-size:calc(13px * var(--fs-mult)); font-weight:700; margin:0 0 32px; letter-spacing:0.08em; text-transform:uppercase; font-family:'Assistant', sans-serif;">
             עובדת סוציאלית • גינקוסופית
           </p>
 
@@ -1066,7 +1066,8 @@ ogImage: https://shoshimiraz.com/photos/hero-main.webp
         var dots = realSlides.map(function(_, i) {
           var dot = document.createElement('button');
           dot.setAttribute('aria-label', 'עדות ' + (i + 1));
-          dot.style.cssText = 'width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:' + (i === 0 ? '1' : '0.3') + '; transition:opacity 0.3s, transform 0.3s; padding:0;';
+          // 24px hit area for touch-target size; background-clip keeps the visible dot at its original 8px via the padding-created content box.
+          dot.style.cssText = 'width:24px; height:24px; padding:8px; box-sizing:border-box; border-radius:50%; background-clip:content-box; border:none; cursor:pointer; background:var(--gold); opacity:' + (i === 0 ? '1' : '0.3') + '; transition:opacity 0.3s, transform 0.3s;';
           dot.addEventListener('click', function() { goToSlide(i); });
           dotsWrap.appendChild(dot);
           return dot;

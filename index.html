@@ -372,7 +372,7 @@
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--olive-mid);
+      color: var(--olive-dark);
       border-bottom: 1.5px solid var(--olive-light);
       padding-bottom: 5px;
       margin-bottom: 10px;
@@ -834,7 +834,7 @@
             <span style="display:block; font-family:'Assistant', sans-serif; font-size:1.05rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--text-light); margin-bottom:4px;">היי, שמי</span>
             <span style="display:block; font-family:'Tinos', 'Cormorant Garamond', Georgia, serif; font-size:2.4rem; font-weight:700; letter-spacing:-0.01em; line-height:1.05; background:linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 60%, var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">שושי מיראז</span>
           </h2>
-          <p style="color:var(--olive-mid); font-size:calc(13px * var(--fs-mult)); font-weight:700; margin:0 0 32px; letter-spacing:0.08em; text-transform:uppercase; font-family:'Assistant', sans-serif;">
+          <p style="color:var(--olive-dark); font-size:calc(13px * var(--fs-mult)); font-weight:700; margin:0 0 32px; letter-spacing:0.08em; text-transform:uppercase; font-family:'Assistant', sans-serif;">
             עובדת סוציאלית • גינקוסופית
           </p>
 
@@ -1154,7 +1154,8 @@
         var dots = realSlides.map(function(_, i) {
           var dot = document.createElement('button');
           dot.setAttribute('aria-label', 'עדות ' + (i + 1));
-          dot.style.cssText = 'width:8px; height:8px; border-radius:50%; border:none; cursor:pointer; background:var(--gold); opacity:' + (i === 0 ? '1' : '0.3') + '; transition:opacity 0.3s, transform 0.3s; padding:0;';
+          // 24px hit area for touch-target size; background-clip keeps the visible dot at its original 8px via the padding-created content box.
+          dot.style.cssText = 'width:24px; height:24px; padding:8px; box-sizing:border-box; border-radius:50%; background-clip:content-box; border:none; cursor:pointer; background:var(--gold); opacity:' + (i === 0 ? '1' : '0.3') + '; transition:opacity 0.3s, transform 0.3s;';
           dot.addEventListener('click', function() { goToSlide(i); });
           dotsWrap.appendChild(dot);
           return dot;
@@ -1449,15 +1450,15 @@
     </div>
 
     <div style="margin-bottom:20px; display:flex; justify-content:center; flex-wrap:wrap; gap:2px;">
-      <a href="accessibility.html" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">הצהרת נגישות</a>
+      <a href="accessibility.html" style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">הצהרת נגישות</a>
       <span style="color:rgba(255,255,255,0.12); font-size:12px; padding:3px 0;">|</span>
-      <a href="privacy.html"       style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">מדיניות פרטיות</a>
+      <a href="privacy.html"       style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">מדיניות פרטיות</a>
       <span style="color:rgba(255,255,255,0.12); font-size:12px; padding:3px 0;">|</span>
-      <a href="terms.html"         style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">תקנון ותנאי שימוש</a>
+      <a href="terms.html"         style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:12px; padding:3px 10px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">תקנון ותנאי שימוש</a>
     </div>
 
     <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:24px;">
-      <p style="color:rgba(255,255,255,0.25); font-size:12px; margin:0; font-family:'Assistant', sans-serif; letter-spacing:0.04em;">
+      <p style="color:rgba(255,255,255,0.5); font-size:12px; margin:0; font-family:'Assistant', sans-serif; letter-spacing:0.04em;">
         © 2026 עצה תומכת. כל הזכויות שמורות.
       </p>
     </div>

@@ -878,11 +878,15 @@
       margin-top: 22px;
     }
     .testimonial-dot {
-      width: 9px; height: 9px;
+      /* 24px hit area for touch-target size; background-clip keeps the
+         visible dot at its original 9px via the padding-created content box. */
+      width: 24px; height: 24px;
+      padding: 7.5px;
+      box-sizing: border-box;
       border-radius: 50%;
       border: none;
-      padding: 0;
       background: rgba(223,192,126,0.35);
+      background-clip: content-box;
       cursor: pointer;
       transition: background-color 0.25s, transform 0.25s;
     }
@@ -1424,9 +1428,9 @@
       <a href="tel:0528753214" style="color:rgba(255,255,255,0.65); text-decoration:none; font-family:'Assistant', sans-serif; font-size:0.85rem;">052-8753214</a>
     </p>
     <p style="margin-bottom:10px;">
-      <a href="accessibility.html" style="color:rgba(255,255,255,0.45); text-decoration:none; font-size:12px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">הצהרת נגישות</a>
+      <a href="accessibility.html" style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:12px; font-family:'Assistant', sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#dfc07e'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">הצהרת נגישות</a>
     </p>
-    <p style="color:rgba(255,255,255,0.25); font-size:12px; font-family:'Assistant', sans-serif;">© 2026 עצה תומכת. כל הזכויות שמורות.</p>
+    <p style="color:rgba(255,255,255,0.5); font-size:12px; font-family:'Assistant', sans-serif;">© 2026 עצה תומכת. כל הזכויות שמורות.</p>
   </div>
 </footer>
 

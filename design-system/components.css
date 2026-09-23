@@ -273,11 +273,15 @@
   margin-top: 22px;
 }
 .testimonial-dot {
-  width: 9px; height: 9px;
+  /* 24px hit area for touch-target size; background-clip keeps the visible
+     dot at its original 9px via the padding-created content box. */
+  width: 24px; height: 24px;
+  padding: 7.5px;
+  box-sizing: border-box;
   border-radius: 50%;
   border: none;
-  padding: 0;
   background: rgba(223,192,126,0.35);
+  background-clip: content-box;
   cursor: pointer;
   transition: background-color 0.25s, transform 0.25s;
 }

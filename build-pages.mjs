@@ -17,6 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 
@@ -28,6 +29,16 @@ const CONTENT_DIR = path.join(ROOT, 'content');
 const PAGES_CONTENT_DIR = path.join(CONTENT_DIR, 'pages');
 const BLOG_CONTENT_DIR = path.join(CONTENT_DIR, 'blog');
 const SERVICES_CONTENT_DIR = path.join(CONTENT_DIR, 'services');
+const SITE_URL = 'https://shoshimiraz.com';
+
+function jsonLd(data) {
+  return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+}
+
+// Derives a clean service name from a "<name> – <site>" / "<name> | <site>" PAGE_META title.
+function deriveServiceName(title) {
+  return (title || '').split(/\s+[–|]\s+/)[0].trim();
+}
 
 function readPartial(name) {
   const filePath = path.join(PARTIALS_DIR, `${name.toLowerCase()}.html`);
@@ -55,11 +66,26 @@ function parsePageMeta(source) {
 
 function renderHeadMeta(meta) {
   let template = readPartial('head-meta');
-  return template
+  let out = template
     .replaceAll('{{TITLE}}', meta.title || '')
     .replaceAll('{{DESCRIPTION}}', meta.description || '')
     .replaceAll('{{CANONICAL_URL}}', meta.canonical || '')
     .replaceAll('{{OG_IMAGE}}', meta.ogImage || '');
+
+  if (meta.schemaType === 'Service') {
+    out += '\n  ' + jsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: deriveServiceName(meta.title),
+      description: meta.description || '',
+      url: meta.canonical || '',
+      image: meta.ogImage || '',
+      areaServed: 'IL',
+      provider: { '@id': `${SITE_URL}/#business` },
+    });
+  }
+
+  return out;
 }
 
 // Takes a full page source (PAGE_META block + INCLUDE markers still present)
@@ -141,6 +167,18 @@ function replaceMarker(html, name, replacement) {
 
 function renderBlogPostPage(post) {
   const template = readPartial('blog-post-template');
+  const canonical = `${SITE_URL}/blog-${post.slug}.html`;
+  const schema = jsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title || '',
+    description: post.excerpt || '',
+    image: post.image ? `${SITE_URL}/photos/${post.image}` : '',
+    datePublished: post.date || '',
+    author: { '@type': 'Person', name: 'שושי מיראז' },
+    publisher: { '@id': `${SITE_URL}/#business` },
+    mainEntityOfPage: canonical,
+  });
   return template
     .replaceAll('{{SLUG}}', post.slug)
     .replaceAll('{{META_TITLE}}', post.metaTitle || post.title || '')
@@ -150,11 +188,24 @@ function renderBlogPostPage(post) {
     .replaceAll('{{EXCERPT}}', post.excerpt || '')
     .replaceAll('{{IMAGE}}', post.image || '')
     .replaceAll('{{IMAGE_ALT}}', post.imageAlt || '')
-    .replaceAll('{{BODY}}', post.bodyHtml || '');
+    .replaceAll('{{BODY}}', post.bodyHtml || '')
+    .replaceAll('{{SCHEMA}}', schema);
 }
 
 function renderServicePage(svc) {
   const template = readPartial('service-page-template');
+  const canonical = `${SITE_URL}/service-${svc.slug}.html`;
+  const schema = jsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: svc.name || '',
+    description: svc.shortDesc || '',
+    url: canonical,
+    image: svc.image ? `${SITE_URL}/photos/${svc.image}` : '',
+    areaServed: 'IL',
+    provider: { '@id': `${SITE_URL}/#business` },
+    ...(svc.price ? { offers: { '@type': 'Offer', price: svc.price, priceCurrency: 'ILS', url: canonical } } : {}),
+  });
   return template
     .replaceAll('{{SLUG}}', svc.slug)
     .replaceAll('{{META_TITLE}}', svc.metaTitle || svc.name || '')
@@ -164,7 +215,8 @@ function renderServicePage(svc) {
     .replaceAll('{{PRICE}}', svc.price || '')
     .replaceAll('{{IMAGE}}', svc.image || '')
     .replaceAll('{{IMAGE_ALT}}', svc.imageAlt || '')
-    .replaceAll('{{BODY}}', svc.bodyHtml || '');
+    .replaceAll('{{BODY}}', svc.bodyHtml || '')
+    .replaceAll('{{SCHEMA}}', schema);
 }
 
 function renderFeaturedBlogCard(post) {
@@ -202,6 +254,67 @@ function renderBlogGridCard(post) {
     </div>`;
 }
 
+// Last commit date for a source file (YYYY-MM-DD), falling back to today for
+// uncommitted/new files so sitemap.xml never has a missing <lastmod>.
+function gitLastMod(relPath, fallbackDate) {
+  try {
+    const out = execSync(`git log -1 --format=%cI -- "${relPath}"`, {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).toString().trim();
+    if (out) return out.slice(0, 10);
+  } catch {}
+  return (fallbackDate || new Date().toISOString()).slice(0, 10);
+}
+
+function generateSitemap(entries) {
+  const body = entries
+    .map((e) => `  <url><loc>${e.url}</loc><lastmod>${e.lastmod}</lastmod></url>`)
+    .join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml, 'utf8');
+  console.log('Built sitemap.xml');
+}
+
+function generateLlmsTxt(serviceMetas, blogPosts) {
+  const serviceLines = serviceMetas
+    .map((s) => `- ${deriveServiceName(s.meta.title)} — ${s.meta.description}: /${s.filename}`)
+    .join('\n');
+  const blogLines = blogPosts.length
+    ? blogPosts.map((p) => `- ${p.title} — ${p.excerpt || ''}: /blog-${p.slug}.html`).join('\n')
+    : '- (עדיין אין פוסטים)';
+
+  const txt = `# עצה תומכת – שושי מיראז
+
+> ליווי רגשי הוליסטי לנשים עם שושי מיראז, עובדת סוציאלית וגינקוסופית, בקרית טבעון (בקליניקה ובזום). התמחות במודעות למחזוריות האישה, גינקוסופיה, וטקסים וטיפולים תומכים לגוף ולנפש בצמתים משמעותיים בחיי אישה — לפני ואחרי לידה, בגיל המעבר, ובכל שלב.
+
+## שירותים
+
+${serviceLines}
+- קורס אשה מעגלית — 5 מפגשים קבוצתיים בקרית טבעון ללימוד מודעות למחזוריות בגישה הוליסטית, מחיר מלא 1,250 ₪: /course-isha-magalit.html
+- השוקולדים של שושי — פרלינים טבעוניים בעבודת יד, הזמנה ישירה בוואטסאפ: /chocolate-landing.html
+
+## בלוג
+
+${blogLines}
+
+## מידע נוסף
+
+- אודות שושי מיראז ורקע מקצועי: /about.html
+- כל מאמרי הבלוג: /blog.html
+- קולגות מומלצות: /friends.html
+- יצירת קשר: וואטסאפ https://wa.me/972528753214
+
+## Optional
+
+- הצהרת נגישות: /accessibility.html
+- מדיניות פרטיות: /privacy.html
+- תקנון ותנאי שימוש: /terms.html
+`;
+  fs.writeFileSync(path.join(ROOT, 'llms.txt'), txt, 'utf8');
+  console.log('Built llms.txt');
+}
+
 function renderServiceCard(svc) {
   return `
       <a href="service-${svc.slug}.html" class="svc-card">
@@ -234,6 +347,8 @@ function main() {
     .readdirSync(SRC_PAGES_DIR)
     .filter((f) => f.endsWith('.html') && !STANDALONE_PAGES.has(f));
   let count = 0;
+  const sitemapEntries = [];
+  const realServiceMetas = [];
 
   for (const filename of files) {
     let html = assemblePage(filename);
@@ -251,6 +366,11 @@ function main() {
     fs.writeFileSync(path.join(ROOT, filename), html, 'utf8');
     console.log(`Built ${filename}`);
     count++;
+
+    const { meta } = parsePageMeta(fs.readFileSync(path.join(SRC_PAGES_DIR, filename), 'utf8'));
+    const url = filename === 'index.html' ? `${SITE_URL}/` : `${SITE_URL}/${filename}`;
+    sitemapEntries.push({ url, lastmod: gitLastMod(`src/pages/${filename}`) });
+    if (meta.schemaType === 'Service') realServiceMetas.push({ filename, meta });
   }
 
   for (const post of blogPosts) {
@@ -259,6 +379,10 @@ function main() {
     fs.writeFileSync(path.join(ROOT, outFilename), html, 'utf8');
     console.log(`Built ${outFilename} (from content/blog/${post.slug}.md)`);
     count++;
+    sitemapEntries.push({
+      url: `${SITE_URL}/${outFilename}`,
+      lastmod: gitLastMod(`content/blog/${post.slug}.md`, post.date),
+    });
   }
 
   for (const svc of services) {
@@ -267,7 +391,20 @@ function main() {
     fs.writeFileSync(path.join(ROOT, outFilename), html, 'utf8');
     console.log(`Built ${outFilename} (from content/services/${svc.slug}.md)`);
     count++;
+    sitemapEntries.push({
+      url: `${SITE_URL}/${outFilename}`,
+      lastmod: gitLastMod(`content/services/${svc.slug}.md`),
+    });
   }
+
+  // Standalone campaign pages (see STANDALONE_PAGES above) — hand-edited at
+  // the repo root, so their lastmod comes from the root file, not src/pages/.
+  for (const filename of STANDALONE_PAGES) {
+    sitemapEntries.push({ url: `${SITE_URL}/${filename}`, lastmod: gitLastMod(filename) });
+  }
+
+  generateSitemap(sitemapEntries);
+  generateLlmsTxt(realServiceMetas, blogPosts);
 
   console.log(`\nDone. ${count} page(s) written to ${ROOT}`);
 }

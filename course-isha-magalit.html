@@ -583,6 +583,25 @@
     }
     .about-photo img { width: 100%; display: block; object-fit: cover; }
 
+    /* ── ABOUT ASSISTANT (photo beside first paragraph on mobile) ── */
+    .about-grid-shira {
+      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-areas: "p1 photo" "p2 photo";
+      gap: 16px 44px;
+    }
+    .about-grid-shira .about-p1 { grid-area: p1; }
+    .about-grid-shira .about-p2 { grid-area: p2; }
+    .about-grid-shira .about-photo { grid-area: photo; }
+    @media (max-width: 520px) {
+      .about-grid-shira {
+        grid-template-columns: 1fr 1.05fr;
+        grid-template-areas: "p1 photo" "p2 p2";
+        gap: 14px 16px;
+        text-align: right;
+      }
+      .about-grid-shira .about-p2 { text-align: center; margin-top: 6px; }
+    }
+
     /* ── PRICING CARDS ── */
     .price-grid {
       display: grid;
@@ -1195,15 +1214,13 @@
       <div class="gold-divider" data-aos="fade-up"></div>
       <h2 data-aos="fade-up" style="font-size:1.7rem; font-weight:500; color:var(--olive-dark); margin-bottom:40px; letter-spacing:-0.01em;">נעים מאוד, שירה לוי כהן</h2>
 
-      <div class="about-grid" style="grid-template-columns:1.15fr 0.85fr;">
-        <div data-aos="fade-right" data-aos-delay="250" style="text-align:right;">
-          <p style="font-family:'Assistant', sans-serif; font-size:0.95rem; color:var(--text-mid); line-height:1.9; margin-bottom:16px;">
-            עובדת סוציאלית מיודעת טראומה, מנחת יוגה, אוהבת אדמה ואדם.ה. דרך נוכחות קשובה מנחה מרחבים של חיבור, הקשבה והעמקה. מלווה תהליכי עומק אישיים וקבוצתיים, ומנחת מעגלי שירה ומעגלי נשים.
-          </p>
-          <p style="font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; font-size:1.1rem; color:var(--olive-dark);">
-            מתרגשת לתמוך את המחזור השני של הקורס "אישה מעגלית" בהנחיית שושי מיראז', מתוך אמונה והכרה עמוקה בכח של החיבור שלנו כנשים לתבונת הגוף שלנו ולביחד נשי אותנטי, תומך, קשוב ומזין 🪷
-          </p>
-        </div>
+      <div class="about-grid about-grid-shira">
+        <p class="about-p1" data-aos="fade-right" data-aos-delay="250" style="font-family:'Assistant', sans-serif; font-size:0.95rem; color:var(--text-mid); line-height:1.9; text-align:right;">
+          עובדת סוציאלית מיודעת טראומה, מנחת יוגה, אוהבת אדמה ואדם.ה. דרך נוכחות קשובה מנחה מרחבים של חיבור, הקשבה והעמקה. מלווה תהליכי עומק אישיים וקבוצתיים, ומנחת מעגלי שירה ומעגלי נשים.
+        </p>
+        <p class="about-p2" data-aos="fade-right" data-aos-delay="300" style="font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; font-size:1.1rem; color:var(--olive-dark); text-align:right;">
+          מתרגשת לתמוך את המחזור השני של הקורס "אישה מעגלית" בהנחיית שושי מיראז', מתוך אמונה והכרה עמוקה בכח של החיבור שלנו כנשים לתבונת הגוף שלנו ולביחד נשי אותנטי, תומך, קשוב ומזין 🪷
+        </p>
         <div class="about-photo" data-aos="fade-left" data-aos-delay="250">
           <img src="photos/שירה לוי כהן.webp" alt="שירה לוי כהן מחייכת בפתח ביתה, שיער מתולתל ומשקפיים אדומים" loading="lazy" />
         </div>

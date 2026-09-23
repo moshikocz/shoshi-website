@@ -4,6 +4,7 @@
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 - **Building a new landing page** (a new course page, or any standalone topic/campaign page, e.g. "FADE IN")? Check `design-system/README.md` first and reuse its tokens/components/AOS scripts instead of designing from scratch. Only the `--accent`/`--accent-deep` color pair should change per topic — see that folder for the full system extracted from `course-isha-magalit.html`.
 - **Building any new page or component** (landing page or main-site page)? Read `design-system/PRINCIPLES.md` first for the overall design language (color tokens for both page families, typography, spacing/shadow scale, component classes, animation rules) before designing from scratch.
+- **Before closing out any task that touches SEO/structured-data, accessibility, performance, or the build/deploy pipeline** — check `WEBSITE_QUALITY_CHECKLIST.md` (project root). It's a portable, project-agnostic checklist distilled from real bugs found in this codebase (llms.txt format, aria-hidden+focusable traps, contrast math, touch-target sizing, publish="." exposure risk, Lighthouse lab-data noise, etc.) — not something you can derive from reading the code alone.
 
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.

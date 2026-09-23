@@ -276,12 +276,19 @@ function generateSitemap(entries) {
   console.log('Built sitemap.xml');
 }
 
+// llms.txt (llmstxt.org) requires real markdown links — [title](url): notes —
+// not a bare "title: /path" suffix. Lighthouse's "Agentic browsing" audit
+// checks for this format specifically.
+function llmsLink(title, url, notes) {
+  return `- [${title}](${url})${notes ? `: ${notes}` : ''}`;
+}
+
 function generateLlmsTxt(serviceMetas, blogPosts) {
   const serviceLines = serviceMetas
-    .map((s) => `- ${deriveServiceName(s.meta.title)} — ${s.meta.description}: /${s.filename}`)
+    .map((s) => llmsLink(deriveServiceName(s.meta.title), `${SITE_URL}/${s.filename}`, s.meta.description))
     .join('\n');
   const blogLines = blogPosts.length
-    ? blogPosts.map((p) => `- ${p.title} — ${p.excerpt || ''}: /blog-${p.slug}.html`).join('\n')
+    ? blogPosts.map((p) => llmsLink(p.title, `${SITE_URL}/blog-${p.slug}.html`, p.excerpt || '')).join('\n')
     : '- (עדיין אין פוסטים)';
 
   const txt = `# עצה תומכת – שושי מיראז
@@ -291,8 +298,8 @@ function generateLlmsTxt(serviceMetas, blogPosts) {
 ## שירותים
 
 ${serviceLines}
-- קורס אשה מעגלית — 5 מפגשים קבוצתיים בקרית טבעון ללימוד מודעות למחזוריות בגישה הוליסטית, מחיר מלא 1,250 ₪: /course-isha-magalit.html
-- השוקולדים של שושי — פרלינים טבעוניים בעבודת יד, הזמנה ישירה בוואטסאפ: /chocolate-landing.html
+${llmsLink('קורס אשה מעגלית', `${SITE_URL}/course-isha-magalit.html`, '5 מפגשים קבוצתיים בקרית טבעון ללימוד מודעות למחזוריות בגישה הוליסטית, מחיר מלא 1,250 ₪')}
+${llmsLink('השוקולדים של שושי', `${SITE_URL}/chocolate-landing.html`, 'פרלינים טבעוניים בעבודת יד, הזמנה ישירה בוואטסאפ')}
 
 ## בלוג
 
@@ -300,16 +307,16 @@ ${blogLines}
 
 ## מידע נוסף
 
-- אודות שושי מיראז ורקע מקצועי: /about.html
-- כל מאמרי הבלוג: /blog.html
-- קולגות מומלצות: /friends.html
+${llmsLink('אודות שושי מיראז', `${SITE_URL}/about.html`, 'רקע מקצועי')}
+${llmsLink('כל מאמרי הבלוג', `${SITE_URL}/blog.html`)}
+${llmsLink('קולגות מומלצות', `${SITE_URL}/friends.html`)}
 - יצירת קשר: וואטסאפ https://wa.me/972528753214
 
 ## Optional
 
-- הצהרת נגישות: /accessibility.html
-- מדיניות פרטיות: /privacy.html
-- תקנון ותנאי שימוש: /terms.html
+${llmsLink('הצהרת נגישות', `${SITE_URL}/accessibility.html`)}
+${llmsLink('מדיניות פרטיות', `${SITE_URL}/privacy.html`)}
+${llmsLink('תקנון ותנאי שימוש', `${SITE_URL}/terms.html`)}
 `;
   fs.writeFileSync(path.join(ROOT, 'llms.txt'), txt, 'utf8');
   console.log('Built llms.txt');

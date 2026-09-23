@@ -33,29 +33,6 @@ _(ריק כרגע — משימות דחופות "קופצות" לכאן ומעל
 
 ---
 
-### ☐ פאנל ניהול עצמאי לעריכת תוכן — Decap CMS
-**נוסף:** 2026-09-05
-
-הוחלט על **Decap CMS** (חינם, קוד פתוח, git-based) על פני Webflow — מתחבר ישירות לתשתית ה-`src/pages/`+`partials/`+`build-pages.mjs` הקיימת בלי לזרוק אותה, ותוכן נשאר קבצים רגילים בגיט (לא נעילה לפלטפורמה קניינית).
-
-**מה כולל הביצוע בפועל (בוצע בקוד, ממתין להגדרות חשבון):**
-1. `netlify.toml` — פקודת build אוטומטית (`optimize-images.mjs --auto` + `build-pages.mjs`) כך ש-commit של שושי מפרסם לבד.
-2. `build-pages.mjs` הורחב לתמוך ב-`content/pages/*.json` (שדות טקסט/גודל/גופן/צבע לפי placeholder), `content/blog/*.md` ו-`content/services/*.md` (קולקציות markdown שמייצרות עמודים אוטומטית + מעדכנות רשימות), ורשימת קולגות ב-`friends.html` כשדה "רשימה".
-3. `admin/config.yml` + `admin/index.html` — ממשק Decap מלא בעברית, ללא מונחי git, עם 4 קולקציות: עמודי האתר (כרגע רק עמוד הבית + חברות, כהוכחת מנגנון — שאר 13 העמודים ממתינים לאותה תבנית), שירותים, בלוג, ופניות לצוות (לא ציבורי בכלל).
-4. `netlify/functions/auth.js` + `callback.js` — התחברות דרך GitHub OAuth (לא Netlify Identity, שהוצא משימוש לאתרים חדשים).
-5. הבלוג שופץ למבנה קולקציה אמיתי — הפוסט הקיים (טקס סגירת אגן) הועבר ל-`content/blog/sgirat-agan.md`; `blog.html` מייצר את רשימת הכרטיסים אוטומטית במקום קוד קשיח.
-6. `optimize-images.mjs` קיבל מצב `--auto` שסורק תמונות שהועלו ולא עברו אופטימיזציה ומטפל בהן לבד בזמן ה-build.
-
-**תיקון אגב שנמצא בדרך:** גילינו ש-`chocolate-landing.html` ו-`course-isha-magalit.html` (עמודי נחיתה עצמאיים) עדיין נכללו בלולאת ה-build למרות שה-CLAUDE.md מציין שהם לא אמורים להיות חלק מהמערכת — הרצת build הייתה מוחקת בשקט תיקונים ידניים אחרונים על `course-isha-magalit.html` (כמו תיקון ה-padding מ-2026-09-23). תוקן ב-`build-pages.mjs` עם רשימת exclude מפורשת.
-
-**נותר לביצוע — פעולות שדורשות גישה לחשבונות, לא ניתנות לביצוע מהסוכן:**
-- רישום GitHub OAuth App (ב-github.com/settings/developers) עם callback URL `https://<domain>/.netlify/functions/callback`, והגדרת `OAUTH_CLIENT_ID`/`OAUTH_CLIENT_SECRET` כמשתני סביבה ב-Netlify.
-- הוספת שושי כ-collaborator עם הרשאת כתיבה לריפו ב-GitHub (היא לא נכנסת ל-GitHub בעצמה — רק ל-`/admin`).
-- בדיקת דיפלוי ראשון ב-Netlify ווידוא שה-build עובר וההתחברות עובדת בפועל (לא ניתן לבדוק OAuth אמיתי מקומית).
-- אימות ש-`repo:` ב-`admin/config.yml` (`moshikocz/shoshi-website`) תואם את מה ש-GitHub App מוגדר עליו.
-
-**שלב הבא (לא בוצע בסבב הזה):** הרחבת מנגנון ה-placeholder ל-13 העמודים הנותרים; יכולת "פתיחת דף נחיתה חדש מתבנית" מלא (כמו קורס/שוקולד) — נדחה כי אלה עמודים עצמאיים שלא מחוברים למנגנון partials.
-
 ---
 
 ## ⚪ רעיון / לעתיד
@@ -83,6 +60,29 @@ _(ריק כרגע — משימות דחופות "קופצות" לכאן ומעל
 ---
 
 ## ✅ בוצע
+
+### ✅ פאנל ניהול עצמאי לעריכת תוכן — Decap CMS
+**נוסף:** 2026-09-05 · **בוצע:** 2026-09-23
+
+הוחלט על **Decap CMS** (חינם, קוד פתוח, git-based) על פני Webflow — מתחבר ישירות לתשתית ה-`src/pages/`+`partials/`+`build-pages.mjs` הקיימת בלי לזרוק אותה, ותוכן נשאר קבצים רגילים בגיט (לא נעילה לפלטפורמה קניינית).
+
+**מה בוצע בפועל:**
+1. `netlify.toml` — פקודת build אוטומטית (`optimize-images.mjs --auto` + `build-pages.mjs`) כך ש-commit של שושי מפרסם לבד.
+2. `build-pages.mjs` הורחב לתמוך ב-`content/pages/*.json` (שדות טקסט/גודל/גופן/צבע לפי placeholder), `content/blog/*.md` ו-`content/services/*.md` (קולקציות markdown שמייצרות עמודים אוטומטית + מעדכנות רשימות), ורשימת קולגות ב-`friends.html` כשדה "רשימה".
+3. `admin/config.yml` + `admin/index.html` — ממשק Decap מלא בעברית, ללא מונחי git, עם 4 קולקציות: עמודי האתר (כרגע רק עמוד הבית + חברות, כהוכחת מנגנון — שאר 13 העמודים ממתינים לאותה תבנית), שירותים, בלוג, ופניות לצוות (לא ציבורי בכלל).
+4. `netlify/functions/auth.js` + `callback.js` — התחברות דרך GitHub OAuth (לא Netlify Identity, שהוצא משימוש לאתרים חדשים).
+5. הבלוג שופץ למבנה קולקציה אמיתי — הפוסט הקיים (טקס סגירת אגן) הועבר ל-`content/blog/sgirat-agan.md`; `blog.html` מייצר את רשימת הכרטיסים אוטומטית במקום קוד קשיח.
+6. `optimize-images.mjs` קיבל מצב `--auto` שסורק תמונות שהועלו ולא עברו אופטימיזציה ומטפל בהן לבד בזמן ה-build.
+7. רישום GitHub OAuth App, הגדרת `OAUTH_CLIENT_ID`/`OAUTH_CLIENT_SECRET` ב-Netlify, והוספת שושי כ-collaborator בריפו.
+
+**תיקונים שהתגלו ובוצעו תוך כדי:**
+- `chocolate-landing.html` ו-`course-isha-magalit.html` (עמודי נחיתה עצמאיים) עדיין נכללו בלולאת ה-build למרות שה-CLAUDE.md מציין שהם לא אמורים להיות חלק מהמערכת — הרצת build הייתה מוחקת בשקט תיקונים ידניים אחרונים על `course-isha-magalit.html`. תוקן ב-`build-pages.mjs` עם רשימת exclude מפורשת.
+- מסך `/admin` עלה ריק לגמרי (`Cannot read properties of null, reading 'appendChild'`) — סקריפט Decap נטען ב-`<head>` לפני יצירת ה-`<body>`. תוקן: הועבר לסוף ה-`<body>`.
+- popup ההתחברות נשאר לבן/תקוע אחרי אישור ב-GitHub — `base_url` ב-`admin/config.yml` היה נתיב יחסי, ששבר את בדיקת ה-origin של Decap ל-postMessage. תוקן לכתובת מוחלטת.
+
+**סטטוס:** נבדק קצה-לקצה בפועל — הן מוישיקו והן שושי התחברו בהצלחה והגיעו למסך העריכה.
+
+**שלב הבא (לא בוצע בסבב הזה):** הרחבת מנגנון ה-placeholder ל-13 העמודים הנותרים; יכולת "פתיחת דף נחיתה חדש מתבנית" מלא (כמו קורס/שוקולד) — נדחה כי אלה עמודים עצמאיים שלא מחוברים למנגנון partials.
 
 ### ✅ בדיקת חוויית מובייל בפועל
 **נוסף:** 2026-09-05 · **בוצע:** 2026-09-05

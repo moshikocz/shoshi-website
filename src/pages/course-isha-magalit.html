@@ -1,5 +1,5 @@
 <!-- PAGE_META
-title: קורס אשה מעגלית | מחזור #2 - ספטמבר–אוקטובר 2026 | עצה תומכת
+title: קורס אשה מעגלית | מחזור #2 - אוקטובר–נובמבר 2026 | עצה תומכת
 description: קורס אשה מעגלית - 5 מפגשים אינטימיים בלב קרית טבעון ללימוד המודעות למחזוריות האישה בגישה הוליסטית. מחיר מלא 1,250 ש״ח.
 canonical: https://shoshimiraz.com/course-isha-magalit.html
 ogImage: https://shoshimiraz.com/photos/service_group.webp
@@ -257,47 +257,50 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
     }
     .hero-badge {
       position: absolute;
-      bottom: -18px;
-      left: -18px;
-      width: 132px;
-      height: 132px;
+      bottom: -20px;
+      left: -20px;
+      width: 164px;
+      height: 164px;
       border-radius: 50%;
-      background: radial-gradient(circle at 32% 28%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 45%), var(--terracotta-deep);
-      color: #fff;
+      background: radial-gradient(120% 140% at 50% 42%, #f6e7c4 0%, var(--gold-soft) 34%, var(--gold) 64%, #9c7a3d 100%);
+      color: var(--text-dark);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      box-shadow: 0 10px 24px -6px rgba(143,74,44,0.45), 0 4px 12px -4px rgba(143,74,44,0.3);
+      box-shadow: 0 10px 24px -6px rgba(184,144,63,0.5), 0 4px 12px -4px rgba(184,144,63,0.35);
       border: 3px solid var(--cream-light);
+      overflow: hidden;
     }
     .hero-badge::before {
       content: '';
       position: absolute;
-      inset: -8px;
-      border-radius: inherit;
-      box-shadow: 0 0 26px 8px rgba(255, 214, 170, 0.65);
+      top: -60%;
+      left: 0;
+      width: 16%;
+      height: 220%;
+      background: linear-gradient(75deg, transparent 0%, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%, transparent 100%);
       pointer-events: none;
-      animation: badgeGlow 2.6s ease-in-out infinite;
+      transform: translateX(-260%);
+      animation: badgeShine 5.5s ease-in-out infinite;
     }
-    @keyframes badgeGlow {
-      0%, 100% { opacity: 0.3; }
-      50%      { opacity: 1; }
+    @keyframes badgeShine {
+      0%, 12%  { transform: translateX(-260%); }
+      55%, 100% { transform: translateX(800%); }
     }
     @media (max-width: 860px) {
       .hero-badge {
-        position: static;
+        position: relative;
         width: auto;
         height: auto;
-        border-radius: 24px;
-        padding: 18px 32px 20px;
+        border-radius: 999px;
+        padding: 22px 40px;
         margin: 22px auto 0;
       }
       .hero-badge .badge-pct { font-size: 13px; padding: 4px 12px; margin-bottom: 8px; }
-      .hero-badge .badge-price { font-size: 2.9rem; margin-bottom: 4px; }
+      .hero-badge .badge-price { font-size: 3.2rem; }
       .hero-badge .badge-old { font-size: 1.05rem; }
-      .hero-badge .badge-until { font-size: 0.95rem; margin-top: 8px; max-width: none; }
     }
     .hero-badge .badge-pct {
       font-family: 'Assistant', sans-serif;
@@ -312,24 +315,23 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
     }
     .hero-badge .badge-price {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       font-weight: 800;
       line-height: 1;
       display: block;
-      margin-bottom: 1px;
+      white-space: nowrap;
     }
     .hero-badge .badge-old {
       font-family: 'Assistant', sans-serif;
       font-size: 0.7rem;
       text-decoration: line-through;
     }
-    .hero-badge .badge-until {
+    .hero-badge .badge-only {
       font-family: 'Assistant', sans-serif;
-      font-size: 0.6rem;
+      font-size: 0.42em;
       font-weight: 700;
-      margin-top: 3px;
-      line-height: 1.3;
-      max-width: 92px;
+      opacity: 0.75;
+      margin-inline-start: 4px;
     }
     .hero-cta-row {
       display: flex;
@@ -338,6 +340,14 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
       flex-wrap: wrap;
     }
     @media (max-width: 860px) { .hero-cta-row { justify-content: center; } }
+    .hero-price-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 140px;
+    }
+    @media (max-width: 860px) {
+      .hero-price-cta { margin-top: 24px; }
+    }
 
     /* ── HERO INFO CARD ── */
     .hero-info-card {
@@ -579,20 +589,23 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
       position: relative;
     }
     .price-card.is-early {
-      background: linear-gradient(165deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 40%), var(--terracotta-deep);
-      color: #fff;
-      box-shadow: 0 12px 26px -12px rgba(143,74,44,0.4), 0 4px 12px -4px rgba(143,74,44,0.3);
+      background: radial-gradient(120% 160% at 50% 40%, #f6e7c4 0%, var(--gold-soft) 34%, var(--gold) 64%, #9c7a3d 100%);
+      color: var(--text-dark);
+      box-shadow: 0 12px 26px -12px rgba(184,144,63,0.45), 0 4px 12px -4px rgba(184,144,63,0.35);
       transform: scale(1.03);
-      overflow: visible;
+      overflow: hidden;
     }
     .price-card.is-early::before {
       content: '';
       position: absolute;
-      inset: -8px;
-      border-radius: inherit;
-      box-shadow: 0 0 26px 8px rgba(255, 214, 170, 0.65);
+      top: -60%;
+      left: 0;
+      width: 16%;
+      height: 220%;
+      background: linear-gradient(75deg, transparent 0%, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%, transparent 100%);
       pointer-events: none;
-      animation: badgeGlow 2.6s ease-in-out infinite;
+      transform: translateX(-260%);
+      animation: badgeShine 5.5s ease-in-out infinite;
     }
     .price-card.is-mid {
       background: var(--cream-light);
@@ -646,7 +659,7 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
       padding: 4px 14px;
       border-radius: 20px;
     }
-    .price-card.is-early .price-tag { background: rgba(0,0,0,0.18); color: #fff; }
+    .price-card.is-early .price-tag { background: rgba(45,36,16,0.82); color: #fff; font-size: 12px; }
     .price-card.is-mid .price-tag { background: rgba(184,90,49,0.14); color: var(--terracotta-deep); }
     .price-card.is-full .price-tag { background: rgba(90,78,52,0.14); color: var(--text-mid); }
     .price-card .price-amount {
@@ -656,14 +669,14 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
       line-height: 1;
       margin-bottom: 6px;
     }
-    .price-card.is-early .price-amount { font-size: 3.4rem; font-weight: 800; }
+    .price-card.is-early .price-amount { font-size: 3.9rem; font-weight: 800; }
     .price-card.is-mid .price-amount { font-size: 2.3rem; color: var(--terracotta-deep); }
     .price-card.is-full .price-amount { font-size: 1.9rem; }
     .price-card .price-note {
       font-family: 'Assistant', sans-serif;
       font-size: 0.85rem;
     }
-    .price-card.is-early .price-note { color: #fff; font-size: 0.95rem; }
+    .price-card.is-early .price-note { color: var(--text-dark); opacity: 0.82; font-size: 1.05rem; font-weight: 600; }
     .price-note-highlight {
       font-weight: 800;
       color: #fff;
@@ -918,7 +931,7 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
     </svg>
     <div class="hero-inner">
       <div data-aos="fade-right" data-aos-duration="800">
-        <span class="hero-eyebrow"><span aria-hidden="true">🌙</span> מחזור #2 · ספטמבר–אוקטובר 2026</span>
+        <span class="hero-eyebrow"><span aria-hidden="true">🌙</span> מחזור #2 · אוקטובר–נובמבר 2026</span>
         <h1>קורס אשה מעגלית<span class="hero-tagline">מעגל נשים ולימוד הוליסטי על מחזוריות האישה 🌿</span></h1>
         <p class="hero-quote">"החכמה הנשית כבר נמצאת בגוף שלך. בואי ללמוד להקשיב לה."</p>
         <div class="hero-cta-row">
@@ -932,15 +945,20 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
           <div class="hero-chips">
             <span class="hero-chip"><span aria-hidden="true">🗓️</span> 5 מפגשים</span>
             <span class="hero-chip"><span aria-hidden="true">📍</span> לב קרית טבעון</span>
-            <span class="hero-chip hero-chip-full"><span aria-hidden="true">🕐</span> ימי ה׳ 18:30–21:30 · מתחילות 17.9</span>
+            <span class="hero-chip hero-chip-full"><span aria-hidden="true">🕐</span> ימי רביעי 18:30–21:30 · מתחילות 14.10</span>
           </div>
         </div>
       </div>
       <div class="hero-media" data-aos="fade-left" data-aos-duration="800" data-aos-delay="150">
         <img src="photos/service_group.webp" alt="נשים יושבות במעגל סביב מדורה בטבע בשעת בין ערביים – מרחב תהליכי נשי" loading="eager" />
         <div class="hero-badge">
-          <span class="badge-price">1,250 ₪</span>
-          <span class="badge-until">מחיר מלא</span>
+          <span class="badge-price">1,250 ₪<span class="badge-only">בלבד</span></span>
+        </div>
+        <div class="hero-price-cta">
+          <a href="https://wa.me/972528753214" id="hero-price-whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            <span>לתפוס מקום ולהירשם</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="17" height="17" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -1151,6 +1169,29 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
     </div>
   </section>
 
+  <!-- ABOUT ASSISTANT -->
+  <section style="background:var(--cream-bg); padding:90px 24px;">
+    <div style="max-width:960px; margin:0 auto; text-align:center;">
+      <p class="section-label" data-aos="fade-up">מי מלווה אותנו בקורס</p>
+      <div class="gold-divider" data-aos="fade-up"></div>
+      <h2 data-aos="fade-up" style="font-size:1.7rem; font-weight:500; color:var(--olive-dark); margin-bottom:40px; letter-spacing:-0.01em;">נעים מאוד, שירה לוי כהן</h2>
+
+      <div class="about-grid" style="grid-template-columns:1.15fr 0.85fr;">
+        <div data-aos="fade-right" data-aos-delay="250" style="text-align:right;">
+          <p style="font-family:'Assistant', sans-serif; font-size:0.95rem; color:var(--text-mid); line-height:1.9; margin-bottom:16px;">
+            עובדת סוציאלית מיודעת טראומה, מנחת יוגה, אוהבת אדמה ואדם.ה. דרך נוכחות קשובה מנחה מרחבים של חיבור, הקשבה והעמקה. מלווה תהליכי עומק אישיים וקבוצתיים, ומנחת מעגלי שירה ומעגלי נשים.
+          </p>
+          <p style="font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; font-size:1.1rem; color:var(--olive-dark);">
+            מתרגשת לתמוך את המחזור השני של הקורס "אישה מעגלית" בהנחיית שושי מיראז', מתוך אמונה והכרה עמוקה בכח של החיבור שלנו כנשים לתבונת הגוף שלנו ולביחד נשי אותנטי, תומך, קשוב ומזין 🪷
+          </p>
+        </div>
+        <div class="about-photo" data-aos="fade-left" data-aos-delay="250">
+          <img src="photos/שירה לוי כהן.webp" alt="שירה לוי כהן מחייכת בפתח ביתה, שיער מתולתל ומשקפיים אדומים" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- LOGISTICS + PRICING -->
   <section id="pricing" style="background:var(--cream-card); padding:90px 24px; scroll-margin-top:90px; position:relative; overflow:hidden;">
     <img src="photos/Course/פרח ועלה.webp" alt="" aria-hidden="true" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.18; pointer-events:none;" />
@@ -1166,11 +1207,11 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
         </div>
         <div class="logistics-item">
           <span class="lab">מועדים</span>
-          <span class="val">17.9 · 24.9 · 1.10 · 8.10 · 15.10</span>
+          <span class="val">14.10 · 21.10 · 28.10 · 4.11 · 11.11</span>
         </div>
         <div class="logistics-item">
           <span class="lab">שעות</span>
-          <span class="val">ימי חמישי, 18:30–21:30</span>
+          <span class="val">ימי רביעי, 18:30–21:30</span>
         </div>
         <div class="logistics-item">
           <span class="lab">גודל קבוצה</span>
@@ -1179,12 +1220,6 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
       </div>
 
       <div class="price-grid">
-        <div class="price-card is-mid is-expired" data-aos="zoom-in">
-          <span class="price-expired-ribbon" aria-hidden="true">הסתיים</span>
-          <span class="price-tag">הרשמה מוקדמת</span>
-          <span class="price-amount" style="text-decoration:line-through; opacity:0.6;">750 ₪</span>
-          <span class="price-note">המבצע הסתיים ב-10.8</span>
-        </div>
         <div class="price-card is-mid is-expired" data-aos="zoom-in" data-aos-delay="80">
           <span class="price-expired-ribbon" aria-hidden="true">הסתיים</span>
           <span class="price-tag">מחיר מוקדם</span>
@@ -1201,7 +1236,7 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
       <p class="perk-label" data-aos="fade-up">🎉 בנוסף, כל נרשמת לקורס מקבלת:</p>
       <div class="perk-list" data-aos="fade-up" style="margin-bottom:40px;">
         <span class="perk-item"><span aria-hidden="true">🎁</span> חליטת צמחי מרפא במתנה, בהרכבה אישית</span>
-        <span class="perk-item"><span aria-hidden="true">💚</span> 15% הנחה על שירותי הקליניקה המשלימים</span>
+        <span class="perk-item"><span aria-hidden="true">💚</span> 10% הנחה על שירותי הקליניקה המשלימים</span>
       </div>
 
       <a href="https://wa.me/972528753214" id="pricing-whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn-primary">
@@ -1300,7 +1335,7 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
         </details>
         <details class="faq-item" data-aos="fade-up" data-aos-delay="450">
           <summary>מה כוללת ההרשמה?</summary>
-          <p>5 מפגשים שבועיים בני 4 שעות, חליטת צמחי מרפא במתנה בהרכבה אישית, ו-15% הנחה על שירותי הקליניקה המשלימים.</p>
+          <p>5 מפגשים שבועיים בני 4 שעות, חליטת צמחי מרפא במתנה בהרכבה אישית, ו-10% הנחה על שירותי הקליניקה המשלימים.</p>
         </details>
         <details class="faq-item" data-aos="fade-up" data-aos-delay="490">
           <summary>יש לי עוד שאלות לפני שאני נרשמת — מה עושים?</summary>
@@ -1350,7 +1385,7 @@ ogImage: https://shoshimiraz.com/photos/service_group.webp
   (function () {
     var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     if (!isMobile) {
-      ['hero-whatsapp-link', 'pricing-whatsapp-link', 'final-whatsapp-link', 'float-whatsapp-link'].forEach(function (id) {
+      ['hero-whatsapp-link', 'hero-price-whatsapp-link', 'pricing-whatsapp-link', 'final-whatsapp-link', 'float-whatsapp-link'].forEach(function (id) {
         var link = document.getElementById(id);
         if (link) link.href = 'https://web.whatsapp.com/send?phone=972528753214';
       });

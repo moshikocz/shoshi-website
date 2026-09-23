@@ -64,6 +64,7 @@
 - **Interactive states:** Every clickable element needs hover, focus-visible, and active states. No exceptions.
 - **Images:** Add a gradient overlay (`bg-gradient-to-t from-black/60`) and a color treatment layer with `mix-blend-multiply`.
 - **Spacing:** Use intentional, consistent spacing tokens — not random Tailwind steps.
+- **Adjacent same-background sections:** When two `<section>`s sit back-to-back with the *same* background value (e.g. both `var(--cream-bg)`), their touching paddings stack with no visual break to justify the gap. Tighten the touching sides (e.g. `90px 24px` → `90px 24px 40px` on the first, `40px 24px 90px` on the second) so the combined gap lands around 70–90px instead of 150px+. Leave the outer (non-touching) padding alone — it's touching a different background and needs the full breathing room. Only applies when the background literally matches; alternating backgrounds (e.g. `--cream-bg` → `--cream-card`) already read as a break and don't need this.
 - **Depth:** Surfaces should have a layering system (base → elevated → floating), not all sit at the same z-plane.
 
 ## Image Alt Text

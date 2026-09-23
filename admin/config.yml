@@ -2,8 +2,8 @@ backend:
   name: github
   repo: moshikocz/shoshi-website
   branch: main
-  base_url: /.netlify/functions
-  auth_endpoint: auth
+  base_url: https://shoshimiraz.com
+  auth_endpoint: /.netlify/functions/auth
 
 publish_mode: simple # direct publish — her save goes straight to the live site, no draft/review step
 media_folder: "photos"

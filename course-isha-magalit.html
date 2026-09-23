@@ -296,7 +296,11 @@
       background: linear-gradient(75deg, transparent 0%, transparent 40%, rgba(255,255,255,0.85) 50%, transparent 60%, transparent 100%);
       pointer-events: none;
       transform: translateX(-260%);
-      animation: badgeShine 5.5s ease-in-out infinite;
+      animation: heroBadgeShine 5.5s ease-in-out infinite;
+    }
+    @keyframes heroBadgeShine {
+      0%, 12%  { transform: translateX(-260%); }
+      55%, 100% { transform: translateX(800%); }
     }
     @media (max-width: 860px) {
       .hero-badge {
@@ -614,9 +618,9 @@
       background: linear-gradient(75deg, transparent 0%, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%, transparent 100%);
       pointer-events: none;
       transform: translateX(-260%);
-      animation: badgeShine 5.5s ease-in-out infinite;
+      animation: priceCardShine 5.5s ease-in-out infinite;
     }
-    @keyframes badgeShine {
+    @keyframes priceCardShine {
       0%, 12%  { transform: translateX(-260%); }
       55%, 100% { transform: translateX(800%); }
     }

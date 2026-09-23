@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /src/
+Disallow: /content/requests/
 
 Sitemap: https://shoshimiraz.com/sitemap.xml

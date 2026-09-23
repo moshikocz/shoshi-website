@@ -2,3 +2,4 @@ node_modules/
 temporary screenshots/
 .claude/
 image_originals_backup/
+logs/

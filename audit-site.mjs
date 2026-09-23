@@ -13,9 +13,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
+import matter from 'gray-matter';
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname).replace(/^\/([A-Za-z]:)/, '$1');
 const SRC_PAGES_DIR = path.join(ROOT, 'src', 'pages');
+const PARTIALS_DIR = path.join(ROOT, 'partials');
+const BLOG_CONTENT_DIR = path.join(ROOT, 'content', 'blog');
+const SERVICES_CONTENT_DIR = path.join(ROOT, 'content', 'services');
 
 const TITLE_MAX = 60;
 const DESC_MAX = 160;
@@ -39,11 +43,62 @@ function parsePageMeta(source) {
   return meta;
 }
 
-function auditTitlesAndDescriptions() {
+// content/blog/*.md and content/services/*.md generate pages via
+// partials/blog-post-template.html / service-page-template.html (see
+// build-pages.mjs). Their PAGE_META block lives in the template with
+// {{PLACEHOLDER}} markers — resolve it the same way build-pages.mjs does,
+// so generated pages get the same title/description/og:image checks as
+// hand-authored src/pages/*.html ones instead of silently skipping them.
+function loadGeneratedPagesMeta() {
+  const templateMeta = {};
+  function getTemplateMetaBlock(templateFile) {
+    if (!templateMeta[templateFile]) {
+      const raw = fs.readFileSync(path.join(PARTIALS_DIR, templateFile), 'utf8');
+      templateMeta[templateFile] = raw.match(/<!--\s*PAGE_META[\s\S]*?-->/)[0];
+    }
+    return templateMeta[templateFile];
+  }
+
+  function loadCollection(dir, templateFile, prefix, fields) {
+    if (!fs.existsSync(dir)) return [];
+    return fs
+      .readdirSync(dir)
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => {
+        const slug = f.replace(/\.md$/, '');
+        const { data } = matter(fs.readFileSync(path.join(dir, f), 'utf8'));
+        let block = getTemplateMetaBlock(templateFile).replaceAll('{{SLUG}}', slug);
+        for (const [placeholder, value] of Object.entries(fields(data))) {
+          block = block.replaceAll(`{{${placeholder}}}`, value || '');
+        }
+        return { file: `${prefix}${slug}.html (content/${dir.includes('blog') ? 'blog' : 'services'}/${f})`, meta: parsePageMeta(block) };
+      });
+  }
+
+  const blogPosts = loadCollection(BLOG_CONTENT_DIR, 'blog-post-template.html', 'blog-', (data) => ({
+    META_TITLE: data.metaTitle || data.title || '',
+    META_DESCRIPTION: data.metaDescription || data.excerpt || '',
+    IMAGE: data.image || '',
+  }));
+  const services = loadCollection(SERVICES_CONTENT_DIR, 'service-page-template.html', 'service-', (data) => ({
+    META_TITLE: data.metaTitle || data.name || '',
+    META_DESCRIPTION: data.metaDescription || data.shortDesc || '',
+    IMAGE: data.image || '',
+  }));
+  return [...blogPosts, ...services];
+}
+
+function loadAllPagesMeta() {
+  const srcPages = fs
+    .readdirSync(SRC_PAGES_DIR)
+    .filter((f) => f.endsWith('.html'))
+    .map((file) => ({ file, meta: parsePageMeta(fs.readFileSync(path.join(SRC_PAGES_DIR, file), 'utf8')) }));
+  return [...srcPages, ...loadGeneratedPagesMeta()];
+}
+
+function auditTitlesAndDescriptions(pages) {
   section('Title / description length');
-  const files = fs.readdirSync(SRC_PAGES_DIR).filter((f) => f.endsWith('.html'));
-  for (const file of files) {
-    const meta = parsePageMeta(fs.readFileSync(path.join(SRC_PAGES_DIR, file), 'utf8'));
+  for (const { file, meta } of pages) {
     const title = meta.title || '';
     const description = meta.description || '';
     if (!title) {
@@ -61,15 +116,13 @@ function auditTitlesAndDescriptions() {
       issues++;
     }
   }
-  console.log(`  Checked ${files.length} page(s).`);
+  console.log(`  Checked ${pages.length} page(s).`);
 }
 
-async function auditOgImages() {
+async function auditOgImages(pages) {
   section('og:image dimensions (>=1200x630 recommended)');
-  const files = fs.readdirSync(SRC_PAGES_DIR).filter((f) => f.endsWith('.html'));
   const seen = new Map(); // localPath -> [pages]
-  for (const file of files) {
-    const meta = parsePageMeta(fs.readFileSync(path.join(SRC_PAGES_DIR, file), 'utf8'));
+  for (const { file, meta } of pages) {
     if (!meta.ogImage) {
       console.log(`  ⚠ ${file}: missing ogImage`);
       issues++;
@@ -80,10 +133,10 @@ async function auditOgImages() {
     seen.get(localPath).push(file);
   }
 
-  for (const [localPath, pages] of seen) {
+  for (const [localPath, usedBy] of seen) {
     const fullPath = path.join(ROOT, localPath);
     if (!fs.existsSync(fullPath)) {
-      console.log(`  ⚠ ${localPath}: file not found (used by ${pages.join(', ')})`);
+      console.log(`  ⚠ ${localPath}: file not found (used by ${usedBy.join(', ')})`);
       issues++;
       continue;
     }
@@ -91,7 +144,7 @@ async function auditOgImages() {
       const { width, height } = await sharp(fullPath).metadata();
       const ok = width >= OG_MIN_WIDTH && height >= OG_MIN_HEIGHT;
       if (!ok) {
-        console.log(`  ⚠ ${localPath}: ${width}x${height} — below ${OG_MIN_WIDTH}x${OG_MIN_HEIGHT} (used by ${pages.join(', ')})`);
+        console.log(`  ⚠ ${localPath}: ${width}x${height} — below ${OG_MIN_WIDTH}x${OG_MIN_HEIGHT} (used by ${usedBy.join(', ')})`);
         issues++;
       }
     } catch (e) {
@@ -99,7 +152,7 @@ async function auditOgImages() {
       issues++;
     }
   }
-  console.log(`  Checked ${seen.size} unique og:image file(s) across ${files.length} page(s).`);
+  console.log(`  Checked ${seen.size} unique og:image file(s) across ${pages.length} page(s).`);
 }
 
 function auditAltText() {
@@ -127,8 +180,9 @@ function auditAltText() {
 }
 
 async function main() {
-  auditTitlesAndDescriptions();
-  await auditOgImages();
+  const pages = loadAllPagesMeta();
+  auditTitlesAndDescriptions(pages);
+  await auditOgImages(pages);
   auditAltText();
 
   console.log(`\n${issues === 0 ? '✅ No issues found.' : `⚠ ${issues} issue(s) found — see above.`}`);

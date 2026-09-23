@@ -7,9 +7,11 @@ re-deriving tokens/animations from scratch.
 
 Landing pages built from this template are still fully self-contained HTML
 files (**no build step or shared includes**), meant to be **copy-pasted
-into a new page**, not linked/imported at runtime — unlike the 13 main-site
-pages, which now go through `build-pages.mjs` (see CLAUDE.md's "Build-in-Place
-System"). A future phase of the Decap CMS work (see `BACKLOG.md`) plans a
+into a new page**, not linked/imported at runtime — unlike the main-site
+pages (12 hand-authored in `src/pages/`, plus any generated from
+`content/blog/`/`content/services/`), which now go through `build-pages.mjs`
+(see CLAUDE.md's "Build-in-Place System"). A future phase of the Decap CMS
+work (see `BACKLOG.md`) plans a
 "landing pages" collection so campaign pages like a new course or FADE IN page
 can eventually be created from this template through the CMS too — not built
 yet, so keep following the manual copy-paste process below until it lands.

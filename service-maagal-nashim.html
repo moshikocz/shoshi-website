@@ -784,6 +784,11 @@
     for (var ci = 0; ci < cloneCount; ci++) {
       var clone = slides[ci].cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
+      // An aria-hidden element must not contain focusable descendants — a
+      // cloned slide's focusable content would otherwise still catch Tab focus.
+      clone.querySelectorAll('button, a, input, textarea, select, [tabindex]').forEach(function(node) {
+        node.setAttribute('tabindex', '-1');
+      });
       track.appendChild(clone);
     }
     var children = Array.prototype.slice.call(track.children);

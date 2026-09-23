@@ -1163,12 +1163,22 @@
         // pos 0 = leading clone (last slide), pos 1..n = real slides, pos n+1 = trailing clone (first slide)
         var hasClones = n > 1;
         var pos = hasClones ? 1 : 0;
+        // An aria-hidden element must not contain focusable descendants (the
+        // cloned slide's "קראי עוד" button would otherwise still catch Tab
+        // focus while hidden from assistive tech / AI agents).
+        function disableFocusWithin(el) {
+          el.querySelectorAll('button, a, input, textarea, select, [tabindex]').forEach(function(node) {
+            node.setAttribute('tabindex', '-1');
+          });
+        }
         if (hasClones) {
           var cloneLast = realSlides[n - 1].cloneNode(true);
           cloneLast.setAttribute('aria-hidden', 'true');
+          disableFocusWithin(cloneLast);
           slides.insertBefore(cloneLast, slides.firstChild);
           var cloneFirst = realSlides[0].cloneNode(true);
           cloneFirst.setAttribute('aria-hidden', 'true');
+          disableFocusWithin(cloneFirst);
           slides.appendChild(cloneFirst);
         }
 

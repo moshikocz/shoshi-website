@@ -9,7 +9,7 @@ This section applies only to Claude Code. All other tools must ignore this secti
 
 ## Internal sessions with Moshe
 
-ב־Claude Code ההוראות המרכזיות והמוח כבר נטענו אוטומטית, אפשר לדלג על הפניות אלה
+ב־Claude Code ההוראות המרכזיות נטענות אוטומטית. המוח נטען אוטומטית רק כשתוכן האינדקס שלו נראה בהקשר (שורת הייבוא לבדה לא נחשבת); אחרת קוראים את קובץ האינדקס לפני תחילת העבודה
 
 For internal sessions, first read ../../../AGENTS.md and ../../../SecondBrain/CLAUDE.md. Follow the brain's instruction to read about-me/about-me.md and the task-relevant project context.
 

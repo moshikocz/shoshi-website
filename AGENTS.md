@@ -24,6 +24,10 @@ If the brain is unavailable in an internal session, stop before task work and as
 - **Building any new page or component** (landing page or main-site page)? Read `design-system/PRINCIPLES.md` first for the overall design language (color tokens for both page families, typography, spacing/shadow scale, component classes, animation rules) before designing from scratch.
 - **Before closing out any task that touches SEO/structured-data, accessibility, performance, or the build/deploy pipeline** — check `WEBSITE_QUALITY_CHECKLIST.md` (project root). It's a portable, project-agnostic checklist distilled from real bugs found in this codebase (llms.txt format, aria-hidden+focusable traps, contrast math, touch-target sizing, publish="." exposure risk, Lighthouse lab-data noise, etc.) — not something you can derive from reading the code alone.
 
+## Analytics and Build (read before any page work)
+- **Google Analytics (GA4, `G-DZMXRV1DJ3`)** is installed. The tag lives in `partials/head-meta.html` (all built pages) and is pasted directly into `chocolate-landing.html` and `course-isha-magalit.html` (standalone). **Every new standalone landing page must include the same tag in `<head>`.** `privacy.html` (source: `src/pages/privacy.html`) discloses Google Analytics and cookies; keep it accurate if tracking changes.
+- After a fresh move or clone, `node_modules` is missing: run `npm install --ignore-scripts` before `node build-pages.mjs`.
+
 ## Content Changes Propagate
 - A change to a detail on a landing page (capacity such as "up to 6 women", a date, a price, a name) must be updated **everywhere it appears** on that page and on the main site. Grep for every occurrence before closing the task. (Moshe, 2026-09-23: "עד 6 נשים" stayed "8" in one place, and a later "fix" changed 6 back to 8.)
 - Design changes: state what you understood, or show options, and wait for Moshe's OK before editing.

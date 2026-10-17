@@ -3,15 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DZMXRV1DJ3"></script>
+  <!-- Google Analytics, Consent Mode "basic": gtag.js is not loaded until the visitor accepts (see cookie-consent.js) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-DZMXRV1DJ3');
+    gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+    window.loadGoogleAnalytics = function () {
+      if (window.__gaLoaded) return;
+      window.__gaLoaded = true;
+      gtag('consent', 'update', {analytics_storage: 'granted'});
+      gtag('js', new Date());
+      gtag('config', 'G-DZMXRV1DJ3');
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DZMXRV1DJ3';
+      document.head.appendChild(s);
+    };
+    try { if (localStorage.getItem('cc_analytics') === 'granted') window.loadGoogleAnalytics(); } catch (e) {}
   </script>
+  <script src="cookie-consent.js" defer></script>
   <title>מדיניות פרטיות – עצה תומכת</title>
   <meta name="description" content="מדיניות הפרטיות של אתר עצה תומכת – שושי מיראז. מידע על איסוף נתונים, שימוש ושמירת פרטיות." />
   <link rel="canonical" href="https://shoshimiraz.com/privacy.html" />
@@ -258,9 +268,11 @@
 
   <p><em>לא חלה עלייך חובה חוקית למסור לנו מידע אישי. מסירת המידע נעשית מרצונך החופשי ובהסכמתך, לצורך קבלת השירות.</em></p>
 
-  <h3>מידע הנאסף אוטומטית</h3>
-  <p>האתר משתמש בכלי הסטטיסטיקה Google Analytics של חברת Google, כדי להבין כמה אנשים מבקרים באתר, אילו עמודים מעניינים אותם וממה הם מגיעים. לשם כך נשמרות בדפדפן עוגיות (Cookies), ו-Google אוספת מידע טכני וכללי על הביקור: סוג המכשיר והדפדפן, העמודים שנצפו, משך הביקור, ואזור גאוגרפי משוער. המידע אינו כולל את שמך, את הטלפון שלך או את כתובת הדואר האלקטרוני שלך, ואיננו מנסים לזהות אותך באמצעותו. המידע משמש אותנו לשיפור האתר בלבד.</p>
-  <p>את יכולה למנוע איסוף כזה בכל עת: בהגדרות הדפדפן אפשר לחסום או למחוק עוגיות, ו-Google מציעה תוסף לדפדפן לביטול המעקב של Google Analytics בכתובת <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">tools.google.com/dlpage/gaoptout</a>.</p>
+  <h3 id="cookies">מידע הנאסף אוטומטית ועוגיות</h3>
+  <p>האתר משתמש בכלי הסטטיסטיקה Google Analytics של חברת Google, כדי להבין כמה אנשים מבקרים באתר, אילו עמודים מעניינים אותם וממה הם מגיעים.</p>
+  <p><strong>העוגיות האלה נשמרות רק אם אישרת זאת</strong> בבאנר שמופיע בכניסה הראשונה לאתר. אם בחרת "לא, תודה", כלי הסטטיסטיקה אינו נטען, לא נשמרות עוגיות לצורך סטטיסטיקה ולא נשלח אליו מידע, והאתר פועל כרגיל.</p>
+  <p>אם אישרת, Google אוספת מידע טכני וכללי על הביקור: סוג המכשיר והדפדפן, העמודים שנצפו, משך הביקור ואזור גאוגרפי משוער. המידע אינו כולל את שמך, את הטלפון שלך או את כתובת הדואר האלקטרוני שלך, ואיננו מנסים לזהות אותך באמצעותו. הוא משמש אותנו לשיפור האתר בלבד.</p>
+  <p><strong>שינוי ההעדפה:</strong> אפשר לשנות את הבחירה בכל עת בלחיצה על <a href="#" onclick="if(window.openCookieSettings){openCookieSettings();}return false;">שינוי העדפת עוגיות</a>, או בהגדרות הדפדפן. Google מציעה גם תוסף לדפדפן לביטול המעקב של Google Analytics בכתובת <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">tools.google.com/dlpage/gaoptout</a>.</p>
   <p>כמו כן, שירותים חיצוניים נוספים שהאתר משתמש בהם – כגון גופנים מ-Google Fonts – עשויים לאסוף מידע טכני מינימלי (כגון כתובת IP) בהתאם למדיניות הפרטיות שלהם.</p>
 
   <h2>למה אנו משתמשים במידע</h2>

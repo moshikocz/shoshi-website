@@ -424,6 +424,16 @@ function main() {
     console.error(`\nERROR: Google Analytics tag (${GA_ID}) is missing from: ${missingGa.join(', ')}`);
     process.exit(1);
   }
+  // Same for the consent banner: GA must never run on a page without cookie-consent.js and Consent Mode.
+  const missingConsent = fs.readdirSync(ROOT).filter((f) => {
+    if (!f.endsWith('.html')) return false;
+    const html = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    return !html.includes('src="cookie-consent.js"') || !html.includes("'consent', 'default'");
+  });
+  if (missingConsent.length > 0) {
+    console.error(`\nERROR: cookie consent (cookie-consent.js + Consent Mode default) is missing from: ${missingConsent.join(', ')}`);
+    process.exit(1);
+  }
 
   console.log(`\nDone. ${count} page(s) written to ${ROOT}`);
 }

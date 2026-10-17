@@ -344,8 +344,8 @@ function main() {
 
   // chocolate-landing.html and course-isha-magalit.html are standalone campaign
   // pages (per CLAUDE.md's design-system convention) — hand-edited directly at
-  // the repo root, NOT generated from src/pages/. Their src/pages/ copies exist
-  // only historically and go stale the moment someone edits the root file
+  // the repo root, NOT generated from src/pages/. Their old src/pages/ copies were
+  // deleted on 2026-10-17 because they went stale the moment someone edits the root file
   // directly; regenerating from them would silently revert real production
   // fixes (this bit a build run during this session — see git history around
   // 2026-09-23 for the incident). Always skip them here.
@@ -412,6 +412,18 @@ function main() {
 
   generateSitemap(sitemapEntries);
   generateLlmsTxt(realServiceMetas, blogPosts);
+
+  // Guard: every served root page must carry the Google Analytics tag. Built pages get it
+  // from partials/head-meta.html; standalone landing pages must include it by hand
+  // (design-system/landing-page-template.html already has it). admin/ is not a root page.
+  const GA_ID = 'G-DZMXRV1DJ3';
+  const missingGa = fs
+    .readdirSync(ROOT)
+    .filter((f) => f.endsWith('.html') && !fs.readFileSync(path.join(ROOT, f), 'utf8').includes(GA_ID));
+  if (missingGa.length > 0) {
+    console.error(`\nERROR: Google Analytics tag (${GA_ID}) is missing from: ${missingGa.join(', ')}`);
+    process.exit(1);
+  }
 
   console.log(`\nDone. ${count} page(s) written to ${ROOT}`);
 }
